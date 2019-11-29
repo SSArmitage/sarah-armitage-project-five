@@ -8,6 +8,7 @@ import Header from './Header';
 import Footer from './Footer';
 import SendMessage from './SendMessage';
 import MessagesList from './MessageList';
+import SignInLogIn from './SignInLogIn';
 
 // const messagesArray = [];
 
@@ -16,7 +17,8 @@ class App extends Component {
     super();
     this.state = {
       messages: [],
-      userInput: ''
+      userInput: '',
+      user: null
     }
   }
 
@@ -124,13 +126,25 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <MessagesList 
-          messages={this.state.messages}/>
-          <SendMessage 
-          onTextInput={this.handleChange} 
-          textInputValue={this.state.userInput}
-          onButtonClick={this.handleSubmit}
-          />
+          {this.state.user === null 
+
+          ? 
+
+          <SignInLogIn />
+
+          : 
+          
+          <div className="content">
+            <p>signed in</p>
+            <MessagesList 
+            messages={this.state.messages}/>
+            <SendMessage 
+            onTextInput={this.handleChange} 
+            textInputValue={this.state.userInput}
+            onButtonClick={this.handleSubmit}
+            />
+          </div>
+          }
         </main>
         <Footer />
       </div>
