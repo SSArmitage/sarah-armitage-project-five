@@ -24,29 +24,36 @@ class App extends Component {
     // connect app to firebase (messages stored in the messages branch)
     const dbRef = firebase.database().ref('messages');
     
-    // when the database changes (newMessages array) grab the data in the database
+    // when the database changes (newMessages array) grab the data in the database (will come back as an array)
     dbRef.on('value', (snapshot) => {
-    const messagesObject = snapshot.val();
-    // console.log(messagesObject);
+    const messagesArray = snapshot.val();
+    console.log(messagesArray);
 
     // change data coming from database: from object to array
-    const messagesArray = [];
-    for (let key in messagesObject) {
-      // create obeject to store each message
-      const individualMessageObject = {
-        messageId: key,
-        messageText: messagesObject[key]
-      }
-      // push each message object into the array
-      messagesArray.push(individualMessageObject);
-    }
-    console.log(messagesArray);
+    // const messagesArray = [];
+    // for (let key in messagesObject) {
+    //   // create obeject to store each message
+    //   const individualMessageObject = {
+    //     messageId: key,
+    //     messageText: messagesObject[key]
+    //   }
+    //   // push each message object into the array
+    //   messagesArray.push(individualMessageObject);
+    // }
+    // console.log(messagesArray);
     
-    // set state with new messages
+    // set state with messagesArray from databse
     this.setState({
       messages: messagesArray
     })
-    });    
+    });
+    
+    // const dbRefArray = firebase.database().ref('-LurPv3mNjJjUBfdyESF');
+    // dbRefArray.on('value', (snapshot) => {
+    //   const testArrayFromDB = snapshot.val();
+    //   console.log("I am the test", testArrayFromDB);
+    // })
+      
   }  
 
   handleChange = (event) => {
@@ -59,43 +66,55 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(`clicked button`);
+    // will use dbRef when pushing up the new array to the database
     const dbRef = firebase.database().ref('messages');
-    // clone the array of database message objects using spread
+    // clone the array of database messages from state using spread
     const newMessagesArray = [...this.state.messages];
-    // console.log(newMessagesArray);
-    
-    // const newMessageList = dbRef.value();
-    // console.log(dbRef);
+    console.log("cloned array", newMessagesArray);
+    // grab the message inputted by the user (held in state)
     const messageToBeAdded = this.state.userInput;
-    // console.log(messageToBeAdded);
-    // add messageToBeAdded to firebase (so that the dbRef listener will will be called and it will update the state and cause app to re-render)
-
-    const newIndividualMessageObject = {
-      messageId: "",
-      messageText: messageToBeAdded
-    }
-    // console.log(newIndividualMessageObject);
+    console.log(messageToBeAdded);
     
-
-    // first check to see if the length of the current messagesArray is less than 100 (current messageArray was set in the state during componentDidMount- whatever messages were in the database on mount were brought down, covereted to an array and set in state)
+    // add messageToBeAdded to the cloned array, and push that array up to firebase (use set to replace the previous array up there)
+    // first check to see if the length of the newMessagesArray is less than 100 
     // also check if the message is just an empty string
+    // then add messageToBeAdded to newMessagesArray
+    // then set in firebase (so that the dbRef listener will will be called and it will update the this.state.messages and cause app to re-render with the new message added to the list of messages)
+
+    // if the user's input is not empty, enter statment:
     if (messageToBeAdded !== '') {
+      console.log("I am not empty");
+
+      // if the cloned messages array is less than 100:
       if (newMessagesArray.length < 100) {
         console.log(`there are less than 100 messages in here!`);
-        newMessagesArray.push(newIndividualMessageObject);
+        // add the new message to the array
+        newMessagesArray.push(messageToBeAdded);
+        console.log(newMessagesArray);
+        
+
+        // else if the cloned messages array is greater than 100:
       } else {
-        // remove the first message
+        // remove the first message from the array (index=0)
         newMessagesArray.shift();
         // then add the new message to the end
-        newMessagesArray.push(newIndividualMessageObject)
+        newMessagesArray.push(messageToBeAdded);
+        console.log(newMessagesArray);
       }
-      dbRef.set(newMessagesArray);
+      // dbRef.set(newMessagesArray);
+
+    } else {
+      console.log("I am empty");
     }
-    console.log(newMessagesArray);
+
+    // push the newMessagesArray up to firebase (set to replace)
+    dbRef.set(newMessagesArray);
+
+    // console.log(newMessagesArray);
     // reset the userInput for the next message
-    // this.setState({
-    //   userInput: ''
-    // }); 
+    this.setState({
+      userInput: ''
+    }); 
 
   }
   
@@ -105,7 +124,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <MessagesList />
+          <MessagesList 
+          messages={this.state.messages}/>
           <SendMessage 
           onTextInput={this.handleChange} 
           textInputValue={this.state.userInput}
