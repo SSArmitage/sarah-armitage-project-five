@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 class MessageList extends Component {
     render() {
         return(
-            <div className="wrapper">
+            <div className="wrapper messageListContainer">
                 <div className="messageBox">
                     {this.props.messages.map((message) => {
                         return(
-                            <li>{message}</li>
+                            <li className="message">{message}</li>
                         )
                     })}
                 </div>
