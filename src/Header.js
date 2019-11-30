@@ -6,6 +6,7 @@ class Header extends Component {
             <header>
                 <div className="wrapper">
                     <h1>Title</h1>
+                    <button onClick={this.props.logOut}>Log Out</button>
                 </div>
             </header>
         );

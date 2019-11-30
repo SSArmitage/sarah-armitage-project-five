@@ -18,7 +18,9 @@ class App extends Component {
     this.state = {
       messages: [],
       userInput: '',
-      user: null
+      currentUser: null,
+      email: '',
+      password: ''
     }
   }
 
@@ -30,33 +32,46 @@ class App extends Component {
     dbRef.on('value', (snapshot) => {
     const messagesArray = snapshot.val();
     console.log(messagesArray);
-
-    // change data coming from database: from object to array
-    // const messagesArray = [];
-    // for (let key in messagesObject) {
-    //   // create obeject to store each message
-    //   const individualMessageObject = {
-    //     messageId: key,
-    //     messageText: messagesObject[key]
-    //   }
-    //   // push each message object into the array
-    //   messagesArray.push(individualMessageObject);
-    // }
-    // console.log(messagesArray);
     
     // set state with messagesArray from databse
     this.setState({
       messages: messagesArray
     })
     });
-    
-    // const dbRefArray = firebase.database().ref('-LurPv3mNjJjUBfdyESF');
-    // dbRefArray.on('value', (snapshot) => {
-    //   const testArrayFromDB = snapshot.val();
-    //   console.log("I am the test", testArrayFromDB);
-    // })
-      
-  }  
+
+    // set an event listener for user login status
+    // listen for change in user auth status (is user logged in or not?)
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        console.log("I am logged in");
+        console.log(user);
+        // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
+        this.setState({
+          currentUser: user
+        })
+      } else {
+        // No user is signed in.
+        // currentUser in state will be set to null, will show login page
+        console.log("I am not logged in");
+        this.setState({
+          currentUser: null
+        })
+      }
+
+      // get user info (use this info to differenitate the users text bubbles?)
+      const currentUser = firebase.auth().currentUser;
+      if (currentUser != null) {
+        const userName = user.displayName;
+        const userEmail = user.email;
+        const userPhotoUrl = user.photoURL;
+        const userEmailVerified = user.emailVerified;
+        const userUid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken( instead.
+      }
+    });    
+  } 
 
   handleChange = (event) => {
     // console.log(`Hiii`);
@@ -117,20 +132,92 @@ class App extends Component {
     this.setState({
       userInput: ''
     }); 
+  }
+  // -------------------- AUTHENTICATION ---------------------
+  // grab user email for sign up
+  handleSignUpEmail = (event) => {
+   this.setState({
+     email: event.target.value
+   })
+  }
 
+  // grab user password for sign up
+  // need to put notifcation for user -> password needs to be > 6 characters long
+  hanldeSignUpPassword = (event) => {    
+    this.setState({
+      password: event.target.value
+    })
+  }
+
+  // when user clicks sign up button
+  handleSignUpSubmit = (event) => {
+    event.preventDefault();
+    console.log("I clicked the button!");
+    // create new account for user
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
+      // handle errors here
+      console.log(error);
+    })
+  }
+
+  // grab user email for sign in
+  handleSignInEmail = (event) => {
+    this.setState({
+      email: event.target.value
+    })
+  }
+
+  // grab user password for sign in
+  hanldeSignInPassword = (event) => {
+    this.setState({
+      password: event.target.value
+    })
+  }
+
+  // when user clicks sign in button
+  handleSignInSubmit = (event) => {
+    event.preventDefault();
+    console.log("I clicked the button!");
+    // change in user auth status fires the auth event listener
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      
+    });
+  }
+
+  handleLogOut = (event) => {
+    // change in user auth status fires the auth event listener
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      console.log(`I was signed out`);
+    }).catch(function (error) {
+      // An error happened.
+      console.log(error);
+    });
   }
   
+  // ---------------- END OF AUTHENTICATION ------------------
 
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header
+        logOut={this.handleLogOut} />
         <main>
-          {this.state.user === null 
+          {this.state.currentUser === null 
 
           ? 
 
-          <SignInLogIn />
+          <SignInLogIn 
+          emailSignUp={this.handleSignUpEmail}
+          passwordSignUp={this.hanldeSignUpPassword}
+          onButtonClickSignUp={this.handleSignUpSubmit}
+          emailSignIn={this.handleSignInEmail}
+          passwordSignIn={this.hanldeSignInPassword}
+          onButtonClickSignIn={this.handleSignInSubmit}/>
 
           : 
           
