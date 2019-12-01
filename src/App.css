@@ -113,6 +113,7 @@ textarea {
 
 .message {
   border: 2px solid blueviolet;
+  border-radius: 5px;
   width: fit-content;
   padding: 5px 10px;
   margin: 10px;
@@ -122,10 +123,25 @@ textarea {
   text-align: left;
 }
 
+.userName,
 .dateAndTime {
   font-size: 0.8rem;
+  text-align: left;
+  font-weight: bold;
 }
 
+.messageBox > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.currentUserPosition {
+  align-self: flex-end;
+}
+
+/* .messageText {
+  font-weight: bold;
+} */
 
 
 /* SETTINGS PAGE STYLES */

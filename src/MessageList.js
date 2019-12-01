@@ -41,15 +41,17 @@ class MessageList extends Component {
                             if (message.username === user.displayName) {
                                 return(
                                     <li
-                                        className="message"
+                                        className="message currentUserPosition"
                                         style={messageStyle} >
                                         <p 
-                                        className="userInfo">
+                                        className="userName">
                                         {message.username}</p>
                                         <p
                                         className="dateAndTime">
                                         {`${message.date} ${message.time}`}</p>
-                                        <p>{message.text}</p>
+                                        <p 
+                                        className="messageText">
+                                        {message.text}</p>
                                     </li>
                                 )
                             } else {
@@ -58,8 +60,10 @@ class MessageList extends Component {
                                         className="message"
                                         style={messageStyleOtherUser} >
                                         <p 
-                                        className="userInfo">{message.username}</p>
-                                        <p>{message.text}</p>
+                                        className="userName">{message.username}</p>
+                                        <p
+                                        className="messageText">
+                                        {message.text}</p>
                                     </li>
                                 )
                             }
