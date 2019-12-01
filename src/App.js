@@ -19,6 +19,7 @@ class App extends Component {
       messages: [],
       userInput: '',
       currentUser: null,
+      uid: '',
       email: '',
       password: '',
       settingsPage: false,
@@ -41,6 +42,10 @@ class App extends Component {
     this.setState({
       messages: messagesArray
     })
+
+    // grab the user's custom theme colour
+    // const dbRefUsers = firebase.database().ref('users');
+    // console.log(dbRefUsers);
     });
 
     // set an event listener for user login status
@@ -52,8 +57,22 @@ class App extends Component {
         console.log(user);
         // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
         this.setState({
-          currentUser: user
+          currentUser: user,
+          uid: user.uid
         })
+
+        // grab the user's custom theme colour from the database and set that in state, so that the messages will be updated to have that color
+        const dbRefUsers = firebase.database().ref('users');
+        dbRefUsers.on('value', (snapshot) => {
+          const usersInfo = snapshot.val();
+          this.setState({
+            theme: {
+              messageColor: usersInfo[`${this.state.uid}`].themeColor
+            }
+          })
+        })
+
+
       } else {
         // No user is signed in.
         // currentUser in state will be set to null, will show login page
@@ -73,8 +92,36 @@ class App extends Component {
         const userUid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken( instead.
+        console.log(userUid);
+
+        
       }
-    });    
+    });
+    
+    // 
+    // // grab the user's custom theme colour from the database
+    const dbRefUsers = firebase.database().ref('users');
+    dbRefUsers.on('value', (snapshot) => {
+      const usersInfo = snapshot.val();
+      // console.log(this.state.theme.messageColor);
+      
+      // console.log(usersInfo);
+      // // console.log(this.state.uid);
+      // const userObject = usersInfo[`${this.state.uid}`];
+      // console.log(userObject);
+      // console.log(this.state.uid);
+      
+      // const userObject = usersInfo[`${this.state.user}`];
+      // console.log(userObject);
+      // const userThemeSelection = userObject.themeColor;
+      // console.log(userThemeSelection);
+
+      // push the slected theme color up to the databsae (use set to replace the previous one)
+      // console.log(usersInfo.uid);
+      
+      // firebase.database().ref().child('users').child(this.state.uid).set(this.state.theme.messageColor)
+    })
+
   } 
 
   handleChange = (event) => {
@@ -95,6 +142,8 @@ class App extends Component {
     // grab the message inputted by the user (held in state)
     const messageToBeAdded = this.state.userInput;
     console.log(messageToBeAdded);
+  
+
     
     // add messageToBeAdded to the cloned array, and push that array up to firebase (use set to replace the previous array up there)
     // first check to see if the length of the newMessagesArray is less than 100 
@@ -188,7 +237,6 @@ class App extends Component {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      
     });
   }
 
@@ -212,7 +260,16 @@ class App extends Component {
       } 
     })
     console.log("I picked a different color!");
-    console.log(event.target.value);
+    // console.log(event.target.value);
+    const uid = this.state.currentUser.uid
+    console.log(uid);
+    console.log(this.state.theme.messageColor);
+    
+    // push the theme color selected by the user up to firebase (save it in under the user's specific uid #)
+    // const uid = firebase.auth().currentUser.uid;
+    firebase.database().ref().child('users').child(uid).set({
+      themeColor: `${this.state.theme.messageColor}`
+    })
     
   }
 
