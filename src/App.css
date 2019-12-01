@@ -67,6 +67,17 @@ textarea {
   background-color: dodgerblue;
 }
 
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+fieldset button {
+  margin: 0 auto;
+}
+
 /* SENDMESSAGE STYLES */
 form {
   background-color: dodgerblue;
