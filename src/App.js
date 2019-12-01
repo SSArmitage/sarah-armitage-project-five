@@ -28,7 +28,9 @@ class App extends Component {
       settingsPage: false,
       theme: {
         messageColor: ''
-      }
+      },
+      date: '',
+      time: ''
     }
   }
 
@@ -137,7 +139,6 @@ class App extends Component {
     });
 
     // set an event listener for 
-
   } 
 
   handleChange = (event) => {
@@ -145,6 +146,8 @@ class App extends Component {
     this.setState({
       userInput: event.target.value
     })
+    // when user types message, grab the date and time
+    this.getDateAndTime();
   }
 
   handleSubmit = (event) => {
@@ -171,7 +174,9 @@ class App extends Component {
     // const messageToBeAdded = this.state.userInput;
     const messageToBeAdded = {
       username: this.state.currentUser.displayName,
-      text: this.state.userInput
+      text: this.state.userInput,
+      date: this.state.date,
+      time: this.state.time
     };
     console.log(messageToBeAdded);
   
@@ -229,8 +234,11 @@ class App extends Component {
 
     // console.log(newMessagesArray);
     // reset the userInput for the next message
+    // reset the date and time for next message
     this.setState({
-      userInput: ''
+      userInput: '',
+      date: '',
+      time: ''
     }); 
   }
   // -------------------- AUTHENTICATION ---------------------
@@ -353,6 +361,62 @@ class App extends Component {
     
   }
 
+  // function to grab the date and time (to use in messages)
+  getDateAndTime = () => {
+    // get the date
+    const day = new Date().getDate(); //Current Day
+    const monthNumber = new Date().getMonth(); //Current Month
+    const year = new Date().getFullYear(); //Current Year
+    // convert monthNumber into monthYear
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthWord = months[monthNumber];
+    const dateFull = `${monthWord} ${day}, ${year}`;
+    console.log(dateFull);
+    // get the time
+    const hours = new Date().getHours(); //Current Hours
+    const min = new Date().getMinutes(); //Current Minutes
+    const sec = new Date().getSeconds(); //Current Seconds
+    console.log(`${hours} ${min} ${sec}`);
+    // make 24hour clock array
+    const timeMilitary = []
+    for (let i = 0; i <= 24; i++) {
+      timeMilitary.push(i);
+    }
+    console.log(timeMilitary);
+
+    // make the 12hour clock array
+    const timeNormal = [];
+    for (let x = 1; x <= 2; x++) {
+      for (let i = 1; i <= 12; i++) {
+        timeNormal.push(i);
+      }
+    }
+    timeNormal.unshift(12)
+    console.log(timeNormal);
+
+    // convert the 24hour clock time into 12hour clock time
+    const timeIndex = timeMilitary.indexOf(hours);
+    console.log("the time index is:", timeIndex);
+    const time = timeNormal[timeIndex];
+    // have: 14 22 31
+    // need: 2:22
+    console.log(time);
+    const timeActual = `${time}:${min}`;
+    console.log(timeActual);
+
+    // ---------------------------
+    // The final date and time stamp
+    // use: dateFull & timeActual
+    // ---------------------------
+
+    // save the date and time in state (will be grabbed and attached to "message" when user clicks submit button)
+    this.setState({
+      date: dateFull,
+      time: timeActual
+    })
+  }
+  
+
   render() {
     return (
       <div className="App">
@@ -380,6 +444,7 @@ class App extends Component {
           <div className="content">
             <p>signed in</p>
             <MessagesList 
+            user={this.state.currentUser}
             messages={this.state.messages}
             messagesUSM={this.state.userSpecificMessages}
             messageColor={this.state.theme.messageColor}/>

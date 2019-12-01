@@ -118,6 +118,16 @@ textarea {
   margin: 10px;
 }
 
+.userInfo {
+  text-align: left;
+}
+
+.dateAndTime {
+  font-size: 0.8rem;
+}
+
+
+
 /* SETTINGS PAGE STYLES */
 .settings {
   z-index: 10;
