@@ -14,15 +14,26 @@ class MessageList extends Component {
             // backgroundColor: 'purple',
             // backgroundImage: 'url(' + imgUrl + ')',
         };
+        let divStyleOtherUser = {
+            borderColor: 'blue'
+            // backgroundColor: 'purple',
+            // backgroundImage: 'url(' + imgUrl + ')',
+        };
+        const arrayUSM = this.props.messagesUSM
+        const array= this.props.messages
+
+
         return(
             <div className="wrapper messageListContainer">
                     <div className="messageBox">
-                        {this.props.messages.map((message) => {
+                        {array.map((message) => {
                             return (
                                 <li 
                                 className="message"
                                 style={divStyle} >
-                                {message}</li>
+                                    <p>{message.username}</p>
+                                    <p>{message.text}</p>
+                                </li>
                             )
                         })}
                     </div>

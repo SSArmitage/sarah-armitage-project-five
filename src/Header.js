@@ -14,7 +14,14 @@ class Header extends Component {
                         type="color" 
                         id="themeColor"
                         onChange={this.props.changeThemeColor}/>
-
+                    </form>
+                    <form onSubmit={this.props.onButtonClickUserName}>
+                        <label>Add Username</label>
+                        <input 
+                        type="text"
+                        value={this.props.username}
+                        onChange={this.props.userName} />
+                        <button>Save</button>
                     </form>
                 </div>
             </header>

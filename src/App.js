@@ -17,8 +17,11 @@ class App extends Component {
     super();
     this.state = {
       messages: [],
+      userSpecificMessages: [],
+      messagesFiltered: [],
       userInput: '',
       currentUser: null,
+      username: '',
       uid: '',
       email: '',
       password: '',
@@ -32,6 +35,7 @@ class App extends Component {
   componentDidMount() {
     // connect app to firebase (messages stored in the messages branch)
     const dbRef = firebase.database().ref('messages');
+    const dbRefUSM = firebase.database().ref('userSpecificMessages');
     
     // when the database changes (newMessages array) grab the data in the database (will come back as an array)
     dbRef.on('value', (snapshot) => {
@@ -46,6 +50,16 @@ class App extends Component {
     // grab the user's custom theme colour
     // const dbRefUsers = firebase.database().ref('users');
     // console.log(dbRefUsers);
+    });
+
+    dbRefUSM.on('value', (snapshot) => {
+      const messagesArray = snapshot.val();
+      console.log(messagesArray);
+
+      // set state with messagesArray from databse
+      this.setState({
+        userSpecificMessages: messagesArray
+      })
     });
 
     // set an event listener for user login status
@@ -93,7 +107,7 @@ class App extends Component {
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken( instead.
         console.log(userUid);
-
+        console.log(userName);
         
       }
     });
@@ -120,7 +134,9 @@ class App extends Component {
       // console.log(usersInfo.uid);
       
       // firebase.database().ref().child('users').child(this.state.uid).set(this.state.theme.messageColor)
-    })
+    });
+
+    // set an event listener for 
 
   } 
 
@@ -136,11 +152,27 @@ class App extends Component {
     console.log(`clicked button`);
     // will use dbRef when pushing up the new array to the database
     const dbRef = firebase.database().ref('messages');
+    const dbRefUSM = firebase.database().ref('userSpecificMessages');
     // clone the array of database messages from state using spread
-    const newMessagesArray = [...this.state.messages];
+    // const newMessagesArray = [...this.state.messages];
+    // const newUserSpecificMessagesArray = [...this.state.userSpecificMessages];
+    // console.log("cloned array", newMessagesArray);
+
+    // clone the array of databast message objects from state using Object.assign method
+    // cant use spread b/c it is a shalow copy and woulndt copy the nested elements
+    const newMessagesArray = [];
+    Object.assign(newMessagesArray, this.state.messages);
     console.log("cloned array", newMessagesArray);
+    const newUserSpecificMessagesArray = [];
+    Object.assign(newUserSpecificMessagesArray, this.state.userSpecificMessages);
+    console.log("cloned array", newUserSpecificMessagesArray);
+
     // grab the message inputted by the user (held in state)
-    const messageToBeAdded = this.state.userInput;
+    // const messageToBeAdded = this.state.userInput;
+    const messageToBeAdded = {
+      username: this.state.currentUser.displayName,
+      text: this.state.userInput
+    };
     console.log(messageToBeAdded);
   
 
@@ -152,7 +184,7 @@ class App extends Component {
     // then set in firebase (so that the dbRef listener will will be called and it will update the this.state.messages and cause app to re-render with the new message added to the list of messages)
 
     // if the user's input is not empty, enter statment:
-    if (messageToBeAdded !== '') {
+    if (messageToBeAdded.text !== '') {
       console.log("I am not empty");
 
       // if the cloned messages array is less than 100:
@@ -160,6 +192,7 @@ class App extends Component {
         console.log(`there are less than 100 messages in here!`);
         // add the new message to the array
         newMessagesArray.push(messageToBeAdded);
+        newUserSpecificMessagesArray.push(messageToBeAdded);
         console.log(newMessagesArray);
         
 
@@ -167,8 +200,10 @@ class App extends Component {
       } else {
         // remove the first message from the array (index=0)
         newMessagesArray.shift();
+        newUserSpecificMessagesArray.shift();
         // then add the new message to the end
         newMessagesArray.push(messageToBeAdded);
+        newUserSpecificMessagesArray.push(messageToBeAdded);
         console.log(newMessagesArray);
       }
       // dbRef.set(newMessagesArray);
@@ -179,6 +214,18 @@ class App extends Component {
 
     // push the newMessagesArray up to firebase (set to replace)
     dbRef.set(newMessagesArray);
+    dbRefUSM.set(newUserSpecificMessagesArray);
+
+    // ****************************************
+    // filter through arrays
+    // const twoArray = this.state.messages;
+    // const oneArray = this.state.userSpecificMessages;
+    // twoArray.forEach((message) => {
+    //   if (oneArray.includes(message)) {
+    //     console.log(message);
+        
+    //   }
+    // })
 
     // console.log(newMessagesArray);
     // reset the userInput for the next message
@@ -250,6 +297,39 @@ class App extends Component {
       console.log(error);
     });
   }
+
+  // grab user's desire username 
+  handleUserName = (event) => {
+    this.setState({
+      username: event.target.value
+    })
+  }
+  // send username to firebase auth
+  handleSaveUserName = (event) => {
+    event.preventDefault();
+
+    const user = firebase.auth().currentUser;
+    const userName = user.displayName;
+    user.updateProfile({
+      displayName: this.state.username,
+      // photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(function () {
+      // Update successful.
+      console.log('successfully updated username');
+      const userName = user.displayName;
+      console.log(userName);
+      
+    }).catch(function (error) {
+      // An error happened.
+      console.log('did not successfully updated username');
+    });
+
+    this.setState({
+      username: ''
+    });
+  }
+
+
   
   // ---------------- END OF AUTHENTICATION ------------------
 
@@ -278,7 +358,10 @@ class App extends Component {
       <div className="App">
         <Header
         logOut={this.handleLogOut}
-        changeThemeColor={this.handleThemeColorChange} />
+        changeThemeColor={this.handleThemeColorChange}
+        username={this.state.username}
+        userName={this.handleUserName} 
+        onButtonClickUserName={this.handleSaveUserName}/>
         <main>
           {this.state.currentUser === null 
 
@@ -298,6 +381,7 @@ class App extends Component {
             <p>signed in</p>
             <MessagesList 
             messages={this.state.messages}
+            messagesUSM={this.state.userSpecificMessages}
             messageColor={this.state.theme.messageColor}/>
             <SendMessage 
             onTextInput={this.handleChange} 
