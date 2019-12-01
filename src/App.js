@@ -20,7 +20,11 @@ class App extends Component {
       userInput: '',
       currentUser: null,
       email: '',
-      password: ''
+      password: '',
+      settingsPage: false,
+      theme: {
+        messageColor: ''
+      }
     }
   }
 
@@ -201,11 +205,23 @@ class App extends Component {
   
   // ---------------- END OF AUTHENTICATION ------------------
 
+  handleThemeColorChange = (event) => {
+    this.setState({
+      theme: {
+        messageColor: event.target.value
+      } 
+    })
+    console.log("I picked a different color!");
+    console.log(event.target.value);
+    
+  }
+
   render() {
     return (
       <div className="App">
         <Header
-        logOut={this.handleLogOut} />
+        logOut={this.handleLogOut}
+        changeThemeColor={this.handleThemeColorChange} />
         <main>
           {this.state.currentUser === null 
 
@@ -224,7 +240,8 @@ class App extends Component {
           <div className="content">
             <p>signed in</p>
             <MessagesList 
-            messages={this.state.messages}/>
+            messages={this.state.messages}
+            messageColor={this.state.theme.messageColor}/>
             <SendMessage 
             onTextInput={this.handleChange} 
             textInputValue={this.state.userInput}

@@ -101,8 +101,17 @@ textarea {
 }
 
 .message {
-  border: 1px solid blueviolet;
+  border: 2px solid blueviolet;
   width: fit-content;
   padding: 5px 10px;
   margin: 10px;
+}
+
+/* SETTINGS PAGE STYLES */
+.settings {
+  z-index: 10;
+  /* width: 300px; */
+  /* height: 200px; */
+  height: 20vh;
+  background-color: grey;
 }
