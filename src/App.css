@@ -1,12 +1,27 @@
-/* ----------------- SETUP ------------------*/
-article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:700;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace, serif;font-size:1em;}pre{white-space:pre-wrap;word-wrap:break-word;}q{quotes:\201C \201D \2018 \2019;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-.5em;}sub{bottom:-.25em;}img{border:0;}svg:not(:root){overflow:hidden;}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,html input[type=button],/* 1 */input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}button[disabled],input[disabled]{cursor:default;}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}body,figure{margin:0;}legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+/* .App {
+  text-align: center;
+} */
 
-.clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+.App-logo {
+  height: 40vmin;
+}
 
-* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
 
-.visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
+.App-link {
+  color: #09d3ac;
+}
 
+/* ----------------- */
 /* REMOVE DEFAULTS */
 body, h1, h2, h3, p, ul, li {
 	margin: 0;
@@ -39,8 +54,10 @@ textarea {
 
 /*---------------------- GENERAL STYLES ------------------- */
 .wrapper {
+  /* max-width: 1080px; */
   max-width: 800px;
   width: 80%;
+  /* background-color: peachpuff; */
   margin: 0 auto;
 }
 
@@ -49,6 +66,7 @@ textarea {
 font-family: 'Source Sans Pro', sans-serif; */
 
 button {
+  /* background-color: fuchsia; */
   font-size: 1.1rem;
   background-color: #c732be;
   padding: 5px 20px;
@@ -72,6 +90,13 @@ body {
 
 /*--------------------- HEADER STYLES ----------------------*/
 header {
+  /* padding: 20px; */
+  /* background-color: #525252; */
+  /* background-color: #52bafa; */
+  /* background-color: #1c1c1c; */
+  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  /* background-image: url("https://www.transparenttextures.com/patterns/connected.png"); */
+  /* color: whitesmoke; */
   height: 10vh;
 }
 
@@ -103,7 +128,10 @@ header .flexContainer {
 /*-------------------- MAIN SECTION STYLES ---------------------*/
 main {
   height: 84vh;
+  /* background-color: #c1e6fa; */
+  /* background-color: #525252; */
   background-color: #52bafa;
+  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
   background-image: url("https://www.transparenttextures.com/patterns/connected.png")
 }
 
@@ -111,6 +139,9 @@ main .wrapper {
   height: 100%;
 }
 
+/* textarea {
+  border: 1px solid black;
+} */
 
 .content {
   height: 100%;
@@ -118,8 +149,14 @@ main .wrapper {
 
 /*----------------- NOT SIGNED IN PAGE STYLES --------------------*/
 .notSingedInPage {
+  /* width: 100%; */
+  /* width: 40%; */
   height: 100%;
+  /* height: 500px;
+  background-color: dodgerblue; */
+  /* background-color: #ececec; */
   display: flex;
+  /* flex-direction: column; */
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
@@ -129,6 +166,9 @@ main .wrapper {
   width: 40%;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* margin-bottom: 40px; */
   color: whitesmoke;
   background-color: #1c1c1c;
   padding: 20px;
@@ -155,8 +195,15 @@ fieldset button {
 /*-------------------- SENDMESSAGE STYLES ------------------*/
 .sendMessageArea {
   height: 25%;
-  background-color: #52bafa;
-  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  /* background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+
+  /* background-color: #52bafa; 
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png"); */
+
+background-color: #52bafa;
+background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+
 }
 
 .sendMessageArea .flexContainer {
@@ -175,14 +222,23 @@ fieldset button {
 
 
 .sendMessageArea form {
+  /* background-color: dodgerblue; */
   display: flex;
+  /* flex-direction: column; */
   align-items: center; 
   justify-content: center;
+  /* padding: 20px; */
 }
 
 textarea {
+  /* background-color: green; */
+  /* max-width: 300px;
+  min-width: 300px;
+  max-height: 200px;
+  min-height: 200px; */
   max-width: 500px;
   height: 80px;
+  /* border: none; */
   margin: 10px;
   font-size: 1.1rem;
   padding: 5px 10px;
@@ -214,16 +270,23 @@ textarea {
 
 }
 .messageBox {
+  /* width: 300px; */
+  width: 90%;
+  /* height: 200px; */
   max-width: 600px;
+  /* height: 350px; */
   padding: 10px 0;
   background-color: white;
   margin: 20px;
+  /* border: 1px solid black; */
   overflow: scroll;
   background-color: #1c1c1c;
 }
 
 .message {
+  /* border: 2px solid blueviolet; */
   border-radius: 5px;
+  /* width: fit-content; */
   padding: 5px 10px;
   margin: 10px;
   color: white;
@@ -253,15 +316,24 @@ textarea {
 }
 
 .messageText {
+  /* font-weight: bold; */
   margin: 5px 2px;
   font-size: 1.2rem;
 }
 
+
 /*---------------------- SETTINGS PAGE STYLES --------------------*/
 .settings {
+  /* z-index: 10; */
+  /* width: 300px; */
+  /* height: 200px; */
+  /* height: 20vh; */
+  /* background-color: #ececec; */
   height: 100%;
   background-color: #52bafa;
-  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+/* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .settings .flexContainer {
@@ -287,6 +359,7 @@ textarea {
 .settings h2 {
   text-align: center;
   margin-bottom: 10px;
+  /* padding-top: 10px; */
 }
 
 .settings ul {
@@ -295,6 +368,7 @@ textarea {
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  /* margin: 0 auto; */
 }
 
 .settings li {
@@ -309,10 +383,12 @@ textarea {
 .settings form {
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
   justify-content: flex-start;
   border: 2px solid whitesmoke;
   padding: 20px;
   margin-bottom: 10px;
+  /* justify-content: flex-start;  */
 }
 
 .settings button {
@@ -357,6 +433,11 @@ footer {
   height: 6vh;
   background-color: #1c1c1c;
   color: whitesmoke;
+  /* text-align: center; */
+  /* background-color: #525252;
+  color: whitesmoke; */
+  /* background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
 }
 
 footer .flexContainer {
@@ -374,6 +455,7 @@ footer .flexContainer {
   }
   .messageBox {
     margin: 0;
+    /* height: 100%; */
   }
   .sendMessageArea form {
     flex-direction: column;
