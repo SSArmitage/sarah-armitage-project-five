@@ -97,12 +97,14 @@ header {
   /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
   /* background-image: url("https://www.transparenttextures.com/patterns/connected.png"); */
   color: whitesmoke;
-  height: 8vh;
+  height: 10vh;
 }
 
 header .flexContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .iconContainer {
@@ -114,7 +116,7 @@ header .flexContainer {
 
 /*-------------------- MAIN SECTION STYLES ---------------------*/
 main {
-  height: 86vh;
+  height: 84vh;
   /* background-color: #c1e6fa; */
   /* background-color: #525252; */
   background-color: #52bafa;

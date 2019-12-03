@@ -309,6 +309,9 @@ class App extends Component {
   handleSignUpSubmit = (event) => {
     event.preventDefault();
     console.log("I clicked the button!");
+    if (this.state.password.length < 6) {
+      alert('Your password must be 6 characters or longer');
+    }
     // create new account for user
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
       // handle errors here
@@ -334,12 +337,15 @@ class App extends Component {
   handleSignInSubmit = (event) => {
     event.preventDefault();
     console.log("I clicked the button!");
+
     // change in user auth status fires the auth event listener
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
+      // handle incorrect sign in password
+      alert('You have entered either an incorrect email or password');
     });
     // make sure the settings page is closed when user logs out
     this.setState({
@@ -509,7 +515,8 @@ class App extends Component {
   }
 
   // when the user clicks on the emoji icon, 
-  handleEmojiClick = () => {
+  handleEmojiClick = (event) => {
+    event.preventDefault();
     console.log('emoji was clicked!!!!');
     const newState = !this.state.showEmojiPicker;
     this.setState({

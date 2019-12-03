@@ -15,19 +15,23 @@ class SignInLogIn extends Component {
                             <input 
                                 type="text" 
                                 id="displayName" 
-                                placeholder="Username"/>
+                                placeholder="Username"
+                                required/>
                             <label htmlFor="email">Email Address:</label>
                             <input 
                                 type="email" 
                                 id="email" 
                                 placeholder="Email address"
-                                onChange={this.props.emailSignUp}/>
+                                onChange={this.props.emailSignUp}
+                                required/>
                             <label htmlFor="password">Password:</label>
                             <input 
                                 type="password"
                                 id="password"
                                 placeholder="Password"
-                                onChange={this.props.passwordSignUp} />
+                                onChange={this.props.passwordSignUp} 
+                                required
+                                title="6 characters minimum"/>
                             <button>Sign Up</button>
                         {/* </fieldset> */}
                     </form>
@@ -43,13 +47,15 @@ class SignInLogIn extends Component {
                                 type="email"
                                 id="email"
                                 placeholder="Email address"
-                                onChange={this.props.emailSignIn} />
+                                onChange={this.props.emailSignIn} 
+                                required/>
                             <label htmlFor="password">Password:</label>
                             <input
                                 type="password"
                                 id="password"
                                 placeholder="Password"
-                                onChange={this.props.passwordSignIn} />
+                                onChange={this.props.passwordSignIn} 
+                                required/>
                             <button>Sign In</button>
                         {/* </fieldset> */}
                     </form>
