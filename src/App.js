@@ -9,6 +9,10 @@ import Footer from './Footer';
 import SendMessage from './SendMessage';
 import MessagesList from './MessageList';
 import SignInLogIn from './SignInLogIn';
+import Settings from './Settings';
+// import 'react-native-emoji-selector';
+
+
 
 // const messagesArray = [];
 
@@ -25,16 +29,50 @@ class App extends Component {
       uid: '',
       email: '',
       password: '',
-      settingsPage: false,
+      settingsPageClicked: false,
       theme: {
         messageColor: ''
       },
       date: '',
-      time: ''
+      time: '',
+      userComputer: '',
+      showEmojiPicker: false
     }
   }
 
+  determineWindowsOrMac = () => {
+    // fxn to determine if users window is a Mac
+    // if yes, returns true
+    const isMacintosh = () => {
+      return navigator.platform.indexOf('Mac') > -1
+    }
+
+    // isWindows = () => {
+    //   return navigator.platform.indexOf('Win') > -1
+    // }
+
+    const isMac = isMacintosh();
+    const isPC = !isMacintosh();
+    console.log(isMac, isPC);
+
+    // if isMacintosh is true, set the userComputer variable in state to be 'Mac'
+    if (isMac) {
+      this.setState({
+        userComputer: 'Mac'
+    })
+    // if isMacintosh is false, set the userComputer variable in state to be 'PC'
+    } else {
+      this.setState({
+        userComputer: 'PC'
+    })
+    }
+  }  
+
   componentDidMount() {
+    // Determine if users computer is windows or mac 
+    // save it to state, then use this to run a set of keyboard codes to make the emoji keyboard to open
+    this.determineWindowsOrMac();
+
     // connect app to firebase (messages stored in the messages branch)
     const dbRef = firebase.database().ref('messages');
     const dbRefUSM = firebase.database().ref('userSpecificMessages');
@@ -114,28 +152,10 @@ class App extends Component {
       }
     });
     
-    // 
     // // grab the user's custom theme colour from the database
     const dbRefUsers = firebase.database().ref('users');
     dbRefUsers.on('value', (snapshot) => {
       const usersInfo = snapshot.val();
-      // console.log(this.state.theme.messageColor);
-      
-      // console.log(usersInfo);
-      // // console.log(this.state.uid);
-      // const userObject = usersInfo[`${this.state.uid}`];
-      // console.log(userObject);
-      // console.log(this.state.uid);
-      
-      // const userObject = usersInfo[`${this.state.user}`];
-      // console.log(userObject);
-      // const userThemeSelection = userObject.themeColor;
-      // console.log(userThemeSelection);
-
-      // push the slected theme color up to the databsae (use set to replace the previous one)
-      // console.log(usersInfo.uid);
-      
-      // firebase.database().ref().child('users').child(this.state.uid).set(this.state.theme.messageColor)
     });
 
     // set an event listener for 
@@ -174,11 +194,39 @@ class App extends Component {
     // const messageToBeAdded = this.state.userInput;
     const messageToBeAdded = {
       username: this.state.currentUser.displayName,
+      userId: this.state.currentUser.uid,
       text: this.state.userInput,
       date: this.state.date,
       time: this.state.time
     };
     console.log(messageToBeAdded);
+
+    // need to go through all the messages and change the username to the current username
+    // update the user specific messages array to have the current username
+    // newUserSpecificMessagesArray.forEach((message) => {
+    //   console.log(message);
+    //   return(
+    //     message.username = this.state.currentUser.displayName
+    //   );
+    // })
+    // console.log(newUserSpecificMessagesArray);
+
+    // ****************HERE HRER HERE **************
+    // // keep the username up to date for all messages of a user (when/if a user changes their username, want to update all the messages they sent to have the current username)
+    // // doesnt work yet!!!! still have old messages appearing as old name???
+    // newMessagesArray.forEach((message) => {
+    //   // console.log(message);
+    //   // console.log(this.state.currentUser);
+      
+    //   // if the userId of the message matches the current user's Id, then update that message to have the users current username
+    //   if (message.userId === this.state.currentUser.uid) {
+    //     console.log(message.userId, this.state.currentUser.uid);
+        
+    //       message.username = this.state.currentUser.displayName
+    //   }
+    // })
+    // then grab the total messages array (newMessagesArray) and compare to the user specific ones and update those to have the current username
+    
   
 
     
@@ -293,6 +341,11 @@ class App extends Component {
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
     });
+    // make sure the settings page is closed when user logs out
+    this.setState({
+      settingsPageClicked: false
+    })
+
   }
 
   handleLogOut = (event) => {
@@ -306,7 +359,7 @@ class App extends Component {
     });
   }
 
-  // grab user's desire username 
+  // grab user's desired username 
   handleUserName = (event) => {
     this.setState({
       username: event.target.value
@@ -327,6 +380,9 @@ class App extends Component {
       const userName = user.displayName;
       console.log(userName);
       
+    }).then(() => {
+      // call fxn to update username in databse (ensures it stays up to date in the message history)
+      this.updateUserNameInDB()
     }).catch(function (error) {
       // An error happened.
       console.log('did not successfully updated username');
@@ -335,6 +391,27 @@ class App extends Component {
     this.setState({
       username: ''
     });
+  }
+
+  // function to update username is database messages when the user changes their username
+  updateUserNameInDB = () => {
+    // reference to firebase, will use when sending array of messages with updated usernmes back up tp the DB
+    const dbRef = firebase.database().ref('messages');
+    const newMessagesArray = [];
+    // make a copy of the array held in this.state.messages (most recent copy of the mesages in firebase) and save it to an array called newMessagesArray
+    Object.assign(newMessagesArray, this.state.messages);
+
+    // keep the username up to date for all messages of a user (when/if a user changes their username, want to update all the messages they sent to have the current username)
+    newMessagesArray.forEach((message) => {
+      // if the userId of the message matches the current user's Id, then update that message to have the users current username
+      if (message.userId === this.state.currentUser.uid) {
+        console.log(message.userId, this.state.currentUser.uid);
+
+        message.username = this.state.currentUser.displayName
+      }
+    })
+    // once the array has been updated so that all the messages have the enw username, push that array up to firebase (this will cause a re-render and this.state.messages will be updated with the new array, and you will see the new username reflected in all the preivious messages)
+    dbRef.set(newMessagesArray);
   }
 
 
@@ -415,18 +492,52 @@ class App extends Component {
       time: timeActual
     })
   }
+
+  // handleSettingsClick = (event, settingsPageStatus) => {
+  //   this.setState({
+  //     settingsPageClicked: !settingsPageStatus
+  //   })
+  //   console.log("Settings clicked!");
+  // }
+
+  // when the user clicks on the hamburger icon the settings menu will appear (in the main)
+  handleSettingsClick = () => {
+    this.setState({
+      settingsPageClicked: !this.state.settingsPageClicked
+    })
+    console.log("Settings clicked!");
+  }
+
+  // when the user clicks on the emoji icon, 
+  handleEmojiClick = () => {
+    console.log('emoji was clicked!!!!');
+    const newState = !this.state.showEmojiPicker;
+    this.setState({
+      showEmojiPicker: newState
+    })
+    // if (this.state.userComputer === 'Mac') {
+    //   console.log(`I am a Mac`);
+      
+    // } else if (this.state.userComputer === 'PC') {
+    //   console.log(`I am a PC`);
+      
+    // }
+  }
   
 
   render() {
     return (
       <div className="App">
         <Header
-        logOut={this.handleLogOut}
-        changeThemeColor={this.handleThemeColorChange}
-        username={this.state.username}
-        userName={this.handleUserName} 
-        onButtonClickUserName={this.handleSaveUserName}/>
+        // logOut={this.handleLogOut}
+        // changeThemeColor={this.handleThemeColorChange}
+        // username={this.state.username}
+        // userName={this.handleUserName} 
+        // onButtonClickUserName={this.handleSaveUserName}
+        handleSettingsClick={this.handleSettingsClick}/>
         <main>
+          {/* first conditional: if the user variable in state is null, user is not logged in, in this case render the signup/login page
+          if the user variable holds the current user object from firebase, the user is logged in, in this case render the MAIN page */}
           {this.state.currentUser === null 
 
           ? 
@@ -441,19 +552,39 @@ class App extends Component {
 
           : 
           
+          // second conditional
+          // rendering of the MAIN section of the page
+          // if the setting page icon was clicked it, the variable settingsPageClicked in state will be true, in this case render the settings page
+          // else it is false, and in this case render the messaging page
+          (this.state.settingsPageClicked === true
+           
+          ?
+
+          <Settings 
+          username={this.state.username}
+          userName={this.handleUserName}
+          onButtonClickUserName={this.handleSaveUserName}
+          changeThemeColor={this.handleThemeColorChange}
+          logOut={this.handleLogOut}/>
+
+          :
+
           <div className="content">
-            <p>signed in</p>
-            <MessagesList 
-            user={this.state.currentUser}
-            messages={this.state.messages}
-            messagesUSM={this.state.userSpecificMessages}
-            messageColor={this.state.theme.messageColor}/>
-            <SendMessage 
-            onTextInput={this.handleChange} 
-            textInputValue={this.state.userInput}
-            onButtonClick={this.handleSubmit}
+            {/* <p>signed in</p> */}
+            <MessagesList
+              user={this.state.currentUser}
+              messages={this.state.messages}
+              messagesUSM={this.state.userSpecificMessages}
+              messageColor={this.state.theme.messageColor} />
+            <SendMessage
+              onTextInput={this.handleChange}
+              textInputValue={this.state.userInput}
+              onEmojiClick={this.handleEmojiClick}
+              showEmojiPicker={this.state.showEmojiPicker}
+              onButtonClick={this.handleSubmit}
             />
           </div>
+          )
           }
         </main>
         <Footer />

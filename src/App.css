@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -56,20 +56,89 @@ textarea {
 .wrapper {
   max-width: 1280px;
   width: 80%;
-  background-color: peachpuff;
+  /* background-color: peachpuff; */
   margin: 0 auto;
+}
+
+/* fonts */
+/* font-family: 'Anton', sans-serif;
+font-family: 'Source Sans Pro', sans-serif; */
+
+button {
+  /* background-color: fuchsia; */
+  font-size: 1.1rem;
+  background-color: #c732be;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  height: 30px;
+  width: 105px;
+}
+
+h1 {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 1px;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.1rem;
+  color: #1c1c1c;
+}
+
+/* HEADER STYLES */
+header {
+  /* padding: 20px; */
+  /* background-color: #525252; */
+  background-color: #52bafa;
+  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  /* color: whitesmoke; */
+  height: 8vh;
+}
+
+header .flexContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.0rem;
+}
+
+/* MAIN SECTION STYLES */
+main {
+  height: 88vh;
+  /* background-color: #c1e6fa; */
+  /* background-color: #525252; */
+  background-color: #52bafa;
+  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+}
+
+/* textarea {
+  border: 1px solid black;
+} */
+
+.content {
+  height: 100%;
 }
 
 /* NOT SIGNED IN PAGE STYLES */
 .notSingedInPage {
   width: 100%;
-  height: 500px;
-  background-color: dodgerblue;
+  /* height: 500px;
+  background-color: dodgerblue; */
+  /* background-color: #ececec; */
 }
 
 fieldset {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
 }
@@ -79,36 +148,93 @@ fieldset button {
 }
 
 /* SENDMESSAGE STYLES */
-form {
-  background-color: dodgerblue;
+.sendMessageArea {
+  height: 25%;
+  /* background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+
+  /* background-color: #52bafa; 
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png"); */
+
+background-color: #52bafa;
+background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+
+}
+
+.sendMessageArea .flexContainer {
+  height: 100%;
+}
+
+.sendMessageArea form {
+  height: 100%;
+}
+
+.fa-laugh {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+
+.sendMessageArea form {
+  /* background-color: dodgerblue; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  /* flex-direction: column; */
+  align-items: center; 
+  justify-content: center;
+  /* padding: 20px; */
 }
 
 textarea {
   /* background-color: green; */
-  max-width: 300px;
+  /* max-width: 300px;
   min-width: 300px;
   max-height: 200px;
-  min-height: 200px;
-  margin: 20px
+  min-height: 200px; */
+  /* width: 300px; */
+  height: 80px;
+  /* border: none; */
+  margin: 10px;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 200px;
+}
+
+.emojiIcon {
+  margin-bottom: 10px;
+}
+
+.sendAndEmojiContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 /* MESSAGELIST STYLES */
+.messageArea{
+  height: 75%;
+  background-color: #1c1c1c;
+}
+
 .messageListContainer {
   display: flex;
   justify-content: center;
 
 }
 .messageBox {
-  width: 300px;
-  height: 200px;
+  /* width: 300px; */
+  width: 90%;
+  /* height: 200px; */
+  max-width: 600px;
+  height: 350px;
   background-color: white;
   margin: 20px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   overflow: scroll;
+  background-color: #1c1c1c;
 }
 
 .message {
@@ -117,6 +243,7 @@ textarea {
   width: fit-content;
   padding: 5px 10px;
   margin: 10px;
+  color: white;
 }
 
 .userInfo {
@@ -128,6 +255,7 @@ textarea {
   font-size: 0.8rem;
   text-align: left;
   font-weight: bold;
+  color: rgba(245,245,245,0.5)
 }
 
 .messageBox > div {
@@ -139,16 +267,74 @@ textarea {
   align-self: flex-end;
 }
 
-/* .messageText {
-  font-weight: bold;
-} */
+.messageText {
+  /* font-weight: bold; */
+  margin: 5px 2px;
+  font-size: 1.2rem;
+}
 
 
 /* SETTINGS PAGE STYLES */
 .settings {
-  z-index: 10;
+  /* z-index: 10; */
   /* width: 300px; */
   /* height: 200px; */
-  height: 20vh;
-  background-color: grey;
+  /* height: 20vh; */
+  /* background-color: #ececec; */
+  height: 100%;
+  background-color: #52bafa;
+/* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.settings .flexContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.settings ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  /* margin: 0 auto; */
+}
+
+.settings li {
+  margin: 10px 0;
+}
+
+.settings input {
+  margin: 10px 0;
+}
+
+.settings form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* justify-content: flex-start;  */
+}
+
+/* FOOTER STYLES */
+footer {
+  height: 4vh;
+  background-color: #1c1c1c;
+  color: whitesmoke;
+  text-align: center;
+  /* background-color: #525252;
+  color: whitesmoke; */
+  /* background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
 }

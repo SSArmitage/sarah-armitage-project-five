@@ -11,6 +11,11 @@ class SignInLogIn extends Component {
                         onSubmit={this.props.onButtonClickSignUp}>
                         <fieldset>
                             <legend>Sign Up!</legend>
+                            <label htmlFor="displayName">Username</label>
+                            <input 
+                                type="text" 
+                                id="displayName" 
+                                placeholder="Username"/>
                             <label htmlFor="email">Email Address</label>
                             <input 
                                 type="email" 
