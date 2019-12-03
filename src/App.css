@@ -236,7 +236,7 @@ textarea {
   min-width: 300px;
   max-height: 200px;
   min-height: 200px; */
-  /* width: 300px; */
+  max-width: 500px;
   height: 80px;
   /* border: none; */
   margin: 10px;
@@ -274,7 +274,8 @@ textarea {
   width: 90%;
   /* height: 200px; */
   max-width: 600px;
-  height: 350px;
+  /* height: 350px; */
+  padding: 10px 0;
   background-color: white;
   margin: 20px;
   /* border: 1px solid black; */
@@ -289,7 +290,7 @@ textarea {
   padding: 5px 10px;
   margin: 10px;
   color: white;
-  width: 48%;
+  width: 40%;
   max-width: 250px;
 }
 
@@ -343,23 +344,36 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
   align-items: center;
 }
 
+.settingsFormContainer {
+  background-color: #1c1c1c;
+  color: whitesmoke;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 60%;
+  max-width: 300px;
+}
+
 .settings h2 {
   text-align: center;
   margin-bottom: 10px;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .settings ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 60%;
+  align-items: flex-start;
+  width: 100%;
   /* margin: 0 auto; */
 }
 
 .settings li {
   margin: 10px 0;
+  width: 100%;
 }
 
 .settings input {
@@ -369,9 +383,49 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
 .settings form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
+  /* align-items: center; */
+  justify-content: flex-start;
+  border: 2px solid whitesmoke;
+  padding: 20px;
+  margin-bottom: 10px;
   /* justify-content: flex-start;  */
+}
+
+.settings button {
+  margin: 0 auto;
+}
+
+.colorChoices {
+  display: flex;
+}
+
+.color1,
+.color2,
+.color3,
+.color4,
+.color5 {
+  width: 30px;
+  height: 20px;
+}
+
+.color1 {
+  background-color: blueviolet;
+}
+
+.color2 {
+  background-color: #0392cf;
+}
+
+.color3 {
+  background-color: #7bc043;
+}
+
+.color4 {
+  background-color: #ee4035;
+}
+
+.color5 {
+  background-color: #f37736;
 }
 
 /*---------------------- FOOTER STYLES -----------------------*/
@@ -391,4 +445,51 @@ footer .flexContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/*---------------------- MEDIA QUERIES -----------------------*/
+
+@media (max-width: 600px) {
+  .wrapper {
+    width: 90%;
+  }
+  .messageBox {
+    margin: 0;
+    /* height: 100%; */
+  }
+  .sendMessageArea form {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  textarea {
+    width: 90%;
+  }
+
+  .sendAndEmojiContainer {
+    flex-direction: row;
+  }
+
+  .sendAndEmojiContainer button {
+    margin: 0 10px 10px 10px;
+  }
+
+  .notSingedInPage {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .notSingedInPage form {
+    padding: 10px;
+    width: 60%;
+  }
+
+  .notSingedInPage input {
+    padding: 0;
+  }
+
+  footer {
+    text-align: center;
+  }
+
 }

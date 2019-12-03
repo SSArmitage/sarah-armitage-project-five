@@ -30,6 +30,7 @@ class App extends Component {
       email: '',
       password: '',
       settingsPageClicked: false,
+      selectedColorOption: '',
       theme: {
         messageColor: ''
       },
@@ -530,6 +531,16 @@ class App extends Component {
       
     // }
   }
+
+  hanldleColorChange = (event) => {
+    console.log("I picked a new color");
+    
+    // this.setState({
+    //   theme: {
+    //     messageColor: event.target.value;
+    //   }
+    // })
+  }
   
 
   render() {
@@ -573,7 +584,8 @@ class App extends Component {
           username={this.state.username}
           userName={this.handleUserName}
           onButtonClickUserName={this.handleSaveUserName}
-          changeThemeColor={this.handleThemeColorChange}
+          selectedColorOption={this.state.selectedColorOption}
+          handleColorChange={this.handleColorChange}
           logOut={this.handleLogOut}/>
 
           :
