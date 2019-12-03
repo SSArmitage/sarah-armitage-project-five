@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sarah-armitage-project-five/precache-manifest.38baa2e4c3736608c7f5f55559a5b2d9.js"
+  "/sarah-armitage-project-five/precache-manifest.fd21d812ee71860160e90ee680926a34.js"
 );
 
 self.addEventListener('message', (event) => {
