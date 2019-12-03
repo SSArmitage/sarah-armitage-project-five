@@ -4,7 +4,7 @@ class Footer extends Component {
     render() {
         return(
             <footer>
-                <div className="wrapper">
+                <div className="wrapper flexContainer">
                     <p>Copyright Sarah Armitage 2019</p>
                 </div>
             </footer>

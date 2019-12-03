@@ -52,9 +52,10 @@ textarea {
     border: none;
 }
 
-/* GENERAL STYLES  */
+/*---------------------- GENERAL STYLES ------------------- */
 .wrapper {
-  max-width: 1280px;
+  /* max-width: 1080px; */
+  max-width: 800px;
   width: 80%;
   /* background-color: peachpuff; */
   margin: 0 auto;
@@ -87,14 +88,15 @@ body {
   color: #1c1c1c;
 }
 
-/* HEADER STYLES */
+/*--------------------- HEADER STYLES ----------------------*/
 header {
   /* padding: 20px; */
   /* background-color: #525252; */
-  background-color: #52bafa;
+  /* background-color: #52bafa; */
+  background-color: #1c1c1c;
   /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
-  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
-  /* color: whitesmoke; */
+  /* background-image: url("https://www.transparenttextures.com/patterns/connected.png"); */
+  color: whitesmoke;
   height: 8vh;
 }
 
@@ -110,14 +112,18 @@ header .flexContainer {
   font-size: 2.0rem;
 }
 
-/* MAIN SECTION STYLES */
+/*-------------------- MAIN SECTION STYLES ---------------------*/
 main {
-  height: 88vh;
+  height: 86vh;
   /* background-color: #c1e6fa; */
   /* background-color: #525252; */
   background-color: #52bafa;
   /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
   background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+}
+
+main .wrapper {
+  height: 100%;
 }
 
 /* textarea {
@@ -128,26 +134,52 @@ main {
   height: 100%;
 }
 
-/* NOT SIGNED IN PAGE STYLES */
+/*----------------- NOT SIGNED IN PAGE STYLES --------------------*/
 .notSingedInPage {
-  width: 100%;
+  /* width: 100%; */
+  /* width: 40%; */
+  height: 100%;
   /* height: 500px;
   background-color: dodgerblue; */
   /* background-color: #ececec; */
-}
-
-fieldset {
   display: flex;
   /* flex-direction: column; */
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
+}
+
+.notSingedInPage form {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* margin-bottom: 40px; */
+  color: whitesmoke;
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 5px;
+  height: max-content;
+}
+
+.notSingedInPage input {
+  font-size: 1.1rem;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px; 
+}
+
+.notSingedInPage button {
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
 fieldset button {
   margin: 0 auto;
 }
 
-/* SENDMESSAGE STYLES */
+/*-------------------- SENDMESSAGE STYLES ------------------*/
 .sendMessageArea {
   height: 25%;
   /* background-color: #52bafa;
@@ -213,7 +245,7 @@ textarea {
   flex-direction: column;
 }
 
-/* MESSAGELIST STYLES */
+/*--------------------- MESSAGELIST STYLES -------------------*/
 .messageArea{
   height: 75%;
   background-color: #1c1c1c;
@@ -274,7 +306,7 @@ textarea {
 }
 
 
-/* SETTINGS PAGE STYLES */
+/*---------------------- SETTINGS PAGE STYLES --------------------*/
 .settings {
   /* z-index: 10; */
   /* width: 300px; */
@@ -327,14 +359,21 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
   /* justify-content: flex-start;  */
 }
 
-/* FOOTER STYLES */
+/*---------------------- FOOTER STYLES -----------------------*/
 footer {
-  height: 4vh;
+  height: 6vh;
   background-color: #1c1c1c;
   color: whitesmoke;
-  text-align: center;
+  /* text-align: center; */
   /* background-color: #525252;
   color: whitesmoke; */
   /* background-color: #52bafa;
   background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+}
+
+footer .flexContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
