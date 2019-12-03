@@ -15,27 +15,18 @@ class MessageList extends Component {
         let messageStyleOtherUser;
 
         messageStyle = {
-            // borderColor: `${this.props.messageColor}`,
-            // backgroundColor: `${this.props.messageColor}`,
             backgroundColor: 'blueviolet'
-            // backgroundImage: 'url(' + imgUrl + ')',
         };
         // default color for the other users
         messageStyleOtherUser = {
-            // borderColor: 'blue',
-            // backgroundColor: '#0392cf',
-            backgroundColor: '#0392cf',
-            // backgroundColor: 'purple',
-            // backgroundImage: 'url(' + imgUrl + ')',
+            backgroundColor: '#0392cf'
         };
 
         // find the uid associated with the username and match based on that for color
-        // 
         return(
 
             <div className="messageArea">
                 <div className="wrapper messageListContainer">
-                        {/* <div className="messageBox"> */}
                         <ScrollToBottom className="messageBox">
                             {   
                                 
@@ -74,7 +65,6 @@ class MessageList extends Component {
                                 }
                             })}
                         </ScrollToBottom>
-                        {/* </div> */}
                 </div>
             </div>
         );

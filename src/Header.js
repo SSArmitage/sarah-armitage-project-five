@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import Settings from './Settings';
 
 class Header extends Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         settingsPageOpen: false
-    //     }
-    // }
-
     render() {
         return(
             <div>

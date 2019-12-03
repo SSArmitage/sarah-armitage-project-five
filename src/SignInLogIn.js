@@ -5,11 +5,8 @@ class SignInLogIn extends Component {
         return(
             <div className="wrapper">
                 <div className="notSingedInPage">
-                    {/* <h2>Not signed in</h2> */}
-                    {/* Sign up user */}
                     <form className="signUp"
                         onSubmit={this.props.onButtonClickSignUp}>
-                        {/* <fieldset> */}
                             <h2>Sign Up</h2>
                             {/* working on making this username input work */}
                             {/* <label htmlFor="displayName">Username:</label>
@@ -34,14 +31,12 @@ class SignInLogIn extends Component {
                                 required
                                 title="8 characters minimum"/>
                             <button>Sign Up</button>
-                        {/* </fieldset> */}
                     </form>
 
                     {/* Sign in user */}
                     <form 
                         className="login"
                         onSubmit={this.props.onButtonClickSignIn}>
-                        {/* <fieldset> */}
                             <h2>Sign In</h2>
                             <label htmlFor="email">Email Address:</label>
                             <input
@@ -58,7 +53,6 @@ class SignInLogIn extends Component {
                                 onChange={this.props.passwordSignIn} 
                                 required/>
                             <button>Sign In</button>
-                        {/* </fieldset> */}
                     </form>
                 </div>
             </div> 

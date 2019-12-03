@@ -22,6 +22,7 @@ class Settings extends Component {
                                     
                                 </form>
                             </li>
+                            {/* adding these in but not working yet */}
                             {/* <li>
                                 <form>
                                     <label>Add/Change Display Picture</label>

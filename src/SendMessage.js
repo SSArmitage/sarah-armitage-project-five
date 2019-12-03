@@ -7,9 +7,7 @@ class SendMessage extends Component {
             <div className="sendMessageArea">
                 <div className="wrapper flexContainer">
                     <form onSubmit={this.props.onButtonClick}>
-                        {/* <fieldset> */}
                             <label htmlFor="userMessage"></label>
-                            {/* <input type="text" id="userMessage" /> */}
                             <textarea 
                             rows="10" 
                             cols="40" 
@@ -28,7 +26,6 @@ class SendMessage extends Component {
                                 <button>Send</button>   
                             </div>
                             
-                        {/* </fieldset> */}
                         {this.props.showEmojiPicker 
                         ? 
                         <div className="emojiPicker">
