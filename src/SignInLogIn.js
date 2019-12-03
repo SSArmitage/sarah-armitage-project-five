@@ -11,12 +11,13 @@ class SignInLogIn extends Component {
                         onSubmit={this.props.onButtonClickSignUp}>
                         {/* <fieldset> */}
                             <h2>Sign Up</h2>
-                            <label htmlFor="displayName">Username:</label>
+                            {/* working on making this username input work */}
+                            {/* <label htmlFor="displayName">Username:</label>
                             <input 
                                 type="text" 
                                 id="displayName" 
                                 placeholder="Username"
-                                required/>
+                                required/> */}
                             <label htmlFor="email">Email Address:</label>
                             <input 
                                 type="email" 
@@ -31,7 +32,7 @@ class SignInLogIn extends Component {
                                 placeholder="Password"
                                 onChange={this.props.passwordSignUp} 
                                 required
-                                title="6 characters minimum"/>
+                                title="8 characters minimum"/>
                             <button>Sign Up</button>
                         {/* </fieldset> */}
                     </form>

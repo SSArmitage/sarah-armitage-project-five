@@ -29,7 +29,7 @@ class App extends Component {
       uid: '',
       email: '',
       password: '',
-      settingsPageClicked: false,
+      settingsPageClicked: true,
       selectedColorOption: '',
       theme: {
         messageColor: ''
@@ -117,16 +117,17 @@ class App extends Component {
           uid: user.uid
         })
 
+        // ******** working on this functionality *********
         // grab the user's custom theme colour from the database and set that in state, so that the messages will be updated to have that color
-        const dbRefUsers = firebase.database().ref('users');
-        dbRefUsers.on('value', (snapshot) => {
-          const usersInfo = snapshot.val();
-          this.setState({
-            theme: {
-              messageColor: usersInfo[`${this.state.uid}`].themeColor
-            }
-          })
-        })
+        // const dbRefUsers = firebase.database().ref('users');
+        // dbRefUsers.on('value', (snapshot) => {
+        //   const usersInfo = snapshot.val();
+        //   this.setState({
+        //     theme: {
+        //       messageColor: usersInfo[`${this.state.uid}`].themeColor
+        //     }
+        //   })
+        // })
 
 
       } else {
@@ -372,7 +373,7 @@ class App extends Component {
       username: event.target.value
     })
   }
-  // send username to firebase auth
+  // send username to firebase auth on button submit
   handleSaveUserName = (event) => {
     event.preventDefault();
 
@@ -396,7 +397,8 @@ class App extends Component {
     });
 
     this.setState({
-      username: ''
+      username: '',
+      settingsPageClicked: !this.state.settingsPageClicked
     });
   }
 

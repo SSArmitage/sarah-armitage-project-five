@@ -5,7 +5,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 class MessageList extends Component {
     render() {
         // change color of message borders based on user selection (passed down as a prop from App.js)
-        const arrayUSM = this.props.messagesUSM
+        // const arrayUSM = this.props.messagesUSM
         // don't think I need this user specific messages anymore??? (have usernames atatched to messages now)
         const user = this.props.user;
         console.log(user.displayName);
