@@ -93,11 +93,22 @@ header {
   /* padding: 20px; */
   /* background-color: #525252; */
   /* background-color: #52bafa; */
-  background-color: #1c1c1c;
+  /* background-color: #1c1c1c; */
   /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
   /* background-image: url("https://www.transparenttextures.com/patterns/connected.png"); */
-  color: whitesmoke;
+  /* color: whitesmoke; */
   height: 10vh;
+}
+
+.headerSignedOutPage {
+    background-color: #1c1c1c;
+    color: whitesmoke;
+}
+
+.headerSignedInPage {
+  background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  color: #1c1c1c;
 }
 
 header .flexContainer {
@@ -272,12 +283,14 @@ textarea {
 }
 
 .message {
-  border: 2px solid blueviolet;
+  /* border: 2px solid blueviolet; */
   border-radius: 5px;
-  width: fit-content;
+  /* width: fit-content; */
   padding: 5px 10px;
   margin: 10px;
   color: white;
+  width: 48%;
+  max-width: 250px;
 }
 
 .userInfo {

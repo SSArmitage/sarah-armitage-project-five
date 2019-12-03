@@ -36,7 +36,8 @@ class App extends Component {
       date: '',
       time: '',
       userComputer: '',
-      showEmojiPicker: false
+      showEmojiPicker: false,
+      userSignedIn: false
     }
   }
 
@@ -351,7 +352,6 @@ class App extends Component {
     this.setState({
       settingsPageClicked: false
     })
-
   }
 
   handleLogOut = (event) => {
@@ -536,6 +536,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header
+        headerChange={this.state.currentUser}
+        // userSignedIn={this.state.userSignedIn}
         // logOut={this.handleLogOut}
         // changeThemeColor={this.handleThemeColorChange}
         // username={this.state.username}
