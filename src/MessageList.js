@@ -8,7 +8,7 @@ class MessageList extends Component {
         // const arrayUSM = this.props.messagesUSM
         // don't think I need this user specific messages anymore??? (have usernames atatched to messages now)
         const user = this.props.user;
-        console.log(user.displayName);
+        // console.log(user.displayName);
         
         const array = this.props.messages;
         let messageStyle;

@@ -10,6 +10,8 @@ import SendMessage from './SendMessage';
 import MessagesList from './MessageList';
 import SignInLogIn from './SignInLogIn';
 import Settings from './Settings';
+import getEmoji from './EmojiPicker';
+
 
 
 
@@ -21,6 +23,7 @@ class App extends Component {
       userSpecificMessages: [],
       messagesFiltered: [],
       userInput: '',
+      tempUserInput: '',
       currentUser: null,
       username: '',
       uid: '',
@@ -35,7 +38,9 @@ class App extends Component {
       time: '',
       userComputer: '',
       showEmojiPicker: false,
-      userSignedIn: false
+      userSignedIn: false,
+      selectedEmoji: '',
+      emojiString: ''
     }
   }
 
@@ -104,9 +109,23 @@ class App extends Component {
     })
     // when user types message, grab the date and time
     this.getDateAndTime();
+    // when the user starts typing, make sure that the emojiPicker is closed (if open)
+    this.setState({
+      showEmojiPicker: false
+    })
   }
 
   handleSubmit = (event) => {
+    console.log(event);
+
+    this.setState({
+      showEmojiPicker: false
+    })
+
+    // if (event.target === "keydown") {
+    //   console.log("ENTER");
+    // }
+    
     event.preventDefault();
     // will use dbRef when pushing up the new array to the database
     const dbRef = firebase.database().ref('messages');
@@ -168,6 +187,7 @@ class App extends Component {
   }
 
   // -------------------- AUTHENTICATION ---------------------
+  // ----- SIGN UP -----
   // grab user email for sign up
   handleSignUpEmail = (event) => {
    this.setState({
@@ -194,7 +214,7 @@ class App extends Component {
       // handle errors here
     })
   }
-
+// ----- SIGN IN -----
   // grab user email for sign in
   handleSignInEmail = (event) => {
     this.setState({
@@ -227,6 +247,7 @@ class App extends Component {
     })
   }
 
+// ----- SIGN OUT -----
   handleLogOut = (event) => {
     // change in user auth status fires the auth event listener
     firebase.auth().signOut().then(function () {
@@ -236,6 +257,7 @@ class App extends Component {
     });
   }
 
+// ----- UPDATE USERNAME -----
   // grab user's desired username 
   handleUserName = (event) => {
     this.setState({
@@ -269,7 +291,7 @@ class App extends Component {
     });
   }
 
-  // function to update username is database messages when the user changes their username
+  // function to update username in database messages when the user changes their username
   updateUserNameInDB = () => {
     // reference to firebase, will use when sending array of messages with updated usernmes back up tp the DB
     const dbRef = firebase.database().ref('messages');
@@ -279,12 +301,12 @@ class App extends Component {
 
     // keep the username up to date for all messages of a user (when/if a user changes their username, want to update all the messages they sent to have the current username)
     newMessagesArray.forEach((message) => {
-      // if the userId of the message matches the current user's Id, then update that message to have the users current username
+      // if the userId of the message matches the current user's Id, then update that message to have the user's current username
       if (message.userId === this.state.currentUser.uid) {
         message.username = this.state.currentUser.displayName
       }
     })
-    // once the array has been updated so that all the messages have the enw username, push that array up to firebase (this will cause a re-render and this.state.messages will be updated with the new array, and you will see the new username reflected in all the preivious messages)
+    // once the array has been updated so that all the messages have the new username, push that array up to firebase (this will cause a re-render and this.state.messages will be updated with the new array, and you will see the new username reflected in all the preivious messages)
     dbRef.set(newMessagesArray);
   }
   
@@ -304,6 +326,7 @@ class App extends Component {
     })
   }
 
+  //--------------- DATE & TIME STAMP -----------------
   // function to grab the date and time (to use in messages)
   getDateAndTime = () => {
     // get the date
@@ -359,7 +382,7 @@ class App extends Component {
     })
   }
 
-  // when the user clicks on the emoji icon, 
+  // when the user clicks on the emoji icon, change the state of showEmojiPicker to true
   handleEmojiClick = (event) => {
     event.preventDefault();
     const newState = !this.state.showEmojiPicker;
@@ -375,6 +398,27 @@ class App extends Component {
     //     messageColor: event.target.value;
     //   }
     // })
+  }
+
+  handleEmojiSelection = (emoji) => {
+    console.log(emoji);
+    // this.setState({
+    //   selectedEmoji: emoji
+    // })
+    // add emoji to the user input 
+    // let temporaryUserInput = `${this.state.userInput}${emoji}`
+    // this.setState({
+    //   userInput: `${this.state.userInput}${emoji}`
+    // })
+
+    // clone the user input in state
+    const temporaryUserInput = this.state.userInput;
+    // append the emoji on to the end of the string the user is typing in the moment
+    const newTemporaryUserInput = `${temporaryUserInput}${emoji}`
+    console.log(newTemporaryUserInput);
+    this.setState({
+      userInput: newTemporaryUserInput
+    })
   }
   
 
@@ -431,6 +475,7 @@ class App extends Component {
               onEmojiClick={this.handleEmojiClick}
               showEmojiPicker={this.state.showEmojiPicker}
               onButtonClick={this.handleSubmit}
+              sendEmojiIntoApp={this.handleEmojiSelection}
             />
           </div>
           )

@@ -290,8 +290,8 @@ textarea {
   padding: 5px 10px;
   margin: 10px;
   color: white;
-  width: 40%;
-  max-width: 250px;
+  max-width: 60%;
+  /* max-width: 250px; */
 }
 
 .userInfo {
@@ -319,6 +319,7 @@ textarea {
   /* font-weight: bold; */
   margin: 5px 2px;
   font-size: 1.2rem;
+  word-break: break-word;
 }
 
 
