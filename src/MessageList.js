@@ -22,6 +22,9 @@ class MessageList extends Component {
             backgroundColor: '#0392cf'
         };
 
+        // let messageText;
+       
+
         // find the uid associated with the username and match based on that for color
         return(
 
@@ -31,6 +34,15 @@ class MessageList extends Component {
                             {   
                                 
                             array.map((message) => {
+                                // let reMessage = new RegExp(message.text);
+                                // console.log(message.text);
+                                
+                                // if the message has a gif url in it, then grab that url
+                                // check that it has a "http" at the begining and a "gif" at the end
+                                const myRe = /^(http.*\.gif)$/;
+                                let messageGifUrl = message.text.match(myRe);
+                                // console.log(messageGifUrl);
+                        
                                 if (message.username === user.displayName) {
                                     return(
                                         <li
@@ -42,9 +54,18 @@ class MessageList extends Component {
                                             <p
                                             className="dateAndTime">
                                             {`${message.date} ${message.time}`}</p>
-                                            <p 
+                                            {/* <p 
                                             className="messageText">
-                                            {message.text}</p>
+                                            {message.text}</p> */}
+                                            {messageGifUrl !== null
+                                            // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
+                                            ?
+                                             <p>
+                                                <img src={messageGifUrl[0]}/>
+                                             </p>
+                                            :
+                                            <p>{message.text}</p>
+                                            }
                                         </li>
                                     )
                                 } else {

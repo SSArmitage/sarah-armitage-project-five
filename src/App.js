@@ -40,7 +40,8 @@ class App extends Component {
       showEmojiPicker: false,
       userSignedIn: false,
       selectedEmoji: '',
-      emojiString: ''
+      emojiString: '',
+      selectedGifId: ''
     }
   }
 
@@ -115,15 +116,38 @@ class App extends Component {
     })
   }
 
-  handleSubmit = (event) => {
-    console.log(event);
+  getGifInfoViaButton = (chosenGif) => {
+    console.log("passing gif info...", chosenGif);
+    console.log(chosenGif);
 
-    this.setState({
-      showEmojiPicker: false
-    })
+    // when user picks a gif, grab the date and time
+    this.getDateAndTime();
+    
+    // only if there is a gif chosen by user, set the userInput in state to be that gif, else do not update state
+    if (chosenGif) {
+      this.setState({
+        userInput: chosenGif
+      })
+    }
+    
+  }
+  
 
-    // if (event.target === "keydown") {
-    //   console.log("ENTER");
+  handleSubmit = (event, chosenGif) => {
+    console.log(event, chosenGif);
+    console.log(`I submitted the form!`);
+    
+
+    // this.setState({
+    //   showEmojiPicker: false
+    // })
+
+    // if (chosenGif !== undefined) {
+    //   console.log("I am not undefined");
+    //   this.setState({
+    //     // chosenGif is a string (gif url)
+    //     userInput: chosenGif
+    //   })
     // }
     
     event.preventDefault();
@@ -146,6 +170,8 @@ class App extends Component {
       date: this.state.date,
       time: this.state.time
     };
+    console.log(messageToBeAdded);
+    
 
     // add messageToBeAdded to the cloned array, and push that array up to firebase (use set to replace the previous array up there)
     // first check to see if the length of the newMessagesArray is less than 100 
@@ -171,6 +197,9 @@ class App extends Component {
         newUserSpecificMessagesArray.push(messageToBeAdded);
       }
       // else message is empty
+    } else {
+      console.log("The gif did not make it into the db");
+      
     }
 
     // push the newMessagesArray up to firebase (set to replace)
@@ -182,7 +211,8 @@ class App extends Component {
     this.setState({
       userInput: '',
       date: '',
-      time: ''
+      time: '',
+      showEmojiPicker: false
     }); 
   }
 
@@ -420,6 +450,14 @@ class App extends Component {
       userInput: newTemporaryUserInput
     })
   }
+
+  // handleGif = (gifId) => {
+  //   console.log("Passed id to app!");
+    
+  //   this.setState({
+  //     selectedGifId: ''
+  //   })
+  // }
   
 
   render() {
@@ -476,6 +514,8 @@ class App extends Component {
               showEmojiPicker={this.state.showEmojiPicker}
               onButtonClick={this.handleSubmit}
               sendEmojiIntoApp={this.handleEmojiSelection}
+              sendGifToApp={this.handleGif}
+              onFormButtonClick={this.getGifInfoViaButton}
             />
           </div>
           )

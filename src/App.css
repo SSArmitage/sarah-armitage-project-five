@@ -212,6 +212,7 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
 
 .sendMessageArea form {
   height: 100%;
+  position: relative;
 }
 
 .fa-laugh {
@@ -237,11 +238,15 @@ textarea {
   max-height: 200px;
   min-height: 200px; */
   max-width: 500px;
-  height: 80px;
+  /* height: 80px; */
+  height: 118px;
+  width: 400px;
   /* border: none; */
   margin: 10px;
   font-size: 1.1rem;
   padding: 5px 10px;
+  resize: none;
+  outline: none;
 }
 
 .emojiPicker {
@@ -256,6 +261,59 @@ textarea {
 .sendAndEmojiContainer {
   display: flex;
   flex-direction: column;
+}
+
+.gifPicker {
+  width: 100%;
+  height: 60vh;
+  /* background-color: black; */
+  overflow: scroll;
+  background-color: #1c1c1c;
+  position: absolute;
+  top: -60vh;
+}
+
+.gifPicker ul {
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* display: grid;
+  /* grid-template-columns: 25% 25% 25% 25%; */
+  /* column-count: 4; */
+  /* gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));  */
+  column-count: 4;
+  /* column-width: 25%; */
+  column-gap: 5px;
+}
+
+.gifPicker li {
+  width: 100%;
+  /* display: inline-block; */
+  margin-bottom: 5px;
+}
+
+.imageContainer {
+  width: 50%;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.textArea {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 118px;
+    overflow: auto;
+    padding: 2px;
+    /* resize: both; */
+    resize: none;
+    width: 400px;
+    background-color: white;
 }
 
 /*--------------------- MESSAGELIST STYLES -------------------*/
@@ -276,7 +334,7 @@ textarea {
   max-width: 600px;
   /* height: 350px; */
   padding: 10px 0;
-  background-color: white;
+  /* background-color: white; */
   margin: 20px;
   /* border: 1px solid black; */
   overflow: scroll;

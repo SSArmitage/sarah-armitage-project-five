@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EmojiPicker from './EmojiPicker';
+import axios from 'axios';
 
 class SendMessage extends Component {
     constructor() {
@@ -7,7 +8,10 @@ class SendMessage extends Component {
         // creating a Ref that can then be assigned to the textarea element with ref-attribute, assigning it to the variable textInput
         this.textInput = React.createRef();
         this.state = {
-            selectedEmoji: ''
+            selectedEmoji: '',
+            searchGifs: [],
+            showGifPicker: false,
+            selectedGifId: ''
         }
     }
 
@@ -50,24 +54,110 @@ class SendMessage extends Component {
     //     }
     // }
 
+    handleGifSearch = (event) => {
+        event.preventDefault();
+        console.log("I clicked the GIF button");
+        
+        // make axios call to GIPHY api
+        axios({
+            method: 'get',
+            url: `http://api.giphy.com/v1/gifs/search`,
+            responseType: 'json',
+            params: {
+                api_key: 'aBCgQnzAOOAJ9COBm7Yt2Rwhp5jVz0rN',
+                q: `dog`
+            }
+        }).then((gifData) => {
+            console.log(gifData.data.data);
+            this.setState({
+                searchGifs: gifData.data.data
+            }, this.setState({
+                showGifPicker: true
+            }))
+        })
+    }
+
+    handleGifClick = (event) => {
+        console.log(event);
+        console.log(event.target.src);
+        this.setState({
+            selectedGifId: event.target.src,
+            showGifPicker: false
+        })
+        // this.props.sendGifToApp(event.target.id)
+    }
+
+    sendInfoWithForm = (event) => {
+        console.log("blaaa blaa blaa");
+        this.props.onFormButtonClick(this.state.selectedGifId);
+        this.setState({
+            selectedGifId: ''
+        })
+    }
+
+    // NOTE: got gif to show up inside of fake text area.. now need it to get sent to the dispaly messages when send form
+    // need to remove the chosen gif from the text area after the send button is clicked - DONE
+    // also need to change the input stuff for the new fake text area
+    // fix date/time stamps
+
     render() {
         return(
             <div className="sendMessageArea">
                 <div className="wrapper flexContainer">
                     <form 
                     onSubmit={this.props.onButtonClick}
+                    // onSubmit={this.sendInfoWithForm}
                     // onSubmit={this.submitOnEnter}
                     >
                             <label htmlFor="userMessage"></label>
-                            <textarea 
+                            {/* <textarea 
                             rows="10" 
                             cols="40" 
                             placeholder="Enter message here" 
                             id="userMessage" 
                             onChange={this.props.onTextInput}
                             value={this.props.textInputValue}
-                            ref={this.textInput}>
+                            ref={this.textInput}
+                            contenteditable>
+                            </textarea> */}
+
+                            {/* div that will look like a textarea, depending on the content, will either have an actual text area inside for catching the users text input OR an image tag for gifs selected by the user */}
+                            <div 
+                            className="textArea"
+                            id="userMessage"
+                            onChange={this.props.onTextInput}
+                            value={this.props.textInputValue}
+                            ref={this.textInput}
+                            contenteditable>
+
+                            {this.state.selectedGifId
+                            ?
+                            
+                            <div className="imageContainer">
+                                <img
+                                src={this.state.selectedGifId}
+                                width="120"
+                                height="100"
+                                contenteditable="false" />
+                            </div>
+                            :
+                            null
+                            }
+
+                            {/* Hi */}
+                            <textarea
+                                rows="10"
+                                cols="40"
+                                placeholder="Enter message here"
+                                id="userMessage"
+                                onChange={this.props.onTextInput}
+                                value={this.props.textInputValue}
+                                ref={this.textInput}
+                                // contenteditable
+                                >
                             </textarea>
+
+                            </div>
                             <div
                             className="sendAndEmojiContainer">
                                 <button 
@@ -75,7 +165,10 @@ class SendMessage extends Component {
                                 onClick={this.props.onEmojiClick}>
                                     <i class="far fa-laugh"></i>
                                 </button>
-                                <button id="clickSend">Send</button>   
+                                <button onClick={this.handleGifSearch}>GIF</button>
+                                <button 
+                                id="clickSend"
+                                onClick={this.sendInfoWithForm}>Send</button>   
                             </div>
                             
                         {this.props.showEmojiPicker 
@@ -84,6 +177,27 @@ class SendMessage extends Component {
                             <EmojiPicker 
                             handleEmojiClick={this.getChosenEmoji}/>
                         </div> 
+                        :
+                        null}
+
+                        {this.state.showGifPicker
+                        ?
+                        <div className="gifPicker">
+                            <ul>
+                                {this.state.searchGifs.map((gifObject) => {
+                                    return (
+                                        <li>
+                                            <img 
+                                            src={gifObject.images.fixed_height_small.url}
+                                            id={gifObject.id}
+                                            onClick={this.handleGifClick}/>
+                                        </li>
+                                    )
+                                })
+    
+                                }
+                            </ul>
+                        </div>
                         :
                         null}
                     </form>
