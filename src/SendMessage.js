@@ -11,6 +11,7 @@ class SendMessage extends Component {
             selectedEmoji: '',
             searchGifs: [],
             showGifPicker: false,
+            gifSearchText: '',
             selectedGifId: ''
         }
     }
@@ -55,8 +56,8 @@ class SendMessage extends Component {
     // }
 
     handleGifSearch = (event) => {
-        event.preventDefault();
-        console.log("I clicked the GIF button");
+        // event.preventDefault();
+        console.log("I searched for a gif");
         
         // make axios call to GIPHY api
         axios({
@@ -65,7 +66,8 @@ class SendMessage extends Component {
             responseType: 'json',
             params: {
                 api_key: 'aBCgQnzAOOAJ9COBm7Yt2Rwhp5jVz0rN',
-                q: `dog`
+                // q: `dog`
+                q: this.state.gifSearchText
             }
         }).then((gifData) => {
             console.log(gifData.data.data);
@@ -95,6 +97,31 @@ class SendMessage extends Component {
         })
     }
 
+    // when user clicks on Gif button, either show or hide the Gif menu
+    changeGifMenuVisibility = (event) => {
+        console.log(event);
+        console.log(this.state.showGifPicker);
+        
+        if (this.state.showGifPicker) {
+            this.setState({
+                showGifPicker: false,
+                searchGifs: []
+            })
+        } else {
+            this.setState({
+                showGifPicker: true
+            })
+        }
+        
+    }
+
+    // when user types their gif search into the text input
+    handleGifTextInput = (event) => {
+        this.setState({
+            gifSearchText: event.target.value
+        }, this.handleGifSearch())
+    }
+
     // NOTE: got gif to show up inside of fake text area.. now need it to get sent to the dispaly messages when send form
     // need to remove the chosen gif from the text area after the send button is clicked - DONE
     // also need to change the input stuff for the new fake text area
@@ -121,7 +148,8 @@ class SendMessage extends Component {
                             contenteditable>
                             </textarea> */}
 
-                            {/* div that will look like a textarea, depending on the content, will either have an actual text area inside for catching the users text input OR an image tag for gifs selected by the user */}
+                            {/* an editable div (the "contenteditable" attribute allows users to make changes to the content inside the div, user can edit the contents of the div) that will look like a textarea. Depending on the content, the div will either have an actual text area inside for catching the users text input OR an image tag for gifs selected by the user */}
+                            {/* passing an image into a "textarea" */}
                             <div 
                             className="textArea"
                             id="userMessage"
@@ -165,7 +193,8 @@ class SendMessage extends Component {
                                 onClick={this.props.onEmojiClick}>
                                     <i class="far fa-laugh"></i>
                                 </button>
-                                <button onClick={this.handleGifSearch}>GIF</button>
+                                {/* <button onClick={this.handleGifSearch}>GIF</button> */}
+                                <button onClick={this.changeGifMenuVisibility}>GIF</button>
                                 <button 
                                 id="clickSend"
                                 onClick={this.sendInfoWithForm}>Send</button>   
@@ -183,6 +212,12 @@ class SendMessage extends Component {
                         {this.state.showGifPicker
                         ?
                         <div className="gifPicker">
+                            <input 
+                            type="text"
+                            onChange={this.handleGifTextInput}
+                            value={this.state.gifSearchText}
+                            >
+                            </input>
                             <ul>
                                 {this.state.searchGifs.map((gifObject) => {
                                     return (
