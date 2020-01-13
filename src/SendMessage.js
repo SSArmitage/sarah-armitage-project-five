@@ -58,6 +58,8 @@ class SendMessage extends Component {
     handleGifSearch = (event) => {
         // event.preventDefault();
         console.log("I searched for a gif");
+        console.log(this.state.gifSearchText);
+        
         
         // make axios call to GIPHY api
         axios({
@@ -73,9 +75,12 @@ class SendMessage extends Component {
             console.log(gifData.data.data);
             this.setState({
                 searchGifs: gifData.data.data
-            }, this.setState({
-                showGifPicker: true
-            }))
+            }, 
+            // this.setState({
+            //     showGifPicker: true
+            // })
+            
+            )
         })
     }
 
@@ -116,10 +121,14 @@ class SendMessage extends Component {
     }
 
     // when user types their gif search into the text input
+    // AFTER the user's input is set in state, a callback fxn runs that will fire the handleGifSearch() fxn (if it was not wrapped in a callback fxn, handleGifSearch() would fire right away and it would call the API before the current typed letter was saved in state, causing the images returned from the API to always be a letter behind)
     handleGifTextInput = (event) => {
         this.setState({
             gifSearchText: event.target.value
-        }, this.handleGifSearch())
+        }, function() {
+            console.log("I was placed in state");
+            this.handleGifSearch()
+        })
     }
 
     // NOTE: got gif to show up inside of fake text area.. now need it to get sent to the dispaly messages when send form
@@ -216,22 +225,30 @@ class SendMessage extends Component {
                             type="text"
                             onChange={this.handleGifTextInput}
                             value={this.state.gifSearchText}
+                            autoFocus
                             >
                             </input>
+
+                            {/* if there is text in the gif search, render the list of gifs from the api, else, don't render anything */}
+                            {this.state.gifSearchText
+                            ?
                             <ul>
                                 {this.state.searchGifs.map((gifObject) => {
                                     return (
                                         <li>
-                                            <img 
-                                            src={gifObject.images.fixed_height_small.url}
-                                            id={gifObject.id}
-                                            onClick={this.handleGifClick}/>
+                                            <img
+                                                src={gifObject.images.fixed_height_small.url}
+                                                id={gifObject.id}
+                                                onClick={this.handleGifClick} />
                                         </li>
                                     )
                                 })
-    
                                 }
                             </ul>
+                            :
+                            null
+                            }
+                           
                         </div>
                         :
                         null}
