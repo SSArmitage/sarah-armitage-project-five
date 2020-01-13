@@ -23,6 +23,7 @@ class MessageList extends Component {
         };
 
         // let messageText;
+        
        
 
         // find the uid associated with the username and match based on that for color
