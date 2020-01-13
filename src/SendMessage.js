@@ -81,6 +81,8 @@ class SendMessage extends Component {
             // })
             
             )
+        }).catch((error) => {
+            console.log(error);
         })
     }
 
