@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 class SignInLogIn extends Component {
     render() {
         return(
-            <div className="wrapper">
+            <div className="wrapper loginFlexContainer">
                 <div className="notSingedInPage">
+                    {/* sign up user */}
                     <form className="signUp"
                         onSubmit={this.props.onButtonClickSignUp}>
                             <h2>Sign Up</h2>
@@ -55,6 +56,11 @@ class SignInLogIn extends Component {
                             <button>Sign In</button>
                     </form>
                 </div>
+                {/* continue as guest */}
+                <button 
+                className="guestButton"
+                onClick={this.props.onButtonClickGuest}
+                >Continue as guest</button>
             </div> 
         );
     };

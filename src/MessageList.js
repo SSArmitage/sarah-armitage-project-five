@@ -43,7 +43,10 @@ class MessageList extends Component {
                                 let messageGifUrl = message.text.match(myRe);
                                 // console.log(messageGifUrl);
                         
-                                if (message.username === user.displayName) {
+                                // if the message to be rendered is asscoiated with the current user logged in, make their text bubbles PURPLE
+                                // OR
+                                // if the message to be rendered is associated with a guest, make their text bubbles PURPLE
+                                if (message.username === user.displayName || message.username === 'Guest') {
                                     return(
                                         <li
                                             className="message currentUserPosition"

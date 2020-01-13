@@ -25,11 +25,12 @@ class App extends Component {
       userInput: '',
       tempUserInput: '',
       currentUser: null,
+      anonymousUser: false,
       username: '',
       uid: '',
       email: '',
       password: '',
-      settingsPageClicked: true,
+      settingsPageClicked: false,
       selectedColorOption: '',
       theme: {
         messageColor: ''
@@ -63,43 +64,74 @@ class App extends Component {
     // set an event listener for user login status
     // listen for change in user auth status (is user logged in or not?)
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
-        this.setState({
-          currentUser: user,
-          uid: user.uid
-        })
 
-        // ******** working on this functionality *********
-        // grab the user's custom theme colour from the database and set that in state, so that the messages will be updated to have that color
-        // const dbRefUsers = firebase.database().ref('users');
-        // dbRefUsers.on('value', (snapshot) => {
-        //   const usersInfo = snapshot.val();
-        //   this.setState({
-        //     theme: {
-        //       messageColor: usersInfo[`${this.state.uid}`].themeColor
-        //     }
-        //   })
-        // })
-
-
+      // if the user signed in as a guest (anonymously)
+      if (this.state.anonymousUser) {
+        console.log(`I was signed in anonymously`);
+        // Anonymous user signed in 
+        if (user) {
+          console.log('I am a guest');
+          
+          // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
+          this.setState({
+            currentUser: user,
+            uid: user.uid,
+            username: 'Guest'
+          })
+        } else {
+          // No anonymous user is signed in.
+          // currentUser in state will be set to null, will show login page
+          this.setState({
+            currentUser: null
+          })
+        }
+        
+      // if the user signed in under their own username/password 
       } else {
-        // No user is signed in.
-        // currentUser in state will be set to null, will show login page
-        this.setState({
-          currentUser: null
-        })
-      }
 
-      // get user info (use this info to differenitate the users text bubbles)
-      const currentUser = firebase.auth().currentUser;
-      if (currentUser != null) {
-        const userName = user.displayName;
-        const userEmail = user.email;
-        const userPhotoUrl = user.photoURL;
-        const userEmailVerified = user.emailVerified;
-        const userUid = user.uid;  // The user's ID, unique to the Firebase project
+        if (user) {
+          // User is signed in.
+          // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
+          this.setState({
+            currentUser: user,
+            uid: user.uid,
+            username: user.displayName
+          })
+
+          // ******** working on this functionality *********
+          // grab the user's custom theme colour from the database and set that in state, so that the messages will be updated to have that color
+          // const dbRefUsers = firebase.database().ref('users');
+          // dbRefUsers.on('value', (snapshot) => {
+          //   const usersInfo = snapshot.val();
+          //   this.setState({
+          //     theme: {
+          //       messageColor: usersInfo[`${this.state.uid}`].themeColor
+          //     }
+          //   })
+          // })
+
+
+        } else {
+          // No user is signed in.
+          // currentUser in state will be set to null, will show login page
+          this.setState({
+            currentUser: null
+          })
+        }
+
+        // get user info (use this info to differenitate the users text bubbles)
+        const currentUser = firebase.auth().currentUser;
+        if (currentUser != null) {
+          const userName = user.displayName;
+          const userEmail = user.email;
+          const userPhotoUrl = user.photoURL;
+          const userEmailVerified = user.emailVerified;
+          const userUid = user.uid;  // The user's ID, unique to the Firebase project
+        }
+
+        // username: this.state.currentUser.displayName
+
+
       }
     });
   } 
@@ -164,7 +196,8 @@ class App extends Component {
 
     // grab the message inputted by the user (held in state)
     const messageToBeAdded = {
-      username: this.state.currentUser.displayName,
+      // username: this.state.currentUser.displayName,
+      username: this.state.username,
       userId: this.state.currentUser.uid,
       text: this.state.userInput,
       date: this.state.date,
@@ -178,6 +211,7 @@ class App extends Component {
     // also check if the message is just an empty string
     // then add messageToBeAdded to newMessagesArray
     // then set in firebase (so that the dbRef listener will will be called and it will update the this.state.messages and cause app to re-render with the new message added to the list of messages)
+    // 
 
     // if the user's input is not empty, enter statment:
     if (messageToBeAdded.text !== '') {
@@ -279,9 +313,16 @@ class App extends Component {
 
 // ----- SIGN OUT -----
   handleLogOut = (event) => {
+    // when the user clicks the logout button, make sure the current anonymous user is made to be false, and that the settings page is closed
+    this.setState({
+      settingsPageClicked: false,
+      anonymousUser: false
+    })
     // change in user auth status fires the auth event listener
     firebase.auth().signOut().then(function () {
+      // console.log("I am still logged in!!!!");
       // Sign-out successful.
+      console.log("sign out successful");
     }).catch(function (error) {
       // An error happened.
     });
@@ -338,6 +379,26 @@ class App extends Component {
     })
     // once the array has been updated so that all the messages have the new username, push that array up to firebase (this will cause a re-render and this.state.messages will be updated with the new array, and you will see the new username reflected in all the preivious messages)
     dbRef.set(newMessagesArray);
+  }
+
+  // GUEST USER
+  // fxn to login as a guest into guest chat room
+  handleGuestButtonClick = () => {
+    console.log(`I am a guest let me in!`);
+
+    this.setState({
+      anonymousUser: true
+    }, function() {
+        firebase.auth().signInAnonymously().catch(function (error) {
+          // Handle Errors here.
+          console.log(error);
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ...
+        })
+    } )
+    
+    
   }
   
   // ---------------- END OF AUTHENTICATION ------------------
@@ -479,7 +540,8 @@ class App extends Component {
           onButtonClickSignUp={this.handleSignUpSubmit}
           emailSignIn={this.handleSignInEmail}
           passwordSignIn={this.hanldeSignInPassword}
-          onButtonClickSignIn={this.handleSignInSubmit}/>
+          onButtonClickSignIn={this.handleSignInSubmit}
+          onButtonClickGuest={this.handleGuestButtonClick}/>
 
           : 
           

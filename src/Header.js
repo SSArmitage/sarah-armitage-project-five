@@ -5,18 +5,18 @@ class Header extends Component {
     render() {
         return(
             <div>
-            {this.props.userChange === false
+            {this.props.headerChange === null
 
             ?
 
                 <header className="headerSignedOutPage">
                     <div className="wrapper flexContainer">
                         <h1>Chat App</h1>
-                        <div
+                        {/* <div
                             className="iconContainer"
                             onClick={this.props.handleSettingsClick}>
                             <i class="fas fa-bars"></i>
-                        </div>
+                        </div> */}
                     </div>
                 </header>
             
@@ -29,7 +29,7 @@ class Header extends Component {
                         <div
                             className="iconContainer"
                             onClick={this.props.handleSettingsClick}>
-                            <i class="fas fa-bars"></i>
+                            <i className="fas fa-bars"></i>
                         </div>
                     </div>
                 </header>

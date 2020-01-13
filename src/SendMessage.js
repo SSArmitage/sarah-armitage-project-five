@@ -75,12 +75,7 @@ class SendMessage extends Component {
             console.log(gifData.data.data);
             this.setState({
                 searchGifs: gifData.data.data
-            }, 
-            // this.setState({
-            //     showGifPicker: true
-            // })
-            
-            )
+            })
         }).catch((error) => {
             console.log(error);
         })
@@ -105,6 +100,7 @@ class SendMessage extends Component {
     }
 
     // when user clicks on Gif button, either show or hide the Gif menu
+    // also... clear the api images and the search text so they are clear/empty for the next search
     changeGifMenuVisibility = (event) => {
         console.log(event);
         console.log(this.state.showGifPicker);
@@ -112,7 +108,8 @@ class SendMessage extends Component {
         if (this.state.showGifPicker) {
             this.setState({
                 showGifPicker: false,
-                searchGifs: []
+                searchGifs: [],
+                gifSearchText: ''
             })
         } else {
             this.setState({
@@ -133,10 +130,11 @@ class SendMessage extends Component {
         })
     }
 
-    // NOTE: got gif to show up inside of fake text area.. now need it to get sent to the dispaly messages when send form
-    // need to remove the chosen gif from the text area after the send button is clicked - DONE
-    // also need to change the input stuff for the new fake text area
-    // fix date/time stamps
+    //✅NOTE: got gif to show up inside of fake text area.. now need it to get sent to the dispaly messages when send form
+    //✅need to remove the chosen gif from the text area after the send button is clicked - DONE
+    //✅also need to change the input stuff for the new fake text area
+    //✅fix date/time stamps
+    //✅remove api search text from the gif picker after it is closed
 
     render() {
         return(
@@ -167,7 +165,7 @@ class SendMessage extends Component {
                             onChange={this.props.onTextInput}
                             value={this.props.textInputValue}
                             ref={this.textInput}
-                            contenteditable>
+                            contentEditable>
 
                             {this.state.selectedGifId
                             ?
@@ -177,7 +175,7 @@ class SendMessage extends Component {
                                 src={this.state.selectedGifId}
                                 width="120"
                                 height="100"
-                                contenteditable="false" />
+                                contentEditable="false" />
                             </div>
                             :
                             null
@@ -202,7 +200,7 @@ class SendMessage extends Component {
                                 <button 
                                 className="emojiIcon"
                                 onClick={this.props.onEmojiClick}>
-                                    <i class="far fa-laugh"></i>
+                                    <i className="far fa-laugh"></i>
                                 </button>
                                 {/* <button onClick={this.handleGifSearch}>GIF</button> */}
                                 <button onClick={this.changeGifMenuVisibility}>GIF</button>
