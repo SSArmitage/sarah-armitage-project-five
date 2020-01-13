@@ -21,7 +21,12 @@ class SendMessage extends Component {
         document.addEventListener("keypress", this.enterFunction, false);
     }
 
-    enterFunction = (event )=> {
+    // prevents this from firing when user logs out (id="clickSend" would be null)
+    componentWillUnmount() {
+        document.removeEventListener("keypress", this.enterFunction, false)
+    }
+
+    enterFunction = (event) => {
         if (event.keyCode === 13) {
             event.preventDefault();
             //Do whatever when esc is pressed

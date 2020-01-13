@@ -46,55 +46,108 @@ class MessageList extends Component {
                                 // if the message to be rendered is asscoiated with the current user logged in, make their text bubbles PURPLE
                                 // OR
                                 // if the message to be rendered is associated with a guest, make their text bubbles PURPLE
-                                if (message.username === user.displayName || message.username === 'Guest') {
-                                    return(
-                                        <li
-                                            className="message currentUserPosition"
-                                            style={messageStyle} >
-                                            <p 
-                                            className="userName">
-                                            {message.username}</p>
-                                            <p
-                                            className="dateAndTime">
-                                            {`${message.date} ${message.time}`}</p>
-                                            {/* <p 
+                                if (message.username != 'Guest') {
+                                    if (message.username === user.displayName) {
+                                        return (
+                                            <li
+                                                className="message currentUserPosition"
+                                                style={messageStyle} >
+                                                <p
+                                                    className="userName">
+                                                    {message.username}</p>
+                                                <p
+                                                    className="dateAndTime">
+                                                    {`${message.date} ${message.time}`}</p>
+                                                {/* <p 
                                             className="messageText">
                                             {message.text}</p> */}
-                                            {messageGifUrl !== null
-                                            // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
-                                            ?
-                                            <p className="gifContainer">
-                                                <img src={messageGifUrl[0]}/>
-                                            </p>
-                                            :
-                                            <p>{message.text}</p>
-                                            }
-                                        </li>
-                                    )
-                                } else {
-                                    return(
-                                        <li
-                                            className="message"
-                                            style={messageStyleOtherUser} >
-                                            <p 
-                                            className="userName">{message.username}</p>
-                                            <p
-                                            className="dateAndTime">
-                                            {`${message.date} ${message.time}`}</p>
-                                            {/* <p
+                                                {messageGifUrl !== null
+                                                    // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
+                                                    ?
+                                                    <p className="gifContainer">
+                                                        <img src={messageGifUrl[0]} />
+                                                    </p>
+                                                    :
+                                                    <p>{message.text}</p>
+                                                }
+                                            </li>
+                                        )
+                                    } else {
+                                        return (
+                                            <li
+                                                className="message"
+                                                style={messageStyleOtherUser} >
+                                                <p
+                                                    className="userName">{message.username}</p>
+                                                <p
+                                                    className="dateAndTime">
+                                                    {`${message.date} ${message.time}`}</p>
+                                                {/* <p
                                             className="messageText">
                                             {message.text}</p> */}
-                                            {messageGifUrl !== null
-                                                // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
-                                                ?
-                                                <p className="gifContainer">
-                                                    <img src={messageGifUrl[0]} />
-                                                </p>
-                                                :
-                                                <p>{message.text}</p>
-                                            }
-                                        </li>
-                                    )
+                                                {messageGifUrl !== null
+                                                    // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
+                                                    ?
+                                                    <p className="gifContainer">
+                                                        <img src={messageGifUrl[0]} />
+                                                    </p>
+                                                    :
+                                                    <p>{message.text}</p>
+                                                }
+                                            </li>
+                                        )
+                                    }
+                                } else if (message.username === 'Guest') {
+                                    if (message.username === 'Guest') {
+                                        return (
+                                            <li
+                                                className="message currentUserPosition"
+                                                style={messageStyle} >
+                                                <p
+                                                    className="userName">
+                                                    {message.username}</p>
+                                                <p
+                                                    className="dateAndTime">
+                                                    {`${message.date} ${message.time}`}</p>
+                                                {/* <p 
+                                            className="messageText">
+                                            {message.text}</p> */}
+                                                {messageGifUrl !== null
+                                                    // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
+                                                    ?
+                                                    <p className="gifContainer">
+                                                        <img src={messageGifUrl[0]} />
+                                                    </p>
+                                                    :
+                                                    <p>{message.text}</p>
+                                                }
+                                            </li>
+                                        )
+                                    } else {
+                                        return (
+                                            <li
+                                                className="message"
+                                                style={messageStyleOtherUser} >
+                                                <p
+                                                    className="userName">{message.username}</p>
+                                                <p
+                                                    className="dateAndTime">
+                                                    {`${message.date} ${message.time}`}</p>
+                                                {/* <p
+                                            className="messageText">
+                                            {message.text}</p> */}
+                                                {messageGifUrl !== null
+                                                    // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
+                                                    ?
+                                                    <p className="gifContainer">
+                                                        <img src={messageGifUrl[0]} />
+                                                    </p>
+                                                    :
+                                                    <p>{message.text}</p>
+                                                }
+                                            </li>
+                                        )
+                                    }
                                 }
                             })}
                         </ScrollToBottom>
