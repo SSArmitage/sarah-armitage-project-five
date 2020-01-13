@@ -64,7 +64,7 @@ class SendMessage extends Component {
         // make axios call to GIPHY api
         axios({
             method: 'get',
-            url: `http://api.giphy.com/v1/gifs/search`,
+            url: `https://api.giphy.com/v1/gifs/search`,
             responseType: 'json',
             params: {
                 api_key: 'aBCgQnzAOOAJ9COBm7Yt2Rwhp5jVz0rN',
