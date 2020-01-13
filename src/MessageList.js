@@ -60,9 +60,9 @@ class MessageList extends Component {
                                             {messageGifUrl !== null
                                             // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
                                             ?
-                                             <p>
+                                            <p className="gifContainer">
                                                 <img src={messageGifUrl[0]}/>
-                                             </p>
+                                            </p>
                                             :
                                             <p>{message.text}</p>
                                             }
@@ -84,7 +84,7 @@ class MessageList extends Component {
                                             {messageGifUrl !== null
                                                 // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
                                                 ?
-                                                <p>
+                                                <p className="gifContainer">
                                                     <img src={messageGifUrl[0]} />
                                                 </p>
                                                 :
