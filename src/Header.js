@@ -5,18 +5,13 @@ class Header extends Component {
     render() {
         return(
             <div>
-            {this.props.headerChange === false
+            {this.props.userChange === null
 
             ?
 
                 <header className="headerSignedOutPage">
                     <div className="wrapper flexContainer">
                         <h1>Chat App</h1>
-                        <div
-                            className="iconContainer"
-                            onClick={this.props.handleSettingsClick}>
-                            <i class="fas fa-bars"></i>
-                        </div>
                     </div>
                 </header>
             

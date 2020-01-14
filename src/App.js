@@ -464,7 +464,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header
-        headerChange={this.state.currentUser}
+        userChange={this.state.currentUser}
         handleSettingsClick={this.handleSettingsClick}/>
         <main>
           {/* first conditional: if the user variable in state is null, user is not logged in, in this case render the signup/login page
