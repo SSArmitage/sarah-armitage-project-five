@@ -46,8 +46,14 @@ class MessageList extends Component {
                                 // if the message to be rendered is asscoiated with the current user logged in, make their text bubbles PURPLE
                                 // OR
                                 // if the message to be rendered is associated with a guest, make their text bubbles PURPLE
-                                if (message.username != 'Guest') {
-                                    if (message.username === user.displayName) {
+                                if (this.props.user.isAnonymous === false) {
+                                    console.log("I am not a guest");
+                                    console.log(message.username);
+                                    console.log(user.displayName);
+                                    
+                                    
+                                    // if (message.username === user.displayName) {
+                                    if (message.userId === user.uid) {
                                         return (
                                             <li
                                                 className="message currentUserPosition"
@@ -97,7 +103,10 @@ class MessageList extends Component {
                                             </li>
                                         )
                                     }
-                                } else if (message.username === 'Guest') {
+                                } else if (this.props.user.isAnonymous === true) {
+                                    console.log("I am a guest");
+                                    console.log(message.username);
+                                    
                                     if (message.username === 'Guest') {
                                         return (
                                             <li
