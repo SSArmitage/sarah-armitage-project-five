@@ -5,7 +5,7 @@ class Header extends Component {
     render() {
         return(
             <div>
-            {this.props.userChange === false
+            {this.props.headerChange === false
 
             ?
 

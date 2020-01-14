@@ -5,6 +5,7 @@ class SignInLogIn extends Component {
         return(
             <div className="wrapper">
                 <div className="notSingedInPage">
+                    {/* sign up user */}
                     <form className="signUp"
                         onSubmit={this.props.onButtonClickSignUp}>
                             <h2>Sign Up</h2>

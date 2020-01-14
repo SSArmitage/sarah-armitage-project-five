@@ -29,7 +29,7 @@ class App extends Component {
       uid: '',
       email: '',
       password: '',
-      settingsPageClicked: true,
+      settingsPageClicked: false,
       selectedColorOption: '',
       theme: {
         messageColor: ''
