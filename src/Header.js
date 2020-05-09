@@ -10,13 +10,8 @@ class Header extends Component {
             ?
 
                 <header className="headerSignedOutPage">
-                    <div className="wrapper flexContainer">
+                    <div className="wrapperSideTwo flexContainer">
                         <h1>Chat App</h1>
-                        {/* <div
-                            className="iconContainer"
-                            onClick={this.props.handleSettingsClick}>
-                            <i class="fas fa-bars"></i>
-                        </div> */}
                     </div>
                 </header>
             
@@ -24,7 +19,7 @@ class Header extends Component {
             :
 
                 <header className="headerSignedInPage">
-                    <div className="wrapper flexContainer">
+                    <div className="wrapperSideTwo flexContainer">
                         <h1>Chat App</h1>
                         <div
                             className="iconContainer"

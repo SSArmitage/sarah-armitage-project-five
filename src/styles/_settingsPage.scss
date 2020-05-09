@@ -1,0 +1,126 @@
+.settings {
+  /* z-index: 10; */
+  /* width: 300px; */
+  /* height: 200px; */
+  /* height: 20vh; */
+  /* background-color: #ececec; */
+  height: 100%;
+  background-color: #52bafa;
+/* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.settings .flexContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.settingsFormContainer {
+  background-color: #1c1c1c;
+  color: whitesmoke;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  // width: 60%;
+  max-width: 300px;
+}
+
+.settings h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  /* padding-top: 10px; */
+}
+
+.settings h3 {
+  text-align: center;
+}
+
+.settings form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;;
+}
+
+.settings ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  /* margin: 0 auto; */
+}
+
+.settings li {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.settings input {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.settings form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: flex-start;
+  border: 2px solid whitesmoke;
+  padding: 20px;
+  margin-bottom: 10px;
+  /* justify-content: flex-start;  */
+  position: relative;
+}
+
+.settings button {
+  margin: 0 auto;
+  background-color: $accent;
+  color: $white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  height: 30px;
+  // width: 100%;
+  width: 105px;
+  &:hover {
+  background-color: $hover;
+  }
+}
+
+.colorChoices {
+  display: flex;
+}
+
+.color1,
+.color2,
+.color3,
+.color4,
+.color5 {
+  width: 30px;
+  height: 20px;
+}
+
+.color1 {
+  background-color: blueviolet;
+}
+
+.color2 {
+  background-color: #0392cf;
+}
+
+.color3 {
+  background-color: #7bc043;
+}
+
+.color4 {
+  background-color: #ee4035;
+}
+
+.color5 {
+  background-color: #f37736;
+}

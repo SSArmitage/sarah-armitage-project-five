@@ -1,8 +1,97 @@
 import React, { Component } from 'react';
-import firebase from './firebase';
+// import firebase from './firebase';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 class MessageList extends Component {
+    constructor() {
+        super();
+        // create a ref to store the messageBox and message DOM elements
+        this.messageBox = React.createRef();
+        this.message = React.createRef();
+    }
+    componentDidMount() {
+        console.log(`Messages are mounting!`);
+        const messageBox = document.querySelector('.messageBox')
+        console.log(messageBox.scrollHeight);
+        
+        console.log(this.message.current);
+        const lastMessage = document.querySelector('.message:last-of-type')
+        console.log(lastMessage);
+        
+        // if the last message (li element) is not "null," then that means all the messages have been parsed and the last one can be accessed
+        // if the last message (li element) is "null," then the browser hasn't parsed the HTML yet => the document.querySelector() returns null => the offsetTop property of the null will result in the Uncaught TypeError message: "Cannot read property 'offsetTop' of null" => temporary fix => use a setTimeout to wait for the messages to be parsed, so that the last message can be accessed and used as the scroll to point
+        // Need to determine where the hold up is and use a promise to ensure that the messages arent requested until after they are all parsed (maybe add a progress icon to the messageBox until they all are available)
+        if (this.message.current) {
+            // when the component mounts, want to display the latest message (instead of scrolling, just want to appear at that message)
+            this.startAtLastMessage()
+        } else {
+            // console.log(`Messages not loaded yet`);
+            // console.log(this.message.current);
+            setTimeout(() => {
+                this.startAtLastMessage()
+            }, 2000);
+        }
+    }
+
+    componentDidUpdate() {
+        console.log(`Messages are updating!`);
+        // const messageBox = document.querySelector('.messageBox')
+        // console.log(messageBox.scrollHeight);
+        // console.log(this.message.current)
+        // const lastMessage = document.querySelector('.message:last-of-type')
+        // console.log(lastMessage);
+        // when the component updates and re-renders the messages, want to display the latest message (instead of scrolling, just want to appear at that message)
+        this.startAtLastMessage()
+    }
+
+    hanldeScrollButtonClick = () => {
+        // when the scroll arrow is clicked, want to scroll to the most recent message (instead of just appearing at the last message)
+        this.scrollToLastMessage()
+    }
+
+    // APPEAR at last message
+    startAtLastMessage = () => {
+        console.log(`Start at last message`);
+        // console.log(this.message.current);
+        // const lastMessage = document.querySelector('.message:last-of-type')
+        // console.log(lastMessage);
+        
+        // grab the messageBox
+        // const messageBox = this.messageBox.current
+        const messageBox = document.querySelector('.messageBox')
+        // offsetTop => returns the number of pixels from the top of the closest relatively positioned parent element
+        // get the distance from the top of the component to the top of the messageBox
+        // const messageBoxTop = this.messageBox.current.offsetTop
+        const messageBoxTop = messageBox.offsetTop
+        // grab the last message
+        const lastMessage = document.querySelector('.message:last-of-type')
+        // get the distance from the top of the messageBox to the last message
+        // const lastMessageTop = this.message.current.offsetTop
+        const lastMessageTop = lastMessage.offsetTop
+        console.log(lastMessageTop);
+        // const lastMessageHeight = lastMessage.offsetHeight
+        // console.log(lastMessageHeight);
+        // const lastMessageBottom = lastMessageTop - lastMessageHeight
+        // console.log(lastMessageBottom);
+        // subtraction gives you the distance between the top of the messageBox and the last message => gives the amount of pixels you need to scroll to get to the last message position
+        messageBox.scrollTop = lastMessageTop - messageBoxTop
+        // messageBox.scrollTop = messageBox.scrollHeight
+    }
+
+    // SCROLL to last message
+    scrollToLastMessage = () => {
+        // grab the last message 
+        // const lastMessage = this.message.current
+        const lastMessage = document.querySelector('.message:last-of-type')
+        console.log(lastMessage);
+        // scrollIntoView() => scrolls the specified element into the visible area of the browser window
+        // scrolls the element's parent container
+        // since no argument is passed into (), it will scroll to the top of the element
+        lastMessage.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
     render() {
         // change color of message borders based on user selection (passed down as a prop from App.js)
         // const arrayUSM = this.props.messagesUSM
@@ -29,8 +118,12 @@ class MessageList extends Component {
         return(
 
             <div className="messageArea">
-                <div className="wrapper messageListContainer">
-                        <ScrollToBottom className="messageBox">
+                <div className="wrapperSideTwo messageListContainer">
+                        {/* <ScrollToBottom className="messageBox"> */}
+                        <ul 
+                        className="messageBox"
+                        ref={this.messageBox}>
+                            
                             {   
                                 
                             array.map((message) => {
@@ -71,7 +164,10 @@ class MessageList extends Component {
                                                     // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
                                                     ?
                                                     <p className="gifContainer">
-                                                        <img src={messageGifUrl[0]} />
+                                                        <img 
+                                                        className="gifImage"
+                                                        src={messageGifUrl[0]}
+                                                        alt="" />
                                                     </p>
                                                     :
                                                     <p>{message.text}</p>
@@ -95,7 +191,10 @@ class MessageList extends Component {
                                                     // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
                                                     ?
                                                     <p className="gifContainer">
-                                                        <img src={messageGifUrl[0]} />
+                                                        <img 
+                                                        className="gifImage"
+                                                        src={messageGifUrl[0]}
+                                                        alt="" />
                                                     </p>
                                                     :
                                                     <p>{message.text}</p>
@@ -104,14 +203,16 @@ class MessageList extends Component {
                                         )
                                     }
                                 } else if (this.props.user.isAnonymous === true) {
-                                    console.log("I am a guest");
-                                    console.log(message.username);
+                                    // console.log("I am a guest");
+                                    // console.log(message.username);
                                     
                                     if (message.username === 'Guest') {
                                         return (
                                             <li
                                                 className="message currentUserPosition"
-                                                style={messageStyle} >
+                                                style={messageStyle}
+                                                ref={this.message}
+                                                 >
                                                 <p
                                                     className="userName">
                                                     {message.username}</p>
@@ -125,7 +226,10 @@ class MessageList extends Component {
                                                     // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
                                                     ?
                                                     <p className="gifContainer">
-                                                        <img src={messageGifUrl[0]} />
+                                                        <img 
+                                                        className="gifImage"
+                                                        src={messageGifUrl[0]}
+                                                        alt="" />
                                                     </p>
                                                     :
                                                     <p>{message.text}</p>
@@ -149,7 +253,10 @@ class MessageList extends Component {
                                                     // if the search for a gif url in the message is not null (meaning there was a match and it does include a gif url), then render the gif image, otherwise just render the message without an image
                                                     ?
                                                     <p className="gifContainer">
-                                                        <img src={messageGifUrl[0]} />
+                                                        <img 
+                                                        className="gifImage"
+                                                        src={messageGifUrl[0]}
+                                                        alt="" />
                                                     </p>
                                                     :
                                                     <p>{message.text}</p>
@@ -159,7 +266,13 @@ class MessageList extends Component {
                                     }
                                 }
                             })}
-                        </ScrollToBottom>
+                        {/* </ScrollToBottom> */}
+                        <div 
+                        className="scrollToBottom"
+                        onClick={this.hanldeScrollButtonClick}>
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                    </ul>
                 </div>
             </div>
         );

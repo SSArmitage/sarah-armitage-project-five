@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import styles
-import './App.css';
+import './App.scss';
 // import firebase
 import firebase from './firebase';
 // import components
@@ -8,9 +8,11 @@ import Header from './Header';
 import Footer from './Footer';
 import SendMessage from './SendMessage';
 import MessagesList from './MessageList';
-import SignInLogIn from './SignInLogIn';
+import SignUpLogIn from './SignInLogIn';
 import Settings from './Settings';
-import getEmoji from './EmojiPicker';
+// import getEmoji from './EmojiPicker';
+import Aside from './Aside';
+import animalNames from './animalNames.js'
 
 
 
@@ -42,7 +44,8 @@ class App extends Component {
       userSignedIn: false,
       selectedEmoji: '',
       emojiString: '',
-      selectedGifId: ''
+      selectedGifId: '',
+      scrollToLastMessage: false
     }
   }
 
@@ -64,19 +67,28 @@ class App extends Component {
     // set an event listener for user login status
     // listen for change in user auth status (is user logged in or not?)
     firebase.auth().onAuthStateChanged((user) => {
-
-      // if the user signed in as a guest (anonymously)
-      if (this.state.anonymousUser) {
+      console.log(user);
+      
+      // if the user signed in as a guest (anonymously) => user.isAnonymous will be true
+      // if (this.state.anonymousUser) {
+      if (user.isAnonymous) {
         console.log(`I was signed in anonymously`);
         // Anonymous user signed in 
         if (user) {
           console.log('I am a guest');
+
+          // grab a random animal for the guest's username (differentiates the guests in the chat room)
+          const length = animalNames.length
+          const ranNum = Math.floor((Math.random() * length) + 1)
+          const animal = animalNames[ranNum]
           
           // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
           this.setState({
+            anonymousUser: true,
             currentUser: user,
             uid: user.uid,
-            username: 'Guest'
+            // username: `${animal}Guest`,
+            username: `Guest`
           })
         } else {
           // No anonymous user is signed in.
@@ -201,7 +213,8 @@ class App extends Component {
       userId: this.state.currentUser.uid,
       text: this.state.userInput,
       date: this.state.date,
-      time: this.state.time
+      time: this.state.time,
+      scrollToLastMessage: true
     };
     console.log(messageToBeAdded);
     
@@ -242,6 +255,7 @@ class App extends Component {
 
     // reset the userInput for the next message
     // reset the date and time for next message
+    // make sure that the emoji picker is closed
     this.setState({
       userInput: '',
       date: '',
@@ -313,10 +327,15 @@ class App extends Component {
 
 // ----- SIGN OUT -----
   handleLogOut = (event) => {
+    console.log(`log out`);
+    
     // when the user clicks the logout button, make sure the current anonymous user is made to be false, and that the settings page is closed
     this.setState({
       settingsPageClicked: false,
-      anonymousUser: false
+      anonymousUser: false,
+      uid: "",
+      username: "",
+      currentUser: null
     })
     // change in user auth status fires the auth event listener
     firebase.auth().signOut().then(function () {
@@ -384,8 +403,7 @@ class App extends Component {
   // GUEST USER
   // fxn to login as a guest into guest chat room
   handleGuestButtonClick = () => {
-    console.log(`I am a guest let me in!`);
-
+    // console.log(`I am a guest let me in!`);
     this.setState({
       anonymousUser: true
     }, function() {
@@ -397,8 +415,6 @@ class App extends Component {
           // ...
         })
     } )
-    
-    
   }
   
   // ---------------- END OF AUTHENTICATION ------------------
@@ -429,9 +445,15 @@ class App extends Component {
     const monthWord = months[monthNumber];
     const dateFull = `${monthWord} ${day}, ${year}`;
     // get the time
-    const hours = new Date().getHours(); //Current Hours
-    const min = new Date().getMinutes(); //Current Minutes
-    const sec = new Date().getSeconds(); //Current Seconds
+    let hours = new Date().getHours(); //Current Hours
+    let min = new Date().getMinutes(); //Current Minutes
+    let sec = new Date().getSeconds(); //Current Seconds
+
+    // make sure minutes has 2 numbers (i.e. if just 2, need to make 02)
+    if (min.toString().length === 1) {
+      min = `0${min.toString()}`
+    }
+
     // make 24hour clock array
     const timeMilitary = []
     for (let i = 0; i <= 24; i++) {
@@ -449,10 +471,26 @@ class App extends Component {
 
     // convert the 24hour clock time into 12hour clock time
     const timeIndex = timeMilitary.indexOf(hours);
-    const time = timeNormal[timeIndex];
+    const timeHour = timeNormal[timeIndex];
     // i.e. have: 14 22 31
     // need: 2:22
-    const timeActual = `${time}:${min}`;
+
+    // get the AM or PM
+    // 24:00/00:00 - 11:59 is AM & 12:00 - 23:59
+  
+
+    // final time stamep
+    const timeActual = `${timeHour}:${min}`;
+
+    // ******** EASIER METHOD ************ //
+    const date = new Date()
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
+    const time = new Intl.DateTimeFormat('en-US', options).format(date)
+    // console.log(time)
 
     // ---------------------------
     // The final date and time stamp
@@ -460,13 +498,18 @@ class App extends Component {
     // ---------------------------
 
     // save the date and time in state (will be grabbed and attached to "message" when user clicks submit button)
+    // this.setState({
+    //   date: dateFull,
+    //   time: timeActual
+    // })
+
     this.setState({
       date: dateFull,
-      time: timeActual
+      time: time
     })
   }
 
-  // when the user clicks on the hamburger icon the settings menu will appear (in the main)
+  // when the user clicks on the hamburger icon the settings menu will appear, or will disappear (in the main)
   handleSettingsClick = () => {
     this.setState({
       settingsPageClicked: !this.state.settingsPageClicked
@@ -506,7 +549,7 @@ class App extends Component {
     const temporaryUserInput = this.state.userInput;
     // append the emoji on to the end of the string the user is typing in the moment
     const newTemporaryUserInput = `${temporaryUserInput}${emoji}`
-    console.log(newTemporaryUserInput);
+    // console.log(newTemporaryUserInput);
     this.setState({
       userInput: newTemporaryUserInput
     })
@@ -524,66 +567,76 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header
-        headerChange={this.state.currentUser}
-        handleSettingsClick={this.handleSettingsClick}/>
-        <main>
-          {/* first conditional: if the user variable in state is null, user is not logged in, in this case render the signup/login page
-          if the user variable holds the current user object from firebase, the user is logged in, in this case render the MAIN page */}
-          {this.state.currentUser === null 
-
-          ? 
-
-          <SignInLogIn 
-          emailSignUp={this.handleSignUpEmail}
-          passwordSignUp={this.hanldeSignUpPassword}
-          onButtonClickSignUp={this.handleSignUpSubmit}
-          emailSignIn={this.handleSignInEmail}
-          passwordSignIn={this.hanldeSignInPassword}
-          onButtonClickSignIn={this.handleSignInSubmit}
-          onButtonClickGuest={this.handleGuestButtonClick}/>
-
-          : 
-          
-          // second conditional
-          // rendering of the MAIN section of the page
-          // if the setting page icon was clicked it, the variable settingsPageClicked in state will be true, in this case render the settings page
-          // else it is false, and in this case render the messaging page
-          (this.state.settingsPageClicked === true
-           
-          ?
-
-          <Settings 
-          username={this.state.username}
-          userName={this.handleUserName}
-          onButtonClickUserName={this.handleSaveUserName}
-          selectedColorOption={this.state.selectedColorOption}
-          handleColorChange={this.handleColorChange}
-          logOut={this.handleLogOut}/>
-
-          :
-
-          <div className="content">
-            <MessagesList
-              user={this.state.currentUser}
-              messages={this.state.messages}
-              messagesUSM={this.state.userSpecificMessages}
-              messageColor={this.state.theme.messageColor} />
-            <SendMessage
-              onTextInput={this.handleChange}
-              textInputValue={this.state.userInput}
-              onEmojiClick={this.handleEmojiClick}
-              showEmojiPicker={this.state.showEmojiPicker}
-              onButtonClick={this.handleSubmit}
-              sendEmojiIntoApp={this.handleEmojiSelection}
-              sendGifToApp={this.handleGif}
-              onFormButtonClick={this.getGifInfoViaButton}
-            />
+        <div className="wrapperMain">
+          <div className="sideOne">
+            <Aside 
+            passUser={this.state.username}/>
           </div>
-          )
-          }
-        </main>
-        <Footer />
+          <div className="sideTwo">
+            <Header
+            headerChange={this.state.currentUser}
+            handleSettingsClick={this.handleSettingsClick}/>
+            <main>
+              {/* first conditional: if the user variable in state is null, user is not logged in, in this case render the signup/login page
+              if the user variable holds the current user object from firebase, the user is logged in, in this case render the MAIN page */}
+              {this.state.currentUser === null 
+  
+              ? 
+  
+              <SignUpLogIn 
+              emailSignUp={this.handleSignUpEmail}
+              passwordSignUp={this.hanldeSignUpPassword}
+              onButtonClickSignUp={this.handleSignUpSubmit}
+              emailSignIn={this.handleSignInEmail}
+              passwordSignIn={this.hanldeSignInPassword}
+              onButtonClickSignIn={this.handleSignInSubmit}
+              onButtonClickGuest={this.handleGuestButtonClick}/>
+  
+              : 
+              
+              // second conditional
+              // rendering of the MAIN section of the page
+              // if the setting page icon was clicked it, the variable settingsPageClicked in state will be true, in this case render the settings page
+              // else it is false, and in this case render the messaging page
+              (this.state.settingsPageClicked === true
+              
+              ?
+  
+              <Settings 
+              username={this.state.username}
+              userName={this.handleUserName}
+              onButtonClickUserName={this.handleSaveUserName}
+              selectedColorOption={this.state.selectedColorOption}
+              handleColorChange={this.handleColorChange}
+              logOut={this.handleLogOut}/>
+  
+              :
+  
+              <div className="content">
+                <MessagesList
+                  user={this.state.currentUser}
+                  messages={this.state.messages}
+                  messagesUSM={this.state.userSpecificMessages}
+                  messageColor={this.state.theme.messageColor}
+                  scrollToLastMessage={this.state.scrollToLastMessage} 
+                  />
+                <SendMessage
+                  onTextInput={this.handleChange}
+                  textInputValue={this.state.userInput}
+                  onEmojiClick={this.handleEmojiClick}
+                  showEmojiPicker={this.state.showEmojiPicker}
+                  onButtonClick={this.handleSubmit}
+                  sendEmojiIntoApp={this.handleEmojiSelection}
+                  sendGifToApp={this.handleGif}
+                  onFormButtonClick={this.getGifInfoViaButton}
+                />
+              </div>
+              )
+              }
+            </main>
+            <Footer />
+          </div>
+        </div>
       </div>
     );
   }

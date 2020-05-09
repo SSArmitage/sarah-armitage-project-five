@@ -1,0 +1,39 @@
+header {
+  /* padding: 20px; */
+  /* background-color: #525252; */
+  /* background-color: #52bafa; */
+  /* background-color: #1c1c1c; */
+  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  /* background-image: url("https://www.transparenttextures.com/patterns/connected.png"); */
+  /* color: whitesmoke; */
+  height: 10vh;
+}
+
+.headerSignedOutPage {
+    background-color: $secondary;
+    color: whitesmoke;
+}
+
+.headerSignedInPage {
+  // background-color: $primary;
+  // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  color: $secondary;
+}
+
+header .flexContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.0rem;
+  cursor: pointer;
+  &:hover {
+    color: $accent;
+  }
+}

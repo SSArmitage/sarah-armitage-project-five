@@ -1,0 +1,154 @@
+/*******************************************/
+/*------------ REMOVE DEFAULTS ------------*/
+/*******************************************/
+body, h1, h2, h3, p, ul, li, fieldset {
+	margin: 0;
+	padding: 0;
+}
+
+ul, li {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+button {
+    border: none;
+    line-height: 0;
+}
+
+fieldset {
+    border: none;
+}
+
+input {
+    border: none;
+}
+
+textarea {
+    border: none;
+}
+
+/*******************************************/
+/*------------ GENERAL STYLES -------------*/
+/*******************************************/
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body, textarea {
+  @include fontStyle(1.8rem, $secondary, $bodyFont, normal, normal, normal, normal);
+  background-color: $white
+}
+
+body {
+  background-color: $secondary;
+  // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  // opacity: 0.5;
+   @include forPhone {
+      font-size: 1.5rem;
+  }
+}
+
+.wrapperMain {
+  // max-width: 1280px;
+  max-width: 600px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+   @include forPhone {
+      width: 100%;
+  }
+}
+
+.wrapperSideTwo {
+  /* max-width: 1080px; */
+  // max-width: 800px;
+  width: 80%;
+  margin: 0 auto;
+  @include forPhone {
+    width: 90%;
+  }
+}
+
+.sideOne {
+  width: 30%;
+  // background-color: pink;
+  // get rid of this side for now
+  display: none;
+}
+
+.sideTwo {
+  // width: 70%;
+  width: 100%;
+  background-color: $primary;
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+}
+
+button {
+  cursor: pointer;
+}
+
+.headerSignedInPage h1 {
+  @include fontStyle(3.5rem, $secondary, $titleFont, normal, normal, normal, 1px)
+}
+
+.headerSignedOutPage h1 {
+  @include fontStyle(3.5rem, $white, $titleFont, normal, normal, normal, 1px)
+}
+
+img {
+  width: 100%;
+	display: block;
+}
+
+.lineBreak {
+    display: block;
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    // background-color: purple;
+}
+.css-y1c0xs::-webkit-scrollbar-thumb {
+  // background-color: darkgrey;
+  background-color: purple;
+  outline: 1px solid slategrey;
+}
+
+/*******************************************/
+/*---------- MAIN SECTION STYLES ----------*/
+/*******************************************/
+main {
+  height: 84vh;
+  // background-color: #52bafa;
+  position: relative;
+  // background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+}
+
+main .wrapperSideTwo {
+  height: 100%;
+}
+
+/* textarea {
+  border: 1px solid black;
+} */
+
+.content {
+  height: 100%;
+}
+
+// scroll back to most recent button
+// need to go into the source code and change there! (scrollToBottom -> 'react-scroll-to-bottom')
+// same thing with changing the scroll bar colors
+.css-1qyrjaz {
+  background-color: $accent;
+}

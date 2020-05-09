@@ -19,6 +19,11 @@ class SendMessage extends Component {
     componentDidMount() {
         // document.addEventListener("keydown", this.enterFunction, false);
         document.addEventListener("keypress", this.enterFunction, false);
+
+        // add event listener for the GIF exit button
+        // const gifExitButton = document.querySelector('.imageContainer img::before')
+        // console.log(gifExitButton);
+        
     }
 
     // prevents this from firing when user logs out (id="clickSend" would be null)
@@ -34,10 +39,17 @@ class SendMessage extends Component {
             console.log(event);
             document.getElementById('clickSend').click();
             // this.props.onButtonClick()
+
+            // focus on the textarea after any message is sent via pressing "enter"
+            const textAreaInput = document.querySelector('#userMessageInput')
+            console.log(textAreaInput)
+            // this.textInput.current.focus();
+            textAreaInput.focus();
         }
     }
 
-    // grab the emoji chosen by the user (coming from the EmojiPicker component) and set it in state in the variable slectedEmoji
+    // grab the emoji chosen by the user (coming from the EmojiPicker component) and send it up to App.js 
+    // put focus on...
     getChosenEmoji = (event, emoji) => {
         // console.log(emoji);
         // this.setState({
@@ -45,7 +57,11 @@ class SendMessage extends Component {
         // })
         this.props.sendEmojiIntoApp(emoji);
         // focus to the textarea when the emoji is clicked (lets the user keep typing message after they choose an emoji) -> using "React refs"
-        this.textInput.current.focus();
+        console.log(this.textInput.current);
+        const textAreaInput = document.querySelector('#userMessageInput')
+        console.log(textAreaInput)
+        // this.textInput.current.focus();
+        textAreaInput.focus();
     }
 
     // submitOnEnter(event) {
@@ -87,17 +103,22 @@ class SendMessage extends Component {
     }
 
     handleGifClick = (event) => {
+        console.log("Pick meeeeee");
+        
         console.log(event);
         console.log(event.target.src);
         this.setState({
             selectedGifId: event.target.src,
-            showGifPicker: false
+            showGifPicker: false,
+            searchGifs: [],
+            gifSearchText: ''
         })
         // this.props.sendGifToApp(event.target.id)
+
+
     }
 
     sendInfoWithForm = (event) => {
-        console.log("blaaa blaa blaa");
         this.props.onFormButtonClick(this.state.selectedGifId);
         this.setState({
             selectedGifId: ''
@@ -135,6 +156,25 @@ class SendMessage extends Component {
         })
     }
 
+    // allow the user to delete a GIF after its been chosen
+    // first check to see if there is an image container added to the textArea div, then
+    handleGifDelete = () => {
+        // remove the GIF from the text area by setting the selectedGifId to be "" => will cause the SendMessage area to re-render without the GIF
+        this.setState({
+            selectedGifId: ''
+        })
+        
+        // // focus on the textarea after any message is sent via pressing "enter"
+        const textAreaInput = document.querySelector('#userMessageInput')
+        console.log(textAreaInput)
+        // this.textInput.current.focus();
+        textAreaInput.focus();
+
+        // *** also do for "delete" key
+    }
+
+
+
     //✅NOTE: got gif to show up inside of fake text area.. now need it to get sent to the dispaly messages when send form
     //✅need to remove the chosen gif from the text area after the send button is clicked - DONE
     //✅also need to change the input stuff for the new fake text area
@@ -144,13 +184,13 @@ class SendMessage extends Component {
     render() {
         return(
             <div className="sendMessageArea">
-                <div className="wrapper flexContainer">
+                <div className="wrapperSideTwo flexContainer">
                     <form 
                     onSubmit={this.props.onButtonClick}
                     // onSubmit={this.sendInfoWithForm}
                     // onSubmit={this.submitOnEnter}
                     >
-                            <label htmlFor="userMessage"></label>
+                            <label className="visuallyHidden"  htmlFor="userMessageInput">Enter Message</label>
                             {/* <textarea 
                             rows="10" 
                             cols="40" 
@@ -181,17 +221,21 @@ class SendMessage extends Component {
                                 width="120"
                                 height="100"
                                 contentEditable="false" />
+                                <div 
+                                className="gifDeleteButton"
+                                onClick={this.handleGifDelete}>
+                                    <i class="fas fa-times"></i>
+                                </div>
                             </div>
                             :
                             null
                             }
 
-                            {/* Hi */}
                             <textarea
                                 rows="10"
                                 cols="40"
                                 placeholder="Enter message here"
-                                id="userMessage"
+                                id="userMessageInput"
                                 onChange={this.props.onTextInput}
                                 value={this.props.textInputValue}
                                 ref={this.textInput}
@@ -211,7 +255,9 @@ class SendMessage extends Component {
                                 <button onClick={this.changeGifMenuVisibility}>GIF</button>
                                 <button 
                                 id="clickSend"
-                                onClick={this.sendInfoWithForm}>Send</button>   
+                                onClick={this.sendInfoWithForm}
+                                type="submit"
+                                >Send</button>   
                             </div>
                             
                         {this.props.showEmojiPicker 
@@ -226,13 +272,16 @@ class SendMessage extends Component {
                         {this.state.showGifPicker
                         ?
                         <div className="gifPicker">
-                            <input 
-                            type="text"
-                            onChange={this.handleGifTextInput}
-                            value={this.state.gifSearchText}
-                            autoFocus
-                            >
-                            </input>
+                            <div className="wrapperSideTwo">
+                                <input 
+                                type="text"
+                                onChange={this.handleGifTextInput}
+                                value={this.state.gifSearchText}
+                                autoFocus
+                                placeholder="Search GIFs"
+                                >
+                                </input>
+                            
 
                             {/* if there is text in the gif search, render the list of gifs from the api, else, don't render anything */}
                             {this.state.gifSearchText
@@ -253,7 +302,7 @@ class SendMessage extends Component {
                             :
                             null
                             }
-                           
+                           </div>
                         </div>
                         :
                         null}

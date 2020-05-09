@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class SignInLogIn extends Component {
+class SignUpLogIn extends Component {
     render() {
         return(
-            <div className="wrapper loginFlexContainer">
+            <div className="wrapperSideTwo loginFlexContainer">
                 <div className="notSingedInPage">
                     {/* sign up user */}
                     <form className="signUp"
@@ -16,17 +16,17 @@ class SignInLogIn extends Component {
                                 id="displayName" 
                                 placeholder="Username"
                                 required/> */}
-                            <label htmlFor="email">Email Address:</label>
+                            <label htmlFor="emailSignUp">Email Address:</label>
                             <input 
                                 type="email" 
-                                id="email" 
+                                id="emailSignUp" 
                                 placeholder="Email address"
                                 onChange={this.props.emailSignUp}
                                 required/>
-                            <label htmlFor="password">Password:</label>
+                            <label htmlFor="passwordSignUp">Password:</label>
                             <input 
                                 type="password"
-                                id="password"
+                                id="passwordSignUp"
                                 placeholder="Password"
                                 onChange={this.props.passwordSignUp} 
                                 required
@@ -38,22 +38,22 @@ class SignInLogIn extends Component {
                     <form 
                         className="login"
                         onSubmit={this.props.onButtonClickSignIn}>
-                            <h2>Sign In</h2>
-                            <label htmlFor="email">Email Address:</label>
+                            <h2>Log In</h2>
+                            <label htmlFor="emailLogIn">Email Address:</label>
                             <input
-                                type="email"
+                                type="emailLogIn"
                                 id="email"
                                 placeholder="Email address"
                                 onChange={this.props.emailSignIn} 
                                 required/>
-                            <label htmlFor="password">Password:</label>
+                            <label htmlFor="passwordLogIn">Password:</label>
                             <input
                                 type="password"
-                                id="password"
+                                id="passwordLogIn"
                                 placeholder="Password"
                                 onChange={this.props.passwordSignIn} 
                                 required/>
-                            <button>Sign In</button>
+                            <button>Log In</button>
                     </form>
                 </div>
                 {/* continue as guest */}
@@ -66,4 +66,4 @@ class SignInLogIn extends Component {
     };
 }
 
-export default SignInLogIn;
+export default SignUpLogIn;

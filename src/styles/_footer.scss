@@ -1,0 +1,23 @@
+footer {
+  height: 6vh;
+  // background-color: #1c1c1c;
+  // background-color: $primary;
+  // color: whitesmoke;
+  color: $secondary;
+  /* text-align: center; */
+  /* background-color: #525252;
+  color: whitesmoke; */
+  /* background-color: #52bafa;
+  // background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  @include forPhone {
+      text-align: center;
+  }
+}
+
+footer .flexContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

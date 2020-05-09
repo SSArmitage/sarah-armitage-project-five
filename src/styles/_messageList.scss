@@ -1,0 +1,103 @@
+.messageArea{
+  height: 75%;
+  // background-color: $secondary;
+  // background-color: $primary;
+  // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  @include forPhone {
+    height: 65%;
+  }
+}
+
+.messageListContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.messageBox {
+  /* width: 300px; */
+  // width: 90%;
+  width: 100%;
+  /* height: 200px; */
+  // max-width: 600px;
+  /* height: 350px; */
+  padding: 10px;
+  /* background-color: white; */
+  margin: 20px 0;
+  /* border: 1px solid black; */
+  // overflow: scroll;
+  background-color: #1c1c1c;
+  @include forPhone {
+    margin: 0;
+  }
+  // > image {
+  //   border-radius: 5px;
+  // }
+}
+
+.gifImage {
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.message {
+  /* border: 2px solid blueviolet; */
+  border-radius: 5px;
+  /* width: fit-content; */
+  padding: 10px;
+  margin: 10px;
+  color: $white;
+  width: fit-content;
+  max-width: 60%;
+  /* max-width: 250px; */
+}
+
+.userInfo {
+  text-align: left;
+}
+
+.userName,
+.dateAndTime {
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: bold;
+  color: rgba(245,245,245,0.5)
+}
+
+.messageBox {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.currentUserPosition {
+  align-self: flex-end;
+}
+
+.messageText {
+  /* font-weight: bold; */
+  margin: 5px 2px;
+  font-size: 1.2rem;
+  word-break: break-word;
+}
+
+.gifContainer {
+  /* max-width: 200px; */
+}
+
+aside .emoji-picker-react {
+  width: 100%;
+}
+
+.scrollToBottom {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  cursor: pointer;
+  color: $white;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+}

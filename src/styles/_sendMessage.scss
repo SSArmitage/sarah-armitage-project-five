@@ -1,0 +1,245 @@
+.sendMessageArea {
+  height: 25%;
+  /* background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+
+  /* background-color: #52bafa; 
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png"); */
+
+// background-color: #52bafa;
+// background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  @include forPhone {
+    height: 35%;
+  }
+}
+
+.sendMessageArea .flexContainer {
+  height: 100%;
+}
+
+.sendMessageArea form {
+  height: 100%;
+  // position: relative;
+  @include forPhone {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
+
+.fa-laugh {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+
+.sendMessageArea form {
+  /* background-color: dodgerblue; */
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center; 
+  justify-content: space-between;
+  /* padding: 20px; */
+}
+
+textarea {
+  /* background-color: green; */
+  /* max-width: 300px;
+  min-width: 300px;
+  max-height: 200px;
+  min-height: 200px; */
+  // max-width: 500px;
+  /* height: 80px; */
+  height: 100%;
+  width: 100%;
+  /* border: none; */
+  // margin: 10px;
+  // font-size: 1.1rem;
+  padding: 5px 10px;
+  resize: none;
+  outline: none;
+  @include forPhone {
+      width: 90%;
+  }
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 25%;
+   @include forPhone {
+      bottom: 35%
+  }
+}
+
+.emojiIcon {
+  line-height: 1;
+  /* margin-bottom: 10px; */
+}
+
+.sendAndEmojiContainer {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  // height: 100%;
+  height: 80%;
+  @include forPhone {
+      flex-direction: row;
+      width: 100%;
+      height: 40%;
+      justify-content: space-between;
+  }
+  button {
+    background-color: $accent;
+    color: $white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    &:hover {
+    background-color: $hover;
+    // border: 2px solid white;
+    }
+    @include forPhone {
+      width: 31%;
+      // margin: 0 10px 10px 10px;
+      // padding: 0;
+    }
+  }
+}
+
+// .sendAndEmojiContainer button {
+//   // font-size: 1.1rem;
+//   background-color: $accent;
+//   padding: 5px 20px;
+//   border-radius: 5px;
+//   color: white;
+//   cursor: pointer;
+//   height: 30px;
+//   width: 105px;
+//   // width: max-content;
+//   &:hover {
+//     background-color: $hover;
+//     // border: 2px solid white;
+//   }
+// }
+
+.gifPicker {
+  width: 100%;
+  height: 75%;
+  /* background-color: black; */
+  overflow: auto;
+  // background-color: #1c1c1c;
+  background-color: $secondary;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 3px solid $primary;
+  input {
+    border-radius: 2px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    width: 60%;
+    border: 3px solid $accent;
+    background-color: $white;
+    outline: none;
+    &:focus {
+      // border: 2px solid $accent;
+      -moz-box-shadow:    inset 0 0 10px $accent;
+      -webkit-box-shadow: inset 0 0 10px $accent;
+      box-shadow:         inset 0 0 10px $accent;
+    }
+  }
+  @include forPhone {
+      height: 65%;
+      border: none;
+  }
+}
+
+.gifPicker::-webkit-scrollbar {
+    width: 12px;
+}
+
+.gifPicker ul {
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* display: grid;
+  /* grid-template-columns: 25% 25% 25% 25%; */
+  /* column-count: 4; */
+  /* gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));  */
+  column-count: 4;
+  /* column-width: 25%; */
+  column-gap: 5px;
+}
+
+
+.gifPicker li {
+  width: 100%;
+  /* display: inline-block; */
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.imageContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  // width: 50%;
+  // width: 100%;
+  width: calc(100%);
+  background-color: $secondary;
+  // overflow: scroll;
+  img {
+    object-fit: contain;
+    height: 100%;
+  }
+}
+
+.gifDeleteButton {
+  font-weight: 900;
+  font-size: 1.5rem;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: $accent;
+  border-radius: 50%;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+// .imageContainer > div {
+//   border-radius: 5px;
+// }
+
+.textArea {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    // border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    // height: 118px;
+    height: 80%;
+    overflow: auto;
+    padding: 2px;
+    /* resize: both; */
+    resize: none;
+    // width: 400px;
+    width: 80%;
+    background-color: white;
+    margin-right: 20px;
+    border-radius: 2px;
+    position: relative;
+    @include forPhone {
+      width: 100%;
+      margin-right: 0;
+      margin-top: 20px;
+    }
+}

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
 class Settings extends Component {
+    handleGuest = () => {
+        alert("Guests cannot change username")
+        
+    }
     render() {
         return(
             <div className="settings">
-                <div className="wrapper flexContainer">
+                <div className="wrapperSideTwo flexContainer">
                     <div className="settingsFormContainer">
                         <h2>Settings</h2>
                         <ul>
@@ -12,14 +16,32 @@ class Settings extends Component {
                                 <form onSubmit={this.props.onButtonClickUserName}>
                                     
                                         <h3>Add/Change Username</h3>
-                                        {/* <label htmlFor="username">Add/Change Username</label> */}
-                                        <input
+                                        <label 
+                                        htmlFor="username"
+                                        className="visuallyHidden">
+                                            Add/Change Username
+                                        </label>
+                                        {this.props.username === "Guest"
+                                        ?
+                                        <div>
+                                            <input
+                                            id="username"
+                                            type="text"
+                                            placeholder={this.props.username}
+                                            onClick={this.handleGuest}
+                                            readOnly/>
+                                            <button disabled>Save</button>
+                                        </div>
+                                        :
+                                        <div>
+                                            <input
                                             id="username"
                                             type="text"
                                             value={this.props.username}
                                             onChange={this.props.userName} />
-                                        <button>Save</button>
-                                    
+                                            <button>Save</button>
+                                        </div>
+                                        }
                                 </form>
                             </li>
                             {/* adding these in but not working yet */}

@@ -1,94 +1,358 @@
-/* .App {
-  text-align: center;
-} */
-
-.App-logo {
-  height: 40vmin;
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+  display: block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+audio, canvas, video {
+  display: inline-block;
 }
 
-.App-link {
-  color: #09d3ac;
+audio:not([controls]) {
+  display: none;
+  height: 0;
 }
 
-/* ----------------- */
-/* REMOVE DEFAULTS */
-body, h1, h2, h3, p, ul, li {
-	margin: 0;
-	padding: 0;
+[hidden] {
+  display: none;
 }
 
-ul, li {
-	list-style-type: none;
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
-a {
-	text-decoration: none;
+a:focus {
+  outline: thin dotted;
 }
 
-button {
-    border: none;
-}
-
-fieldset {
-    border: none;
-}
-
-input {
-    border: none;
-}
-
-textarea {
-    border: none;
-}
-
-/*---------------------- GENERAL STYLES ------------------- */
-.wrapper {
-  /* max-width: 1080px; */
-  max-width: 800px;
-  width: 80%;
-  /* background-color: peachpuff; */
-  margin: 0 auto;
-}
-
-/* fonts */
-/* font-family: 'Anton', sans-serif;
-font-family: 'Source Sans Pro', sans-serif; */
-
-button {
-  /* background-color: fuchsia; */
-  font-size: 1.1rem;
-  background-color: #c732be;
-  padding: 5px 20px;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  height: 30px;
-  width: 105px;
+a:active, a:hover {
+  outline: 0;
 }
 
 h1 {
-  font-family: 'Anton', sans-serif;
-  letter-spacing: 1px;
+  font-size: 2em;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+dfn {
+  font-style: italic;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, serif;
+  font-size: 1em;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+q {
+  quotes: \201C \201D \2018 \2019;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -.5em;
+}
+
+sub {
+  bottom: -.25em;
+}
+
+img {
+  border: 0;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: .35em .625em .75em;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+
+button, input {
+  line-height: normal;
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled], input[disabled] {
+  cursor: default;
+}
+
+input[type=checkbox], input[type=radio] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+}
+
+input[type=search] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body, figure {
+  margin: 0;
+}
+
+legend, button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: '';
+  clear: both;
+  height: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.visuallyHidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
+  clip: rect(0 0 0);
+  overflow: hidden;
+}
+
+/* font-family: 'Anton', sans-serif;
+font-family: 'Source Sans Pro', sans-serif; */
+/*******************************************/
+/*------------ REMOVE DEFAULTS ------------*/
+/*******************************************/
+body, h1, h2, h3, p, ul, li, fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  line-height: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+input {
+  border: none;
+}
+
+textarea {
+  border: none;
+}
+
+/*******************************************/
+/*------------ GENERAL STYLES -------------*/
+/*******************************************/
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body, textarea {
+  font-size: 1.8rem;
+  color: #1c1c1c;
+  font-family: "Source Sans Pro", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  background-color: #f5f5f5;
 }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 1.1rem;
-  color: #1c1c1c;
+  background-color: #1c1c1c;
 }
 
-/*--------------------- HEADER STYLES ----------------------*/
+@media (max-width: 650px) {
+  body {
+    font-size: 1.5rem;
+  }
+}
+
+.wrapperMain {
+  max-width: 600px;
+  width: 80%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (max-width: 650px) {
+  .wrapperMain {
+    width: 100%;
+  }
+}
+
+.wrapperSideTwo {
+  /* max-width: 1080px; */
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media (max-width: 650px) {
+  .wrapperSideTwo {
+    width: 90%;
+  }
+}
+
+.sideOne {
+  width: 30%;
+  display: none;
+}
+
+.sideTwo {
+  width: 100%;
+  background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+}
+
+button {
+  cursor: pointer;
+}
+
+.headerSignedInPage h1 {
+  font-size: 3.5rem;
+  color: #1c1c1c;
+  font-family: "Anton", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.headerSignedOutPage h1 {
+  font-size: 3.5rem;
+  color: #f5f5f5;
+  font-family: "Anton", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.lineBreak {
+  display: block;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.css-y1c0xs::-webkit-scrollbar-thumb {
+  background-color: purple;
+  outline: 1px solid slategrey;
+}
+
+/*******************************************/
+/*---------- MAIN SECTION STYLES ----------*/
+/*******************************************/
+main {
+  height: 84vh;
+  position: relative;
+}
+
+main .wrapperSideTwo {
+  height: 100%;
+}
+
+/* textarea {
+  border: 1px solid black;
+} */
+.content {
+  height: 100%;
+}
+
+.css-1qyrjaz {
+  background-color: #c732be;
+}
+
 header {
   /* padding: 20px; */
   /* background-color: #525252; */
@@ -101,266 +365,97 @@ header {
 }
 
 .headerSignedOutPage {
-    background-color: #1c1c1c;
-    color: whitesmoke;
+  background-color: #1c1c1c;
+  color: whitesmoke;
 }
 
 .headerSignedInPage {
-  background-color: #52bafa;
-  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
   color: #1c1c1c;
 }
 
 header .flexContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
 }
 
 .iconContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.0rem;
-}
-
-/*-------------------- MAIN SECTION STYLES ---------------------*/
-main {
-  height: 84vh;
-  /* background-color: #c1e6fa; */
-  /* background-color: #525252; */
-  background-color: #52bafa;
-  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
-  background-image: url("https://www.transparenttextures.com/patterns/connected.png")
-}
-
-main .wrapper {
-  height: 100%;
-}
-
-/* textarea {
-  border: 1px solid black;
-} */
-
-.content {
-  height: 100%;
-}
-
-/*----------------- NOT SIGNED IN PAGE STYLES --------------------*/
-.loginFlexContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.notSingedInPage {
-  /* width: 100%; */
-  /* width: 40%; */
-  height: 80%;
-  /* height: 500px;
-  background-color: dodgerblue; */
-  /* background-color: #ececec; */
-  display: flex;
-  /* flex-direction: column; */
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.notSingedInPage form {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* margin-bottom: 40px; */
-  color: whitesmoke;
-  background-color: #1c1c1c;
-  padding: 20px;
-  border-radius: 5px;
-  height: max-content;
-}
-
-.notSingedInPage input {
-  font-size: 1.1rem;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 5px 10px; 
-}
-
-.notSingedInPage button {
-  margin: 0 auto;
-  margin-top: 10px;
-}
-
-fieldset button {
-  margin: 0 auto;
-}
-
-.guestButton {
-  width: max-content;
-}
-
-/*-------------------- SENDMESSAGE STYLES ------------------*/
-.sendMessageArea {
-  height: 25%;
-  /* background-color: #52bafa;
-  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
-
-  /* background-color: #52bafa; 
-  background-image: url("https://www.transparenttextures.com/patterns/arches.png"); */
-
-background-color: #52bafa;
-background-image: url("https://www.transparenttextures.com/patterns/connected.png");
-
-}
-
-.sendMessageArea .flexContainer {
-  height: 100%;
-}
-
-.sendMessageArea form {
-  height: 100%;
-  position: relative;
-}
-
-.fa-laugh {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 3.0rem;
   cursor: pointer;
 }
 
-
-.sendMessageArea form {
-  /* background-color: dodgerblue; */
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center; 
-  justify-content: center;
-  /* padding: 20px; */
+.iconContainer:hover {
+  color: #c732be;
 }
 
-textarea {
-  /* background-color: green; */
-  /* max-width: 300px;
-  min-width: 300px;
-  max-height: 200px;
-  min-height: 200px; */
-  max-width: 500px;
-  /* height: 80px; */
-  height: 118px;
-  width: 400px;
-  /* border: none; */
-  margin: 10px;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-  resize: none;
-  outline: none;
-}
-
-.emojiPicker {
-  position: absolute;
-  bottom: 200px;
-}
-
-.emojiIcon {
-  /* margin-bottom: 10px; */
-}
-
-.sendAndEmojiContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-}
-
-.gifPicker {
-  width: 100%;
-  height: 60vh;
-  /* background-color: black; */
-  overflow: scroll;
-  background-color: #1c1c1c;
-  position: absolute;
-  top: -60vh;
-}
-
-.gifPicker ul {
-  /* display: flex;
-  flex-wrap: wrap; */
-  /* display: grid;
-  /* grid-template-columns: 25% 25% 25% 25%; */
-  /* column-count: 4; */
-  /* gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));  */
-  column-count: 4;
-  /* column-width: 25%; */
-  column-gap: 5px;
-}
-
-.gifPicker li {
-  width: 100%;
-  /* display: inline-block; */
-  margin-bottom: 5px;
-}
-
-.imageContainer {
-  width: 50%;
-}
-
-img {
-  width: 100%;
-  display: block;
-}
-
-.textArea {
-    -moz-appearance: textfield-multiline;
-    -webkit-appearance: textarea;
-    border: 1px solid gray;
-    font: medium -moz-fixed;
-    font: -webkit-small-control;
-    height: 118px;
-    overflow: auto;
-    padding: 2px;
-    /* resize: both; */
-    resize: none;
-    width: 400px;
-    background-color: white;
-}
-
-/*--------------------- MESSAGELIST STYLES -------------------*/
-.messageArea{
+.messageArea {
   height: 75%;
-  background-color: #1c1c1c;
+}
+
+@media (max-width: 650px) {
+  .messageArea {
+    height: 65%;
+  }
 }
 
 .messageListContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
 }
+
 .messageBox {
   /* width: 300px; */
-  width: 90%;
+  width: 100%;
   /* height: 200px; */
-  max-width: 600px;
   /* height: 350px; */
-  padding: 10px 0;
+  padding: 10px;
   /* background-color: white; */
-  margin: 20px;
+  margin: 20px 0;
   /* border: 1px solid black; */
-  overflow: scroll;
   background-color: #1c1c1c;
+}
+
+@media (max-width: 650px) {
+  .messageBox {
+    margin: 0;
+  }
+}
+
+.gifImage {
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .message {
   /* border: 2px solid blueviolet; */
   border-radius: 5px;
   /* width: fit-content; */
-  padding: 5px 10px;
+  padding: 10px;
   margin: 10px;
-  color: white;
+  color: #f5f5f5;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   max-width: 60%;
   /* max-width: 250px; */
@@ -372,19 +467,26 @@ img {
 
 .userName,
 .dateAndTime {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   text-align: left;
   font-weight: bold;
-  color: rgba(245,245,245,0.5)
+  color: rgba(245, 245, 245, 0.5);
 }
 
-.messageBox > div {
+.messageBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: auto;
 }
 
 .currentUserPosition {
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .messageText {
@@ -398,8 +500,320 @@ img {
   /* max-width: 200px; */
 }
 
+aside .emoji-picker-react {
+  width: 100%;
+}
 
-/*---------------------- SETTINGS PAGE STYLES --------------------*/
+.scrollToBottom {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  cursor: pointer;
+  color: #f5f5f5;
+  opacity: 0.5;
+}
+
+.scrollToBottom:hover {
+  opacity: 1;
+}
+
+footer {
+  height: 6vh;
+  color: #1c1c1c;
+  /* text-align: center; */
+  /* background-color: #525252;
+  color: whitesmoke; */
+  /* background-color: #52bafa;
+  // background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+}
+
+@media (max-width: 650px) {
+  footer {
+    text-align: center;
+  }
+}
+
+footer .flexContainer {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sendMessageArea {
+  height: 25%;
+  /* background-color: #52bafa;
+  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  /* background-color: #52bafa; 
+  background-image: url("https://www.transparenttextures.com/patterns/arches.png"); */
+}
+
+@media (max-width: 650px) {
+  .sendMessageArea {
+    height: 35%;
+  }
+}
+
+.sendMessageArea .flexContainer {
+  height: 100%;
+}
+
+.sendMessageArea form {
+  height: 100%;
+}
+
+@media (max-width: 650px) {
+  .sendMessageArea form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+}
+
+.fa-laugh {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.sendMessageArea form {
+  /* background-color: dodgerblue; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* flex-direction: column; */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  /* padding: 20px; */
+}
+
+textarea {
+  /* background-color: green; */
+  /* max-width: 300px;
+  min-width: 300px;
+  max-height: 200px;
+  min-height: 200px; */
+  /* height: 80px; */
+  height: 100%;
+  width: 100%;
+  /* border: none; */
+  padding: 5px 10px;
+  resize: none;
+  outline: none;
+}
+
+@media (max-width: 650px) {
+  textarea {
+    width: 90%;
+  }
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 25%;
+}
+
+@media (max-width: 650px) {
+  .emojiPicker {
+    bottom: 35%;
+  }
+}
+
+.emojiIcon {
+  line-height: 1;
+  /* margin-bottom: 10px; */
+}
+
+.sendAndEmojiContainer {
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 80%;
+}
+
+@media (max-width: 650px) {
+  .sendAndEmojiContainer {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%;
+    height: 40%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+.sendAndEmojiContainer button {
+  background-color: #c732be;
+  color: #f5f5f5;
+  padding: 5px 20px;
+  border-radius: 5px;
+  height: 30px;
+  width: 100%;
+}
+
+.sendAndEmojiContainer button:hover {
+  background-color: #771E72;
+}
+
+@media (max-width: 650px) {
+  .sendAndEmojiContainer button {
+    width: 31%;
+  }
+}
+
+.gifPicker {
+  width: 100%;
+  height: 75%;
+  /* background-color: black; */
+  overflow: auto;
+  background-color: #1c1c1c;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 3px solid #52bafa;
+}
+
+.gifPicker input {
+  border-radius: 2px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  width: 60%;
+  border: 3px solid #c732be;
+  background-color: #f5f5f5;
+  outline: none;
+}
+
+.gifPicker input:focus {
+  -webkit-box-shadow: inset 0 0 10px #c732be;
+  box-shadow: inset 0 0 10px #c732be;
+}
+
+@media (max-width: 650px) {
+  .gifPicker {
+    height: 65%;
+    border: none;
+  }
+}
+
+.gifPicker::-webkit-scrollbar {
+  width: 12px;
+}
+
+.gifPicker ul {
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* display: grid;
+  /* grid-template-columns: 25% 25% 25% 25%; */
+  /* column-count: 4; */
+  /* gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));  */
+  -webkit-column-count: 4;
+          column-count: 4;
+  /* column-width: 25%; */
+  -webkit-column-gap: 5px;
+          column-gap: 5px;
+}
+
+.gifPicker li {
+  width: 100%;
+  /* display: inline-block; */
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.imageContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: calc(100%);
+  background-color: #1c1c1c;
+}
+
+.imageContainer img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: 100%;
+}
+
+.gifDeleteButton {
+  font-weight: 900;
+  font-size: 1.5rem;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #c732be;
+  border-radius: 50%;
+  color: #f5f5f5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.textArea {
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  height: 80%;
+  overflow: auto;
+  padding: 2px;
+  /* resize: both; */
+  resize: none;
+  width: 80%;
+  background-color: white;
+  margin-right: 20px;
+  border-radius: 2px;
+  position: relative;
+}
+
+@media (max-width: 650px) {
+  .textArea {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+}
+
 .settings {
   /* z-index: 10; */
   /* width: 300px; */
@@ -408,28 +822,42 @@ img {
   /* background-color: #ececec; */
   height: 100%;
   background-color: #52bafa;
-/* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
-background-image: url("https://www.transparenttextures.com/patterns/connected.png")
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
 }
 
 .settings .flexContainer {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .settingsFormContainer {
   background-color: #1c1c1c;
   color: whitesmoke;
   border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 20px;
-  width: 60%;
   max-width: 300px;
 }
 
@@ -439,11 +867,37 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
   /* padding-top: 10px; */
 }
 
-.settings ul {
+.settings h3 {
+  text-align: center;
+}
+
+.settings form div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.settings ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   width: 100%;
   /* margin: 0 auto; */
 }
@@ -455,24 +909,45 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
 
 .settings input {
   margin: 10px 0;
+  width: 100%;
 }
 
 .settings form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   /* align-items: center; */
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   border: 2px solid whitesmoke;
   padding: 20px;
   margin-bottom: 10px;
   /* justify-content: flex-start;  */
+  position: relative;
 }
 
 .settings button {
   margin: 0 auto;
+  background-color: #c732be;
+  color: #f5f5f5;
+  padding: 5px 20px;
+  border-radius: 5px;
+  height: 30px;
+  width: 105px;
+}
+
+.settings button:hover {
+  background-color: #771E72;
 }
 
 .colorChoices {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -505,68 +980,158 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
   background-color: #f37736;
 }
 
-/*---------------------- FOOTER STYLES -----------------------*/
-footer {
-  height: 6vh;
-  background-color: #1c1c1c;
-  color: whitesmoke;
-  /* text-align: center; */
-  /* background-color: #525252;
-  color: whitesmoke; */
-  /* background-color: #52bafa;
-  background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
-}
-
-footer .flexContainer {
-  height: 100%;
+/*----------------- NOT SIGNED IN PAGE STYLES --------------------*/
+.loginFlexContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
-/*---------------------- MEDIA QUERIES -----------------------*/
+.notSingedInPage {
+  width: 100%;
+  /* width: 40%; */
+  height: 80%;
+  /* height: 500px;
+  background-color: dodgerblue; */
+  /* background-color: #ececec; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* flex-direction: column; */
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 
-@media (max-width: 600px) {
-  .wrapper {
-    width: 90%;
-  }
-  .messageBox {
-    margin: 0;
-    /* height: 100%; */
-  }
-  .sendMessageArea form {
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  textarea {
-    width: 90%;
-  }
-
-  .sendAndEmojiContainer {
-    flex-direction: row;
-  }
-
-  .sendAndEmojiContainer button {
-    margin: 0 10px 10px 10px;
-  }
-
+@media (max-width: 650px) {
   .notSingedInPage {
-    flex-direction: column;
-    justify-content: space-evenly;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    height: 90%;
   }
+}
 
+.notSingedInPage form {
+  width: 48%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* margin-bottom: 40px; */
+  color: whitesmoke;
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 5px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.notSingedInPage form h2 {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 650px) {
   .notSingedInPage form {
     padding: 10px;
     width: 60%;
   }
+}
 
+@media (max-width: 525px) {
+  .notSingedInPage form {
+    width: 80%;
+  }
+}
+
+.notSingedInPage input {
+  font-size: 1.8rem;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
+@media (max-width: 650px) {
   .notSingedInPage input {
     padding: 0;
   }
-
-  footer {
-    text-align: center;
-  }
-
 }
+
+.notSingedInPage button {
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 30px;
+  width: 105px;
+  background-color: #c732be;
+  color: #f5f5f5;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.notSingedInPage button:hover {
+  background-color: #771E72;
+}
+
+fieldset button {
+  margin: 0 auto;
+}
+
+.guestButton {
+  height: 30px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 20px;
+  background-color: #c732be;
+  color: #f5f5f5;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.guestButton:hover {
+  background-color: #771E72;
+}
+
+.sideOne {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #1c1c1c;
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  color: #f5f5f5;
+}
+
+.aside {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.onlineUsers {
+  width: 100%;
+  height: 300px;
+  background-color: grey;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=App.css.map */

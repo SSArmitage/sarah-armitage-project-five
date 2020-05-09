@@ -1,0 +1,33 @@
+.sideOne {
+    // background-color: #747474;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: $secondary;
+    // border: 4px solid $accent;
+    background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+    color: $white;
+    // .top {
+    //     height: 10vh;
+    //     background-color: #52bafa;
+    //     background-image: url(https://www.transparenttextures.com/patterns/connected.png);
+    //     // color: #1c1c1c;
+    // }
+    // .main {
+    //     height: 84vh;
+    //     border: 4px solid $accent;
+    // }
+}
+
+.aside {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.onlineUsers {
+    width: 100%;
+    height: 300px;
+    background-color: grey;
+    border-radius: 5px;
+}
+
+

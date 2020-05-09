@@ -1,0 +1,92 @@
+/*----------------- NOT SIGNED IN PAGE STYLES --------------------*/
+.loginFlexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.notSingedInPage {
+  width: 100%;
+  /* width: 40%; */
+  height: 80%;
+  /* height: 500px;
+  background-color: dodgerblue; */
+  /* background-color: #ececec; */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+  // margin: 0 auto;
+  @include forPhone {
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90%;
+  }
+}
+
+.notSingedInPage form {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* margin-bottom: 40px; */
+  color: whitesmoke;
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 5px;
+  h2 {
+    margin-bottom: 10px;
+  }
+  height: max-content;
+  @include forPhone {
+    padding: 10px;
+    width: 60%;
+  }
+  @include forSmallPhone {
+    width: 80%;
+  }
+}
+
+.notSingedInPage input {
+  // font-size: 1.1rem;
+  font-size: 1.8rem;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px; 
+  @include forPhone {
+      padding: 0;
+  }
+}
+
+.notSingedInPage button {
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 30px;
+  width: 105px;
+  background-color: $accent;
+  color: $white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  &:hover {
+  background-color: $hover;
+  }
+}
+
+fieldset button {
+  margin: 0 auto;
+}
+
+.guestButton {
+  height: 30px;
+  width: max-content;
+  padding: 20px;
+  background-color: $accent;
+  color: $white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  &:hover {
+  background-color: $hover;
+  }
+}
