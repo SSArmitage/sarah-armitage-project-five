@@ -234,7 +234,7 @@ class SendMessage extends Component {
                             <textarea
                                 rows="10"
                                 cols="40"
-                                placeholder="Enter message here"
+                                placeholder="message"
                                 id="userMessageInput"
                                 onChange={this.props.onTextInput}
                                 value={this.props.textInputValue}

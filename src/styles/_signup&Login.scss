@@ -27,18 +27,24 @@
 
 .notSingedInPage form {
   width: 48%;
-  height: 330px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
   /* align-items: center; */
   /* margin-bottom: 40px; */
-  color: whitesmoke;
-  background-color: #1c1c1c;
+  color: $primary2;
+  text-transform: lowercase;
+  // border: 2px solid $accent2;
+  box-shadow: 5px 5px $accent2;
+  // background-color: #1c1c1c;
+  background-color: $white;
   padding: 20px;
   border-radius: 5px;
   h2 {
     margin-bottom: 10px;
+    font-family: $titleFont;
+    color: $primary2;
   }
   // height: max-content;
   @include forPhone {
@@ -58,6 +64,7 @@
   margin-bottom: 10px;
   padding: 5px 10px; 
   width: 100%;
+  // border: 2px solid $accent2;
   @include forPhone {
       padding: 0;
   }
@@ -68,12 +75,13 @@
   margin-top: 10px;
   height: 30px;
   width: 105px;
-  background-color: $accent;
+  background-color: $primary2;
   color: $white;
-  padding: 5px 20px;
+  // padding: 5px 20px;
   border-radius: 5px;
+  // letter-spacing: 0.2rem;
   &:hover {
-  background-color: $hover;
+  background-color: $hover2;
   }
 }
 
@@ -85,11 +93,11 @@ fieldset button {
   height: 30px;
   width: max-content;
   padding: 20px;
-  background-color: $accent;
+  background-color: $primary2;
   color: $white;
   padding: 5px 20px;
   border-radius: 5px;
   &:hover {
-  background-color: $hover;
+  background-color: $hover2;
   }
 }

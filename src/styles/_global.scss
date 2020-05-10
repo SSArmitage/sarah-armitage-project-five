@@ -17,6 +17,7 @@ a {
 button {
     border: none;
     line-height: 0;
+    outline: none;
 }
 
 fieldset {
@@ -25,6 +26,7 @@ fieldset {
 
 input {
     border: none;
+    outline: none;
 }
 
 textarea {
@@ -46,12 +48,29 @@ body, textarea {
 }
 
 body {
-  background-color: $secondary;
+  // background-color: $secondary;
+  background-color: $secondary2;
   // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
   // opacity: 0.5;
    @include forPhone {
       font-size: 1.5rem;
   }
+}
+
+input {
+  border: 2px solid $accent2;
+  border-radius: 2px;
+  &:focus {
+    border: 2px solid $accentOpaque;
+    // -moz-box-shadow:    inset 0 0 10px $accent;
+    // -webkit-box-shadow: inset 0 0 10px $accent;
+    // box-shadow:         inset 0 0 10px $accent;
+  }
+}
+
+label {
+  text-transform: lowercase;
+  color: $primary2;
 }
 
 .wrapperMain {
@@ -86,16 +105,28 @@ body {
 .sideTwo {
   // width: 70%;
   width: 100%;
-  background-color: $primary;
-  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  // background-color: $primary;
+  background-color: $secondary2;
+  // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
 }
 
 button {
   cursor: pointer;
+  background-color: $primary2;
+  height: 30px;
+  // text-transform: uppercase;
+  font-family: $titleFont;
+  // &:focus {
+  //   box-shadow: 5px 5px 5px $accent;
+  // }
 }
 
+// h1 {
+//   @include fontStyle(3.5rem, $secondary, $titleFont, normal, normal, normal, 1px)
+// }
+
 h1 {
-  @include fontStyle(3.5rem, $secondary, $titleFont, normal, normal, normal, 1px)
+  @include fontStyle(3.5rem, $primary2, $titleFont, normal, normal, normal, 1px)
 }
 
 // .headerSignedInPage h1 {
@@ -105,6 +136,10 @@ h1 {
 // .headerSignedOutPage h1 {
 //   @include fontStyle(3.5rem, $white, $titleFont, normal, normal, normal, 1px)
 // }
+
+h1, h2, button {
+  letter-spacing: 0.2rem;
+}
 
 img {
   width: 100%;
@@ -126,6 +161,22 @@ body::-webkit-scrollbar-track {
   // background-color: darkgrey;
   background-color: purple;
   outline: 1px solid slategrey;
+}
+
+// input placeholder text styles
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: 	#C0C0C0;
+  opacity: 1; /* Firefox */
+  // font-family: $titleFont;
+  text-transform: lowercase;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: 	#A9A9A9;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: 	#A9A9A9;
 }
 
 /*******************************************/

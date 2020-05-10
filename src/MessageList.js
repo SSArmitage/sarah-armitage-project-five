@@ -110,11 +110,15 @@ class MessageList extends Component {
         let messageStyleOtherUser;
 
         messageStyle = {
-            backgroundColor: 'blueviolet'
+            // backgroundColor: 'blueviolet'
+            backgroundColor: '#06a8de',
+            color: 'whitesmoke'
         };
         // default color for the other users
         messageStyleOtherUser = {
-            backgroundColor: '#0392cf'
+            // backgroundColor: '#0392cf'
+            backgroundColor: '#cdf1fd',
+            color: 'rgba(28,28,28, 0.7)'
         };
 
         // let messageText;
@@ -155,13 +159,13 @@ class MessageList extends Component {
                                     if (message.userId === user.uid) {
                                         return (
                                             <li
-                                                className="message currentUserPosition"
+                                                className="message currentUserPosition rightMessage"
                                                 style={messageStyle} >
                                                 <p
                                                     className="userName">
                                                     {message.username}</p>
                                                 <p
-                                                    className="dateAndTime">
+                                                    className="dateAndTime rightTimeStamp">
                                                     {`${message.date} ${message.time}`}</p>
                                                 {/* <p 
                                             className="messageText">
@@ -183,12 +187,12 @@ class MessageList extends Component {
                                     } else {
                                         return (
                                             <li
-                                                className="message"
+                                                className="message leftMessage"
                                                 style={messageStyleOtherUser} >
                                                 <p
                                                     className="userName">{message.username}</p>
                                                 <p
-                                                    className="dateAndTime">
+                                                    className="dateAndTime leftTimeStamp">
                                                     {`${message.date} ${message.time}`}</p>
                                                 {/* <p
                                             className="messageText">
@@ -215,7 +219,7 @@ class MessageList extends Component {
                                     if (message.username === 'Guest') {
                                         return (
                                             <li
-                                                className="message currentUserPosition"
+                                                className="message currentUserPosition rightMessage"
                                                 style={messageStyle}
                                                 ref={this.message}
                                                  >
@@ -223,7 +227,7 @@ class MessageList extends Component {
                                                     className="userName">
                                                     {message.username}</p>
                                                 <p
-                                                    className="dateAndTime">
+                                                    className="dateAndTime rightTimeStamp">
                                                     {`${message.date} ${message.time}`}</p>
                                                 {/* <p 
                                             className="messageText">
@@ -245,12 +249,12 @@ class MessageList extends Component {
                                     } else {
                                         return (
                                             <li
-                                                className="message"
+                                                className="message leftMessage"
                                                 style={messageStyleOtherUser} >
                                                 <p
                                                     className="userName">{message.username}</p>
                                                 <p
-                                                    className="dateAndTime">
+                                                    className="dateAndTime leftTimeStamp">
                                                     {`${message.date} ${message.time}`}</p>
                                                 {/* <p
                                             className="messageText">
@@ -276,7 +280,7 @@ class MessageList extends Component {
                         <div 
                         className="scrollToBottom"
                         onClick={this.hanldeScrollButtonClick}>
-                            <i class="fas fa-arrow-down"></i>
+                            <i class="fas fa-arrow-circle-down"></i>
                         </div>
                     </ul>
                 </div>

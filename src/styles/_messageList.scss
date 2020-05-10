@@ -22,10 +22,11 @@
   /* height: 350px; */
   padding: 10px;
   /* background-color: white; */
-  margin: 20px 0;
+  // margin: 20px 0;
   /* border: 1px solid black; */
   // overflow: scroll;
-  background-color: #1c1c1c;
+  // background-color: #1c1c1c;
+  background-color: $white;
   @include forPhone {
     margin: 0;
   }
@@ -41,14 +42,18 @@
 
 .message {
   /* border: 2px solid blueviolet; */
-  border-radius: 5px;
+  // border-radius: 5px;
+  border-radius: 10px;
   /* width: fit-content; */
-  padding: 10px;
-  margin: 10px;
-  color: $white;
-  width: fit-content;
+  padding: 20px;
+  margin: 20px 10px;
+  // color: $white;
+  color: $text;
+  // width: fit-content;
+  width: 40%;
   max-width: 60%;
   /* max-width: 250px; */
+  position: relative;
 }
 
 .userInfo {
@@ -60,13 +65,90 @@
   font-size: 1.2rem;
   text-align: left;
   font-weight: bold;
-  color: rgba(245,245,245,0.5)
+  // color: rgba(245,245,245,0.5)
+  // color: $textOpaque;
+}
+
+.userName {
+  font-family: $titleFont;
+  letter-spacing: 0.2rem;
+  position: absolute;
+  top: 2px;
+  left: 8px;
+}
+
+.dateAndTime {
+  position: absolute;
+  bottom: -20px;
+  color: $textOpaque;
+  width: max-content;
+}
+
+.rightMessage {
+  box-shadow: -4px 4px #0595c5;
+  &::after {
+    content: '';
+  position: absolute;
+  right: -7px;
+  bottom: -10px;
+  border: 12px solid $primary2;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid transparent;
+  transform: rotate(-135deg);
+  }
+  &::before {
+    content: '';
+  position: absolute;
+  right: -7px;
+  bottom: -15px;
+  border: 12px solid #0595c5;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid transparent;
+  transform: rotate(-135deg);
+  }
+}
+
+.leftMessage {
+  box-shadow: 4px 4px #94cde0;
+  &::after {
+    content: '';
+  position: absolute;
+  left: -7px;
+  bottom: -10px;
+  border: 12px solid $secondary2;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid transparent;
+  transform: rotate(135deg);
+  }
+  &::before {
+    content: '';
+  position: absolute;
+  left: -7px;
+  bottom: -15px;
+  border: 12px solid #94cde0;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid transparent;
+  transform: rotate(135deg);
+  }
+}
+
+.rightTimeStamp {
+  right: 20px;
+}
+
+.leftTimeStamp {
+  left: 20px;
 }
 
 .messageBox {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  border: 2px solid $accent2;
 }
 
 .currentUserPosition {
@@ -89,16 +171,17 @@ aside .emoji-picker-react {
 }
 
 .scrollToBottom {
-  width: 15px;
-  height: 15px;
+  // width: 15px;
+  // height: 15px;
   position: absolute;
-  bottom: 35px;
-  right: 25px;
+  bottom: 0;
+  right: 18px;
   cursor: pointer;
-  color: $white;
-  opacity: 0.5;
+  // color: $white;
+  opacity: 0.3;
   font-size: 2.5rem;
   &:hover {
     opacity: 1;
+    color: $hover2;
   }
 }

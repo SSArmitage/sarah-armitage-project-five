@@ -5,9 +5,10 @@
   /* height: 20vh; */
   /* background-color: #ececec; */
   height: 100%;
-  background-color: #52bafa;
+  // background-color: #52bafa;
+  background-color: $secondary2;
 /* background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png"); */
-background-image: url("https://www.transparenttextures.com/patterns/connected.png")
+// background-image: url("https://www.transparenttextures.com/patterns/connected.png")
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
@@ -20,8 +21,10 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
 }
 
 .settingsFormContainer {
-  background-color: #1c1c1c;
-  color: whitesmoke;
+  // background-color: #1c1c1c;
+  background-color: $secondary2;
+  // color: whitesmoke;
+  color: $text;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -34,11 +37,15 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
 .settings h2 {
   text-align: center;
   margin-bottom: 10px;
+  font-family: $titleFont;
+  color: $primary2;
   /* padding-top: 10px; */
 }
 
 .settings h3 {
   text-align: center;
+  // color: $textOpaque;
+  color: $primary2;
 }
 
 .settings form div {
@@ -64,6 +71,7 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
 .settings input {
   margin: 10px 0;
   width: 100%;
+  padding: 5px 10px;
 }
 
 .settings form {
@@ -71,24 +79,31 @@ background-image: url("https://www.transparenttextures.com/patterns/connected.pn
   flex-direction: column;
   /* align-items: center; */
   justify-content: flex-start;
-  border: 2px solid whitesmoke;
+  // border: 2px solid whitesmoke;
+  border: 2px solid $accent2;
+  background-color: $white;
   padding: 20px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   /* justify-content: flex-start;  */
   position: relative;
+  input {
+    // border: 2px solid $accent2;
+    // background-color: $white;
+  }
 }
 
 .settings button {
   margin: 0 auto;
-  background-color: $accent;
+  // background-color: $accent;
+  background-color: $primary2;
   color: $white;
-  padding: 5px 20px;
+  // padding: 5px 20px;
   border-radius: 5px;
-  height: 30px;
+  // height: 30px;
   // width: 100%;
-  width: 105px;
+  width: 120px;
   &:hover {
-  background-color: $hover;
+  background-color: $hover2;
   }
 }
 

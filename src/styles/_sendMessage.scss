@@ -66,9 +66,18 @@ textarea {
 .emojiPicker {
   position: absolute;
   bottom: 25%;
+  border: 2px solid $accent2;
+  border-radius: 2px;
    @include forPhone {
       bottom: 35%
   }
+}
+
+.emoji-picker-react {
+  box-shadow: none;
+  border-radius: 2px;
+  // border: none;
+  // border: 2px solid $accent2;
 }
 
 .emojiIcon {
@@ -91,14 +100,17 @@ textarea {
       justify-content: space-between;
   }
   button {
-    background-color: $accent;
+    // background-color: $accent;
     color: $white;
     padding: 5px 20px;
     border-radius: 5px;
+    // height: 30px;
     height: 30px;
+    // max-height: 40px;
+    // min-height: 25px;
     width: 100%;
     &:hover {
-    background-color: $hover;
+    background-color: $hover2;
     // border: 2px solid white;
     }
     @include forPhone {
@@ -126,29 +138,33 @@ textarea {
 // }
 
 .gifPicker {
-  width: 100%;
+  // width: 100%;
+  width: 80%;
   height: 75%;
   /* background-color: black; */
   overflow: auto;
   // background-color: #1c1c1c;
-  background-color: $secondary;
+  // background-color: $secondary;
+  background-color: $white;
   position: absolute;
   top: 0;
-  left: 0;
-  border: 3px solid $primary;
+  // left: 0;
+  border: 2px solid $accent2;
+  // border-bottom: 5px solid #1c1c1c;
+  // border-bottom: 5px solid $accent2;
   input {
     border-radius: 2px;
     padding: 5px 10px;
     margin: 10px 0;
     width: 60%;
-    border: 3px solid $accent;
+    // border: 2px solid $accent2;
     background-color: $white;
     outline: none;
     &:focus {
       // border: 2px solid $accent;
-      -moz-box-shadow:    inset 0 0 10px $accent;
-      -webkit-box-shadow: inset 0 0 10px $accent;
-      box-shadow:         inset 0 0 10px $accent;
+      // -moz-box-shadow:    inset 0 0 10px $accent;
+      // -webkit-box-shadow: inset 0 0 10px $accent;
+      // box-shadow:         inset 0 0 10px $accent;
     }
   }
   @include forPhone {
@@ -172,6 +188,9 @@ textarea {
   column-count: 4;
   /* column-width: 25%; */
   column-gap: 5px;
+  @include forSmallPhone {
+    column-count: 3;
+  }
 }
 
 
@@ -190,7 +209,8 @@ textarea {
   // width: 50%;
   // width: 100%;
   width: calc(100%);
-  background-color: $secondary;
+  // background-color: $secondary;
+  background-color: $white;
   // overflow: scroll;
   img {
     object-fit: contain;
@@ -233,7 +253,9 @@ textarea {
     resize: none;
     // width: 400px;
     width: 80%;
-    background-color: white;
+    // background-color: white;
+    background-color: $white;
+    border: 2px solid $accent2;
     margin-right: 20px;
     border-radius: 2px;
     position: relative;
@@ -243,3 +265,4 @@ textarea {
       margin-top: 20px;
     }
 }
+

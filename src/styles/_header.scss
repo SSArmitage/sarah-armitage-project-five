@@ -32,8 +32,9 @@ header .flexContainer {
   justify-content: center;
   align-items: center;
   font-size: 3.0rem;
+  color: $primary2;
   cursor: pointer;
   &:hover {
-    color: $accent;
+    color: $hover2;
   }
 }

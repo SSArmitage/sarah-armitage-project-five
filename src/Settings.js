@@ -15,11 +15,11 @@ class Settings extends Component {
                             <li>
                                 <form onSubmit={this.props.onButtonClickUserName}>
                                     
-                                        <h3>Change Username</h3>
+                                        {/* <h3>Change Username</h3> */}
                                         <label 
                                         htmlFor="username"
-                                        className="visuallyHidden">
-                                            Change Username
+                                        className="">
+                                            Change Username:
                                         </label>
                                         {this.props.username === "Guest"
                                         ?
