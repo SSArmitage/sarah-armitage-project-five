@@ -57,6 +57,7 @@
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 5px 10px; 
+  width: 100%;
   @include forPhone {
       padding: 0;
   }
