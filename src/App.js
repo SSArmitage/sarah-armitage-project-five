@@ -41,7 +41,7 @@ class App extends Component {
       time: '',
       userComputer: '',
       showEmojiPicker: false,
-      userSignedIn: false,
+      // userSignedIn: false,
       selectedEmoji: '',
       emojiString: '',
       selectedGifId: '',
@@ -52,7 +52,7 @@ class App extends Component {
   componentDidMount() {
     // connect app to firebase (messages stored in the messages branch)
     const dbRef = firebase.database().ref('messages');
-    const dbRefUSM = firebase.database().ref('userSpecificMessages');
+    // const dbRefUSM = firebase.database().ref('userSpecificMessages');
     
     // when the database changes (newMessages array) grab the data in the database (will come back as an array)
     dbRef.on('value', (snapshot) => {
@@ -104,11 +104,26 @@ class App extends Component {
         if (user) {
           // User is signed in.
           // if the user is signed it, set the user object to the current user in state (current user will go from null -> user object), this will conidtionally render the chat page
-          this.setState({
-            currentUser: user,
-            uid: user.uid,
-            username: user.displayName
-          })
+
+          if (user.displayName === null && this.state.username) {
+            // the user was just created and does not have a username saved to the account yet => need to update the account with the username in state
+            this.setState({
+              currentUser: user,
+              uid: user.uid,
+              // username: user.displayName
+            }, () => {
+              // call the function to update the username in DB
+              this.handleSaveUserName()
+            })
+
+          } else {
+            // the user already existed, just set their info in state
+            this.setState({
+              currentUser: user,
+              uid: user.uid,
+              username: user.displayName
+            })
+          }
 
           // ******** working on this functionality *********
           // grab the user's custom theme colour from the database and set that in state, so that the messages will be updated to have that color
@@ -273,6 +288,16 @@ class App extends Component {
    })
   }
 
+  // grab the user's username choice for sign up
+  handleSignUpUsername = (event) => {
+    console.log(`username!!!!`);
+    console.log(event.target.value);
+    
+    this.setState({
+      username: event.target.value
+    })
+  }
+
   // grab user password for sign up
   // need to put notifcation for user -> password needs to be > 6 characters long
   hanldeSignUpPassword = (event) => {    
@@ -290,7 +315,12 @@ class App extends Component {
     // create new account for user
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
       // handle errors here
+    }).then(() => {
+      console.log("Sign me up Scotty!");
+      // after the user is created, add the chosen username to the user's account
+      // this.handleSaveUserName()
     })
+    
   }
 // ----- SIGN IN -----
   // grab user email for sign in
@@ -319,7 +349,7 @@ class App extends Component {
       // handle incorrect sign in password
       alert('You have entered either an incorrect email or password');
     });
-    // make sure the settings page is closed when user logs out
+    // make sure the settings page is closed when user logs in
     this.setState({
       settingsPageClicked: false
     })
@@ -356,10 +386,12 @@ class App extends Component {
   }
   // send username to firebase auth on button submit
   handleSaveUserName = (event) => {
-    event.preventDefault();
-
+    if (event) {
+      event.preventDefault();
+    }
+    
     const user = firebase.auth().currentUser;
-    const userName = user.displayName;
+    // const userName = user.displayName;
     user.updateProfile({
       displayName: this.state.username,
       // going to add the ability to add display picture
@@ -376,7 +408,7 @@ class App extends Component {
     });
 
     this.setState({
-      username: '',
+      // username: '',
       settingsPageClicked: !this.state.settingsPageClicked
     });
   }
@@ -584,6 +616,7 @@ class App extends Component {
               ? 
   
               <SignUpLogIn 
+              usernameSignUp={this.handleSignUpUsername}
               emailSignUp={this.handleSignUpEmail}
               passwordSignUp={this.hanldeSignUpPassword}
               onButtonClickSignUp={this.handleSignUpSubmit}

@@ -10,27 +10,30 @@ class SignUpLogIn extends Component {
                         onSubmit={this.props.onButtonClickSignUp}>
                             <h2>Sign Up</h2>
                             {/* working on making this username input work */}
-                            {/* <label htmlFor="displayName">Username:</label>
-                            <input 
-                                type="text" 
-                                id="displayName" 
-                                placeholder="Username"
-                                required/> */}
-                            <label htmlFor="emailSignUp">Email Address:</label>
-                            <input 
-                                type="email" 
-                                id="emailSignUp" 
-                                placeholder="Email address"
-                                onChange={this.props.emailSignUp}
-                                required/>
-                            <label htmlFor="passwordSignUp">Password:</label>
-                            <input 
-                                type="password"
-                                id="passwordSignUp"
-                                placeholder="Password"
-                                onChange={this.props.passwordSignUp} 
-                                required
-                                title="8 characters minimum"/>
+                            <div className="userInfo">
+                                <label htmlFor="displayName">Username:</label>
+                                <input 
+                                    type="text" 
+                                    id="displayName" 
+                                    placeholder="Username"
+                                    onChange={this.props.usernameSignUp}
+                                    required/> 
+                                <label htmlFor="emailSignUp">Email Address:</label>
+                                <input 
+                                    type="email" 
+                                    id="emailSignUp" 
+                                    placeholder="Email address"
+                                    onChange={this.props.emailSignUp}
+                                    required/>
+                                <label htmlFor="passwordSignUp">Password:</label>
+                                <input 
+                                    type="password"
+                                    id="passwordSignUp"
+                                    placeholder="Password"
+                                    onChange={this.props.passwordSignUp} 
+                                    required
+                                    title="8 characters minimum"/>
+                            </div>
                             <button>Sign Up</button>
                     </form>
 
@@ -39,20 +42,22 @@ class SignUpLogIn extends Component {
                         className="login"
                         onSubmit={this.props.onButtonClickSignIn}>
                             <h2>Log In</h2>
-                            <label htmlFor="emailLogIn">Email Address:</label>
-                            <input
-                                type="emailLogIn"
-                                id="email"
-                                placeholder="Email address"
-                                onChange={this.props.emailSignIn} 
-                                required/>
-                            <label htmlFor="passwordLogIn">Password:</label>
-                            <input
-                                type="password"
-                                id="passwordLogIn"
-                                placeholder="Password"
-                                onChange={this.props.passwordSignIn} 
-                                required/>
+                            <div className="userInfo">
+                                <label htmlFor="emailLogIn">Email Address:</label>
+                                <input
+                                    type="emailLogIn"
+                                    id="email"
+                                    placeholder="Email address"
+                                    onChange={this.props.emailSignIn} 
+                                    required/>
+                                <label htmlFor="passwordLogIn">Password:</label>
+                                <input
+                                    type="password"
+                                    id="passwordLogIn"
+                                    placeholder="Password"
+                                    onChange={this.props.passwordSignIn} 
+                                    required/>
+                            </div>
                             <button>Log In</button>
                     </form>
                 </div>

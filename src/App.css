@@ -288,19 +288,9 @@ button {
   cursor: pointer;
 }
 
-.headerSignedInPage h1 {
+h1 {
   font-size: 3.5rem;
   color: #1c1c1c;
-  font-family: "Anton", sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
-  letter-spacing: 1px;
-}
-
-.headerSignedOutPage h1 {
-  font-size: 3.5rem;
-  color: #f5f5f5;
   font-family: "Anton", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -365,8 +355,7 @@ header {
 }
 
 .headerSignedOutPage {
-  background-color: #1c1c1c;
-  color: whitesmoke;
+  color: #1c1c1c;
 }
 
 .headerSignedInPage {
@@ -508,11 +497,12 @@ aside .emoji-picker-react {
   width: 15px;
   height: 15px;
   position: absolute;
-  bottom: 30px;
-  right: 20px;
+  bottom: 35px;
+  right: 25px;
   cursor: pointer;
   color: #f5f5f5;
   opacity: 0.5;
+  font-size: 2.5rem;
 }
 
 .scrollToBottom:hover {
@@ -1031,6 +1021,7 @@ textarea {
 
 .notSingedInPage form {
   width: 48%;
+  height: 330px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1038,16 +1029,15 @@ textarea {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  /* justify-content: center; */
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   /* align-items: center; */
   /* margin-bottom: 40px; */
   color: whitesmoke;
   background-color: #1c1c1c;
   padding: 20px;
   border-radius: 5px;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
 }
 
 .notSingedInPage form h2 {
@@ -1058,6 +1048,9 @@ textarea {
   .notSingedInPage form {
     padding: 10px;
     width: 60%;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
   }
 }
 

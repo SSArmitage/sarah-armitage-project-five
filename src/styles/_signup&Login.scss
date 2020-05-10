@@ -27,9 +27,10 @@
 
 .notSingedInPage form {
   width: 48%;
+  height: 330px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: space-between; 
   /* align-items: center; */
   /* margin-bottom: 40px; */
   color: whitesmoke;
@@ -39,10 +40,11 @@
   h2 {
     margin-bottom: 10px;
   }
-  height: max-content;
+  // height: max-content;
   @include forPhone {
     padding: 10px;
     width: 60%;
+    height: max-content;
   }
   @include forSmallPhone {
     width: 80%;

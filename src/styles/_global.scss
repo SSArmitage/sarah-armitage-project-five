@@ -94,13 +94,17 @@ button {
   cursor: pointer;
 }
 
-.headerSignedInPage h1 {
+h1 {
   @include fontStyle(3.5rem, $secondary, $titleFont, normal, normal, normal, 1px)
 }
 
-.headerSignedOutPage h1 {
-  @include fontStyle(3.5rem, $white, $titleFont, normal, normal, normal, 1px)
-}
+// .headerSignedInPage h1 {
+//   @include fontStyle(3.5rem, $secondary, $titleFont, normal, normal, normal, 1px)
+// }
+
+// .headerSignedOutPage h1 {
+//   @include fontStyle(3.5rem, $white, $titleFont, normal, normal, normal, 1px)
+// }
 
 img {
   width: 100%;

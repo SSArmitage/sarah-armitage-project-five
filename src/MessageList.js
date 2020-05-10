@@ -8,16 +8,22 @@ class MessageList extends Component {
         // create a ref to store the messageBox and message DOM elements
         this.messageBox = React.createRef();
         this.message = React.createRef();
+        this.state = {
+            messageBox: '',
+            lastMessage:''
+        }
     }
     componentDidMount() {
-        console.log(`Messages are mounting!`);
-        const messageBox = document.querySelector('.messageBox')
-        console.log(messageBox.scrollHeight);
-        
-        console.log(this.message.current);
-        const lastMessage = document.querySelector('.message:last-of-type')
-        console.log(lastMessage);
-        
+        // console.log(`Messages are mounting!`);
+        // const messageBox = document.querySelector('.messageBox')
+        // console.log(messageBox);
+        // // console.log(this.message.current);
+        // const lastMessage = document.querySelector('.message:last-of-type')
+        // console.log(lastMessage);
+        // this.setState({
+        //     messageBox: messageBox,
+        //     lastMessage: lastMessage
+        // })
         // if the last message (li element) is not "null," then that means all the messages have been parsed and the last one can be accessed
         // if the last message (li element) is "null," then the browser hasn't parsed the HTML yet => the document.querySelector() returns null => the offsetTop property of the null will result in the Uncaught TypeError message: "Cannot read property 'offsetTop' of null" => temporary fix => use a setTimeout to wait for the messages to be parsed, so that the last message can be accessed and used as the scroll to point
         // Need to determine where the hold up is and use a promise to ensure that the messages arent requested until after they are all parsed (maybe add a progress icon to the messageBox until they all are available)
@@ -140,9 +146,9 @@ class MessageList extends Component {
                                 // OR
                                 // if the message to be rendered is associated with a guest, make their text bubbles PURPLE
                                 if (this.props.user.isAnonymous === false) {
-                                    console.log("I am not a guest");
-                                    console.log(message.username);
-                                    console.log(user.displayName);
+                                    // console.log("I am not a guest");
+                                    // console.log(message.username);
+                                    // console.log(user.displayName);
                                     
                                     
                                     // if (message.username === user.displayName) {
