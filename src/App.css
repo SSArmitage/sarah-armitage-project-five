@@ -608,12 +608,6 @@ textarea {
   outline: none;
 }
 
-@media (max-width: 650px) {
-  textarea {
-    width: 90%;
-  }
-}
-
 .emojiPicker {
   position: absolute;
   bottom: 25%;
