@@ -4,7 +4,7 @@
   // background-color: $primary;
   // background-image: url("https://www.transparenttextures.com/patterns/connected.png");
   @include forPhone {
-    height: 65%;
+    height: 70%;
   }
 }
 
@@ -54,6 +54,7 @@
   max-width: 60%;
   /* max-width: 250px; */
   position: relative;
+  overflow-wrap: break-word;
 }
 
 .userInfo {
@@ -75,6 +76,8 @@
   position: absolute;
   top: 2px;
   left: 8px;
+  word-break: break-all;
+  line-height: 1;
 }
 
 .dateAndTime {
@@ -175,7 +178,7 @@ aside .emoji-picker-react {
   // height: 15px;
   position: absolute;
   bottom: 0;
-  right: 18px;
+  right: 3px;
   cursor: pointer;
   // color: $white;
   opacity: 0.3;

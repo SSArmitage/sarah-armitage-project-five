@@ -26,11 +26,13 @@
 }
 
 .notSingedInPage form {
-  width: 48%;
+  // width: 48%;
+  width: 60%;
   height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
+  position: relative;
   /* align-items: center; */
   /* margin-bottom: 40px; */
   color: $primary2;
@@ -45,6 +47,7 @@
     margin-bottom: 10px;
     font-family: $titleFont;
     color: $primary2;
+    text-align: center;
   }
   // height: max-content;
   @include forPhone {
@@ -100,4 +103,48 @@ fieldset button {
   &:hover {
   background-color: $hover2;
   }
+}
+
+.logInButtons {
+  // width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+  // border: 2px solid $accent2;
+  border-radius: 2px;
+  button {
+    width: 150px;
+  }
+}
+
+.iconContainerChat {
+  color: $white;
+  font-size: 18.0rem;
+  position: relative;
+  transform: rotate(5deg);
+  &::before {
+    content: 'Hi!';
+    position: absolute;
+    left: 0;
+    color: $textOpaque;
+    z-index: 10;
+    font-size: 10.0rem;
+    transform: rotate(5deg);
+    bottom: 63px;
+    left: 27px;
+  }
+}
+
+.signUpPage, .logInPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // form {
+  //   margin-bottom: 40px;
+  // }
 }

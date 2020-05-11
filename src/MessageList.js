@@ -47,7 +47,10 @@ class MessageList extends Component {
         // const lastMessage = document.querySelector('.message:last-of-type')
         // console.log(lastMessage);
         // when the component updates and re-renders the messages, want to display the latest message (instead of scrolling, just want to appear at that message)
-        this.startAtLastMessage()
+        const messageBox = document.querySelector('.messageBox')
+        if (messageBox) {
+            this.startAtLastMessage()
+        }
     }
 
     hanldeScrollButtonClick = () => {
@@ -126,7 +129,6 @@ class MessageList extends Component {
 
         // find the uid associated with the username and match based on that for color
         return(
-
             <div className="messageArea">
                 <div className="wrapperSideTwo messageListContainer">
                         {/* <ScrollToBottom className="messageBox"> */}
