@@ -880,6 +880,7 @@ textarea {
 @media (max-width: 650px) {
   .gifPicker {
     height: 70%;
+    width: 90%;
     border: none;
   }
 }

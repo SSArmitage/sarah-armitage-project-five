@@ -169,6 +169,7 @@ textarea {
   }
   @include forPhone {
       height: 70%;
+      width: 90%;
       border: none;
   }
 }
