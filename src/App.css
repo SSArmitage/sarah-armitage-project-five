@@ -803,7 +803,7 @@ textarea {
 }
 
 .emojiIcon {
-  line-height: 1;
+  line-height: 1.2;
   /* margin-bottom: 10px; */
 }
 
@@ -1253,12 +1253,6 @@ textarea {
   margin-bottom: 10px;
   padding: 5px 10px;
   width: 100%;
-}
-
-@media (max-width: 650px) {
-  .notSingedInPage input {
-    padding: 0;
-  }
 }
 
 .notSingedInPage button {

@@ -68,9 +68,9 @@
   padding: 5px 10px; 
   width: 100%;
   // border: 2px solid $accent2;
-  @include forPhone {
-      padding: 0;
-  }
+  // @include forPhone {
+  //     padding: 0;
+  // }
 }
 
 .notSingedInPage button {
