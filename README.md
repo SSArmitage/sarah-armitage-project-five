@@ -1,4 +1,4 @@
-# Chat App
+# :speech_balloon: Chat App :speech_balloon:
 A user authenticated chat application built using React and Firebase. Log in as a guest or create an account and chat under your own username in the single chatroom. Send emojis and GIFs! With the use of Firebase, user's messages are persistant, and changes in username are reflected in all old messages. 
 
 ## Built With
