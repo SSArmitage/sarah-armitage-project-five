@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/sarah-armitage-project-five/static/css/main.7a1e699f.chunk.css",
-    "main.js": "/sarah-armitage-project-five/static/js/main.df6e67c5.chunk.js",
-    "main.js.map": "/sarah-armitage-project-five/static/js/main.df6e67c5.chunk.js.map",
+    "main.css": "/sarah-armitage-project-five/static/css/main.643f3626.chunk.css",
+    "main.js": "/sarah-armitage-project-five/static/js/main.99237738.chunk.js",
+    "main.js.map": "/sarah-armitage-project-five/static/js/main.99237738.chunk.js.map",
     "runtime-main.js": "/sarah-armitage-project-five/static/js/runtime-main.b317e37b.js",
     "runtime-main.js.map": "/sarah-armitage-project-five/static/js/runtime-main.b317e37b.js.map",
     "static/js/2.c08392f8.chunk.js": "/sarah-armitage-project-five/static/js/2.c08392f8.chunk.js",
     "static/js/2.c08392f8.chunk.js.map": "/sarah-armitage-project-five/static/js/2.c08392f8.chunk.js.map",
     "index.html": "/sarah-armitage-project-five/index.html",
-    "precache-manifest.ae5e77fafe27e086a196bafcd8a3f3b2.js": "/sarah-armitage-project-five/precache-manifest.ae5e77fafe27e086a196bafcd8a3f3b2.js",
+    "precache-manifest.e60d2dddec925fa897de4234fde0ffb2.js": "/sarah-armitage-project-five/precache-manifest.e60d2dddec925fa897de4234fde0ffb2.js",
     "service-worker.js": "/sarah-armitage-project-five/service-worker.js",
-    "static/css/main.7a1e699f.chunk.css.map": "/sarah-armitage-project-five/static/css/main.7a1e699f.chunk.css.map"
+    "static/css/main.643f3626.chunk.css.map": "/sarah-armitage-project-five/static/css/main.643f3626.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.b317e37b.js",
     "static/js/2.c08392f8.chunk.js",
-    "static/css/main.7a1e699f.chunk.css",
-    "static/js/main.df6e67c5.chunk.js"
+    "static/css/main.643f3626.chunk.css",
+    "static/js/main.99237738.chunk.js"
   ]
 }
